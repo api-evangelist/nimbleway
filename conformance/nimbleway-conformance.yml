@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://www.nimbleway.com/trust and https://www.nimbleway.com/ (compliance
+  posture), plus derivation from openapi/nimbleway-openapi.json for the
+  cross-cutting API standards.
+description: >-
+  Industry / cross-cutting standards the Nimble SDK conforms to. Compliance
+  certifications searched from the Nimble Trust Center; API conventions derived
+  from the OpenAPI.
+standards:
+  - id: soc2
+    conforms: true
+    evidence: Nimble Trust Center lists SOC 2 (https://www.nimbleway.com/trust)
+  - id: gdpr
+    conforms: true
+    evidence: Nimble Trust Center / homepage list GDPR compliance
+  - id: ccpa
+    conforms: true
+    evidence: Nimble homepage lists CCPA compliance
+  - id: oauth2
+    conforms: false
+    evidence: The web-data API authenticates with a Bearer API key, not OAuth2 (the MCP server offers OAuth 2.1 separately).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a JSON {code, message} envelope, not application/problem+json.
+  - id: rate-limit-headers
+    conforms: true
+    evidence: Responses carry X-RateLimit-Limit / -Remaining / -Reset; 429 on throttle.
+  - id: async-task-polling
+    conforms: true
+    evidence: task_id + /v1/tasks/{id} polling model across async endpoints.

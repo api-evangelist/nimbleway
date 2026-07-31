@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nimbleway-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/nimbleway-openapi.json

@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.nimbleway.com/changelog/release-notes
+description: >-
+  Nimble SDK & Web Tools changelog. Nimble ships updates regularly; the docs
+  changelog is grouped by month with New Features / Improvements / Integrations
+  badges. Recent window captured below — the live changelog is the source of
+  truth.
+scheme: dated-monthly
+current_version: v1 (Nimble SDK 1.0.0)
+changelog_url: https://docs.nimbleway.com/changelog/release-notes
+entries:
+  - period: May 2026
+    highlights:
+      - type: new-feature
+        title: Domain Knowledge API
+        detail: >-
+          GET /v1/domain-knowledge/driver looks up the recommended driver and
+          detected antibot systems (e.g. cloudflare, perimeterx, akamai) for any
+          domain or agent, and whether JS rendering is required.
+      - type: new-feature
+        title: Media Download API
+        detail: >-
+          Download images, video, audio, and documents via the SDK. Realtime
+          (POST /v1/media) for instant binary downloads and Async
+          (POST /v1/media/async) for large files delivered to a storage bucket.
+      - type: new-feature
+        title: Jobs
+        detail: >-
+          Run any Web Search Agent as a managed, recurring workload — upload an
+          input list (CSV/Parquet/JSON), set a schedule (manual/daily/weekly/
+          monthly/cron), and Nimble fans out one agent invocation per row.
+      - type: integration
+        title: Azure MCP Center
+        detail: >-
+          Nimble MCP onboarded as an officially curated partner on Azure MCP
+          Center; one-click VS Code install with OAuth 2.1 (PKCE).

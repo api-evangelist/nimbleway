@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  openapi/nimbleway-openapi.json (4xx/5xx responses across all 42 operations),
+  enriched with the documented status-code meanings from
+  https://docs.nimbleway.com/api-reference/introduction
+format: json-code-message
+envelope:
+  fields: [code, message]
+  extra: retry_after (on 429)
+  media_type: application/json
+description: >-
+  API-level error catalogue for the Nimble SDK. Nimble returns a JSON envelope
+  with code and message rather than RFC 9457 problem+json. Statuses below are
+  the ones declared in the OpenAPI responses and documented in the API overview.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Bad or malformed request parameters.
+  - status: 401
+    title: Unauthorized
+    meaning: Invalid or missing API key.
+  - status: 402
+    title: Payment Required
+    meaning: Insufficient budget or expired trial.
+    remediation: Top up account budget or upgrade the plan.
+  - status: 404
+    title: Not Found
+    meaning: Referenced resource (agent, task, crawl, job, generation) does not exist.
+  - status: 422
+    title: Unprocessable Entity
+    meaning: Request failed validation (invalid request parameters).
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit exceeded. Includes retry_after guidance.
+    remediation: Back off per retry_after / X-RateLimit-Reset; contact sales for higher limits.
+  - status: 500
+    title: Internal Server Error
+    meaning: Infrastructure error on Nimble's side.

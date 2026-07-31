@@ -1,27 +1,277 @@
 aid: nimbleway
 name: Nimbleway
-description: 'Nimbleway is a company surfaced as a portfolio company of norwest-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. Sector: unknown. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Nimble (Nimbleway) is a real-time web data intelligence platform that turns any
+  public web page into structured, analysis-ready data at scale. Its AI-Native SDK
+  exposes Search, Extract, Map, Crawl, SERP, Media Download, and Web Search Agents
+  over a single REST API (https://sdk.nimbleway.com/v1), plus a managed Jobs layer
+  for recurring, scheduled collection. Nimble ships first-party Python, TypeScript,
+  Go (CLI), LangChain, Scrapy, and Vercel AI SDK libraries, an official Model
+  Context Protocol server, and native connectors for Databricks, Snowflake, Azure,
+  and Claude. The platform is SOC 2, GDPR, and CCPA compliant. Originally added to
+  the API Evangelist network as a Norwest Venture Partners portfolio lead, now
+  enriched from Nimble's public developer surface.
 url: https://raw.githubusercontent.com/api-evangelist/nimbleway/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - norwest-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://logo.clearbit.com/nimbleway.com
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-- Unknown
-apis: []
+- Web Data
+- Web Scraping
+- Data Extraction
+- Web Search
+- Proxies
+- AI Agents
+- Model Context Protocol
+apis:
+- aid: nimbleway:nimbleway-agents-api
+  name: Nimbleway Agents API
+  description: The Agents API from Nimbleway — 7 operation(s) for agents.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-crawl-api
+  name: Nimbleway Crawl API
+  description: The Crawl API from Nimbleway — 2 operation(s) for crawl.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Crawl
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-crawl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-domain-knowledge-api
+  name: Nimbleway Domain Knowledge API
+  description: The Domain Knowledge API from Nimbleway — 1 operation(s) for domain knowledge.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Domain Knowledge
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-domain-knowledge-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-extract-api
+  name: Nimbleway Extract API
+  description: The Extract API from Nimbleway — 3 operation(s) for extract.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Extract
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-extract-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-fast-serp-api
+  name: Nimbleway Fast SERP API
+  description: The Fast SERP API from Nimbleway — 1 operation(s) for fast serp.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Fast SERP
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-fast-serp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-jobs-api
+  name: Nimbleway Jobs API
+  description: The Jobs API from Nimbleway — 9 operation(s) for jobs.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-map-api
+  name: Nimbleway Map API
+  description: The Map API from Nimbleway — 1 operation(s) for map.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Map
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-map-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-media-api
+  name: Nimbleway Media API
+  description: The Media API from Nimbleway — 2 operation(s) for media.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-media-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-search-api
+  name: Nimbleway Search API
+  description: The Search API from Nimbleway — 1 operation(s) for search.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-serp-api
+  name: Nimbleway SERP API
+  description: The SERP API from Nimbleway — 3 operation(s) for serp.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - SERP
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-serp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
+- aid: nimbleway:nimbleway-tasks-api
+  name: Nimbleway Tasks API
+  description: The Tasks API from Nimbleway — 6 operation(s) for tasks.
+  humanURL: https://docs.nimbleway.com/home
+  baseURL: https://sdk.nimbleway.com/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/nimbleway-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.nimbleway.com/home
+  - type: APIReference
+    url: https://docs.nimbleway.com/api-reference/introduction
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://docs.nimbleway.com/home
+- type: Documentation
+  url: https://docs.nimbleway.com/home
+- type: APIReference
+  url: https://docs.nimbleway.com/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.nimbleway.com/api-reference/introduction
+- type: OpenAPI
+  url: openapi/nimbleway-openapi.json
+- type: Authentication
+  url: authentication/nimbleway-authentication.yml
+- type: Conventions
+  url: conventions/nimbleway-conventions.yml
+- type: ErrorCatalog
+  url: errors/nimbleway-problem-types.yml
+- type: RateLimits
+  url: rate-limits/nimbleway-rate-limits.yml
+- type: DataModel
+  url: data-model/nimbleway-data-model.yml
+- type: Overlay
+  url: overlays/nimbleway-openapi-overlay.yaml
+- type: Lifecycle
+  url: lifecycle/nimbleway-lifecycle.yml
+- type: StatusPage
+  url: https://status.nimbleway.com
+- type: ChangeLog
+  url: changelog/nimbleway-changelog.yml
+- type: Conformance
+  url: conformance/nimbleway-conformance.yml
+- type: Compliance
+  url: https://www.nimbleway.com/trust
+- type: TrustCenter
+  url: security/nimbleway-trust-center.yml
+- type: DomainSecurity
+  url: security/nimbleway-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/nimbleway-agentic-access.yml
+- type: MCPServer
+  url: mcp/nimbleway-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/nimbleway-llms.txt
+- type: Packages
+  url: packages/nimbleway-packages.yml
+- type: SDKs
+  url: packages/nimbleway-packages.yml
+- type: CLI
+  url: cli/nimbleway-cli.yml
+- type: GitHubOrganization
+  url: https://github.com/Nimbleway
+- type: Blog
+  url: https://www.nimbleway.com/blog
+- type: Support
+  url: https://portal.usepylon.com/nimble
+- type: Pricing
+  url: https://www.nimbleway.com/pricing
+- type: SignUp
+  url: https://online.nimbleway.com/signup
+- type: Login
+  url: https://online.nimbleway.com/login
+- type: TermsOfService
+  url: https://www.nimbleway.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.nimbleway.com/privacy-policy
 - type: Website
   url: https://nimbleway.com
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

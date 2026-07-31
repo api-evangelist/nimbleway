@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.nimbleway.com/api-reference/introduction — cross-cutting
+  request/response conventions that apply across every Nimble SDK operation,
+  supplemented by derivation from openapi/nimbleway-openapi.json.
+description: >-
+  How the Nimble SDK behaves across every operation: authentication, the async
+  task-polling model, batching, pagination on list endpoints, rate-limit
+  signalling, versioning, and the error envelope. These are runtime-semantics
+  conventions that the OpenAPI does not fully express.
+base_url: https://sdk.nimbleway.com/v1
+api_style: REST over HTTPS, JSON request/response
+
+authentication:
+  scheme: Bearer token (API key) in the Authorization header
+  header: "Authorization: Bearer <NIMBLE_API_KEY>"
+  key_source: Nimble Dashboard (https://online.nimbleway.com/account-settings/api-keys)
+  docs: https://docs.nimbleway.com/api-reference/introduction
+  detail: authentication/nimbleway-authentication.yml
+
+idempotency:
+  supported: false
+  note: >-
+    No client-supplied idempotency key is documented. Long-running work uses the
+    async task model below, where a server-issued task_id identifies the unit of
+    work; GET polling and result retrieval are inherently safe to retry.
+
+async_model:
+  supported: true
+  pattern: >-
+    POST to an async endpoint (e.g. /v1/extract/async) returns a task_id; poll
+    GET /v1/tasks/{task_id} for status and GET /v1/tasks/{task_id}/results for
+    output.
+  async_endpoints: [extract, agents, search, map, crawl, media, serp]
+  batch: >-
+    *_batch endpoints (extract/batch, agents/batch, serp/batch) submit many
+    inputs at once and are tracked as batches via /v1/batches/{batch_id} and
+    /v1/batches/{batch_id}/progress.
+  jobs: >-
+    Managed recurring workloads via /v1/jobs (create/schedule/trigger runs,
+    retrieve run artifacts).
+
+pagination:
+  supported: true
+  scope: list endpoints (/v1/tasks, /v1/batches, /v1/jobs)
+  note: List endpoints return paginated collections; parameter names not exhaustively documented in the public overview.
+
+rate_limiting:
+  default: 83 QPS (5,000 QPM) per API key
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  throttled_status: 429
+  retry_field: retry_after
+  detail: rate-limits/nimbleway-rate-limits.yml
+
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: lifecycle/nimbleway-lifecycle.yml
+
+error_envelope:
+  format: JSON object with code and message fields, plus operation-specific
+    details such as retry_after on 429.
+  statuses: [400, 401, 402, 422, 429, 500]
+  detail: errors/nimbleway-problem-types.yml

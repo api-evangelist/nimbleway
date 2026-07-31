@@ -1,0 +1,35 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: Nimbleway
+providerId: nimbleway
+generated: '2026-07-20'
+method: searched
+source: https://docs.nimbleway.com/api-reference/introduction
+created: '2026-07-20'
+modified: '2026-07-20'
+tags:
+  - Rate Limiting
+  - Web Data
+description: >-
+  Nimble SDK enforces a per-API-key rate limit. The default ceiling is 83 QPS
+  (5,000 QPM) applied across driver types (vx6, vx8, vx10). Higher limits are
+  available via sales. Rate-limit state is signalled on every response via
+  X-RateLimit-* headers; exceeding the limit returns HTTP 429 with retry_after.
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+responseCodes:
+  throttled: 429
+retryField: retry_after
+limits:
+  - name: Default per-key request rate (per second)
+    scope: api_key
+    metric: requests_per_second
+    limit: 83
+    timeFrame: second
+  - name: Default per-key request rate (per minute)
+    scope: api_key
+    metric: requests_per_minute
+    limit: 5000
+    timeFrame: minute

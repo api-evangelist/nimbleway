@@ -1,0 +1,34 @@
+{
+  "provider": "nimbleway",
+  "sources": [
+    "nimbleway-agents-api-openapi.yml",
+    "nimbleway-crawl-api-openapi.yml",
+    "nimbleway-domain-knowledge-api-openapi.yml",
+    "nimbleway-extract-api-openapi.yml",
+    "nimbleway-fast-serp-api-openapi.yml",
+    "nimbleway-jobs-api-openapi.yml",
+    "nimbleway-map-api-openapi.yml",
+    "nimbleway-media-api-openapi.yml",
+    "nimbleway-search-api-openapi.yml",
+    "nimbleway-serp-api-openapi.yml",
+    "nimbleway-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "nimbleway-agents-api-openapi.yml",
+    "nimbleway-crawl-api-openapi.yml",
+    "nimbleway-domain-knowledge-api-openapi.yml",
+    "nimbleway-extract-api-openapi.yml",
+    "nimbleway-fast-serp-api-openapi.yml",
+    "nimbleway-jobs-api-openapi.yml",
+    "nimbleway-map-api-openapi.yml",
+    "nimbleway-media-api-openapi.yml",
+    "nimbleway-search-api-openapi.yml",
+    "nimbleway-serp-api-openapi.yml",
+    "nimbleway-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

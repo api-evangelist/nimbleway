@@ -1,0 +1,96 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nimbleway-openapi.json (paths + 62 component schemas)
+description: >-
+  Entity-relationship graph for the Nimble SDK, derived from the OpenAPI path
+  structure and id-reference parameters. Nimble models web-data work as
+  synchronous tool calls plus an async layer of tasks/batches and a managed
+  Jobs -> Runs -> Artifacts hierarchy.
+entities:
+  - name: Agent
+    description: A Web Search Agent that extracts structured data from a class of website.
+    identified_by: agent_name
+    endpoints:
+      - "GET /v1/agents"
+      - "GET /v1/agents/{agent_name}"
+      - "POST /v1/agents/run"
+  - name: Generation
+    description: An async agent-generation job that produces a custom agent.
+    identified_by: generation_id
+    endpoints:
+      - "POST /v1/agents/generations"
+      - "GET /v1/agents/generations/{generation_id}"
+  - name: Task
+    description: An async unit of work (extract/search/map/agent/crawl/serp/media).
+    identified_by: task_id
+    endpoints:
+      - "GET /v1/tasks"
+      - "GET /v1/tasks/{task_id}"
+      - "GET /v1/tasks/{task_id}/results"
+  - name: Batch
+    description: A collection of tasks submitted together via a *_batch endpoint.
+    identified_by: batch_id
+    endpoints:
+      - "GET /v1/batches"
+      - "GET /v1/batches/{batch_id}"
+      - "GET /v1/batches/{batch_id}/progress"
+  - name: Crawl
+    description: A multi-page crawl of a website.
+    identified_by: id
+    endpoints:
+      - "POST /v1/crawl"
+      - "GET /v1/crawl"
+      - "GET /v1/crawl/{id}"
+      - "DELETE /v1/crawl/{id}"
+  - name: Job
+    description: A managed, recurring workload that runs a Web Search Agent over an input list.
+    identified_by: job_id
+    endpoints:
+      - "GET /v1/jobs"
+      - "POST /v1/jobs"
+      - "GET /v1/jobs/{job_id}"
+      - "PATCH /v1/jobs/{job_id}"
+      - "DELETE /v1/jobs/{job_id}"
+  - name: Run
+    description: A single execution of a Job.
+    identified_by: run_id
+    endpoints:
+      - "GET /v1/jobs/{job_id}/runs"
+      - "POST /v1/jobs/{job_id}/runs"
+      - "GET /v1/jobs/runs/{run_id}"
+      - "POST /v1/jobs/runs/{run_id}/cancel"
+  - name: Artifact
+    description: An output file produced by a Run.
+    identified_by: artifact_id
+    endpoints:
+      - "GET /v1/jobs/runs/{run_id}/artifacts"
+      - "GET /v1/jobs/runs/{run_id}/artifacts/{artifact_id}"
+relationships:
+  - from: Batch
+    type: has_many
+    to: Task
+    via: batch_id
+  - from: Task
+    type: belongs_to
+    to: Batch
+    via: batch_id
+  - from: Agent
+    type: has_many
+    to: Generation
+    via: agent
+  - from: Job
+    type: has_many
+    to: Run
+    via: job_id
+  - from: Run
+    type: belongs_to
+    to: Job
+    via: job_id
+  - from: Run
+    type: has_many
+    to: Artifact
+    via: run_id
+  - from: Job
+    type: has_one
+    to: Agent
+    via: agent_name

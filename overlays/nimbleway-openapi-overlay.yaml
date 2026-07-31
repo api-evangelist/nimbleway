@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Nimble SDK
+  version: 1.0.0
+extends: openapi/nimbleway-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: nimbleway
+      x-apievangelist-artifacts:
+        authentication: authentication/nimbleway-authentication.yml
+        conventions: conventions/nimbleway-conventions.yml
+        errors: errors/nimbleway-problem-types.yml
+        rate_limits: rate-limits/nimbleway-rate-limits.yml
+        lifecycle: lifecycle/nimbleway-lifecycle.yml
+        mcp: mcp/nimbleway-mcp.yml
+        agentic_access: agentic-access/nimbleway-agentic-access.yml
+  - target: $.info
+    update:
+      x-apievangelist-rate-limit:
+        default_qps: 83
+        default_qpm: 5000
+        headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  - target: $.components.securitySchemes.BearerAuth
+    update:
+      x-apievangelist-note: >-
+        Bearer token is the Nimble API key from the Nimble Dashboard. The Nimble
+        MCP server additionally supports OAuth 2.1 (PKCE).

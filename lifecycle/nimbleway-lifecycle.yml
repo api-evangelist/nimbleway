@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.nimbleway.com/api-reference/introduction ,
+  https://docs.nimbleway.com/changelog/release-notes , https://status.nimbleway.com
+description: >-
+  Versioning, status, and support-lifecycle posture for the Nimble SDK / Web
+  Tools API, derived from the docs and confirmed live endpoints.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://sdk.nimbleway.com/v1
+  docs: https://docs.nimbleway.com/api-reference/introduction
+status_page: https://status.nimbleway.com
+changelog: https://docs.nimbleway.com/changelog/release-notes
+support:
+  channel: https://portal.usepylon.com/nimble
+  email: support@nimbleway.com
+deprecation:
+  policy_url: null
+  sunset_header: null
+  note: No formal deprecation/Sunset-header policy published as of this pass.
+deprecated_operations: []

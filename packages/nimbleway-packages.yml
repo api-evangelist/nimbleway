@@ -1,0 +1,64 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.nimbleway.com/nimble-sdk/ and the public package registries.
+  npm and PyPI entries confirmed via registry.npmjs.org / pypi.org JSON APIs
+  (HTTP 200 recorded at fetch time). GitHub org: https://github.com/Nimbleway.
+description: >-
+  First-party Nimble (Nimbleway) client libraries, framework integrations, and
+  the CLI. Official flag set only for libraries published under the Nimbleway
+  GitHub org / official registry namespaces.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@nimble-way/nimble-js"
+    url: https://www.npmjs.com/package/@nimble-way/nimble-js
+    source: https://github.com/Nimbleway/nimble-typescript
+    install: npm install @nimble-way/nimble-js
+    official: true
+  - language: python
+    registry: pypi
+    name: nimble_python
+    url: https://pypi.org/project/nimble-python/
+    source: https://github.com/Nimbleway/nimble-python
+    install: pip install nimble-python
+    official: true
+  - language: python
+    registry: pypi
+    name: nimbleway
+    url: https://pypi.org/project/nimbleway/
+    source: https://github.com/Nimbleway/sdk
+    install: pip install nimbleway
+    official: true
+  - language: go
+    registry: github
+    name: nimble-cli
+    url: https://github.com/Nimbleway/nimble-cli
+    source: https://github.com/Nimbleway/nimble-cli
+    install: see github.com/Nimbleway/nimble-cli releases
+    official: true
+    note: First-party command-line interface (Go). Command surface catalogued in cli/nimbleway-cli.yml.
+  - language: typescript
+    registry: npm
+    name: "@nimble-way/ai-sdk"
+    url: https://www.npmjs.com/package/@nimble-way/ai-sdk
+    source: https://github.com/Nimbleway/ai-sdk
+    install: npm install @nimble-way/ai-sdk
+    official: true
+    note: Nimble Web Search as a ready-made tool for the Vercel AI SDK.
+  - language: python
+    registry: pypi
+    name: langchain-nimble
+    url: https://pypi.org/project/langchain-nimble/
+    source: https://github.com/Nimbleway/langchain-nimble
+    install: pip install langchain-nimble
+    official: true
+    note: Production-grade LangChain integration for Nimble Web Search & Content Extraction.
+  - language: python
+    registry: pypi
+    name: scrapy-nimble
+    url: https://pypi.org/project/scrapy-nimble/
+    source: https://github.com/Nimbleway/scrapy-nimble
+    install: pip install scrapy-nimble
+    official: true
+    note: Native Nimble platform integration for Scrapy projects.

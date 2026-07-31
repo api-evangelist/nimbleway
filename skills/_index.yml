@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: generated
+source: >-
+  Generated from openapi/nimbleway-openapi.json (operations verified against the
+  spec paths) and conventions/nimbleway-conventions.yml. Nimble also publishes
+  official Agent Skills at https://github.com/Nimbleway/agent-skills and
+  https://docs.nimbleway.com/integrations/agent-skills/ (Business Research,
+  Marketing, SEO, Productivity, Nimble Web Expert, Nimble Agent Builder).
+description: >-
+  Packaged Agent Skills for the Nimble SDK — short operating instructions an
+  agent follows to use the API correctly for one marquee flow. Every step is
+  grounded in a real Nimble SDK operation (method + path verified in the spec).
+official_skills:
+  repo: https://github.com/Nimbleway/agent-skills
+  docs: https://docs.nimbleway.com/integrations/agent-skills/
+  examples: [Business Research, Marketing, SEO, Productivity, Nimble Web Expert, Nimble Agent Builder]
+skills:
+  - file: nimbleway-search-and-extract.md
+    name: Search the live web and extract a page
+    api: openapi/nimbleway-openapi.json
+    operations: ["POST /v1/search", "POST /v1/extract"]
+  - file: nimbleway-run-web-search-agent.md
+    name: Run a Web Search Agent (async, with task polling)
+    api: openapi/nimbleway-openapi.json
+    operations: ["GET /v1/agents", "POST /v1/agents/async", "GET /v1/tasks/{task_id}", "GET /v1/tasks/{task_id}/results"]
+  - file: nimbleway-crawl-a-site.md
+    name: Crawl a website and collect the results
+    api: openapi/nimbleway-openapi.json
+    operations: ["POST /v1/crawl", "GET /v1/crawl/{id}", "DELETE /v1/crawl/{id}"]

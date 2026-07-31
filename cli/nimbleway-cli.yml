@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/Nimbleway/nimble-cli
+description: >-
+  First-party Nimble command-line interface, written in Go and published under
+  the official Nimbleway GitHub organization. The binary itself is catalogued in
+  packages/nimbleway-packages.yml; this artifact records its command surface.
+name: nimble-cli
+language: go
+repository: https://github.com/Nimbleway/nimble-cli
+install:
+  - method: github-release
+    detail: Download the platform binary from github.com/Nimbleway/nimble-cli releases.
+auth:
+  scheme: Nimble API key (Bearer), same credential as the SDK/API.
+notes: >-
+  Command surface fronts the same web-data operations as the Nimble SDK
+  (search, extract, map, crawl, agents). Grouped command detail is maintained in
+  the repository README; only the first-party existence and auth model are
+  asserted here (no invented subcommands).
