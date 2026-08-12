@@ -211,7 +211,7 @@ common:
 - type: GettingStarted
   url: https://docs.nimbleway.com/api-reference/introduction
 - type: OpenAPI
-  url: openapi/nimbleway-openapi.json
+  url: openapi/_original/nimbleway-openapi.json
 - type: Authentication
   url: authentication/nimbleway-authentication.yml
 - type: Conventions
