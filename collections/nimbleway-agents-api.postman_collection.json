@@ -1,0 +1,1975 @@
+{
+  "item": [
+    {
+      "id": "ecd66638-3ecf-4213-92de-7dc506a40407",
+      "name": "Agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3fed459-dc15-4b38-bc4c-1e46cbd45b48",
+          "name": "Agent Run",
+          "request": {
+            "name": "Agent Run",
+            "description": {
+              "content": "Execute Search Agent Realtime Endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agent\": \"<string>\",\n  \"params\": \"<object>\",\n  \"localization\": \"<boolean>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63cef1c7-2e99-414a-89ed-d14d2fa9349f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://www.example.com/\",\n  \"task_id\": \"e8ed8ef6-2657-43ba-98d5-a5c79ea7b551\",\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"data\": {\n    \"html\": \"...\",\n    \"markdown\": \"MARKDOWN\",\n    \"parsing\": {},\n    \"cookies\": {},\n    \"screenshot\": \"iVBORw0KGgoAAAANSUhEUgAAA...\",\n    \"fetch_request\": [],\n    \"network_capture\": [],\n    \"browser_actions\": [],\n    \"headers\": {}\n  },\n  \"metadata\": {\n    \"query_time\": \"2026-02-09T10:26:05.817Z\",\n    \"query_duration\": 1877,\n    \"response_parameters\": {\n      \"input_url\": \"https://www.example.com/\"\n    },\n    \"driver\": \"vx8\",\n    \"agent\": \"agent_name\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b10d581d-131d-4dff-b933-63dd79850705",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0560f15-e8cb-4eb6-bb90-20d4b6a3d2b3",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53333a54-1f80-4910-8e2f-8d683db6ad0d",
+              "name": "Agent Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Agent not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6182fe4b-4375-4328-b73d-6a4b30332e99",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "151e38e0-5aaa-4026-bcf1-e1e378fa21f8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"amazon_pdp\",\n  \"params\": {\n    \"asin\": \"B0DLKFK6LR\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bca8e31c-6822-42f4-86b0-81c96511fc58",
+          "name": "Agent Async",
+          "request": {
+            "name": "Agent Async",
+            "description": {
+              "content": "Execute Search Agent Async Endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agent\": \"<string>\",\n  \"params\": \"<object>\",\n  \"localization\": \"<boolean>\",\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae42179b-da58-4eb0-bc5d-e4c89524ca08",
+              "name": "Async Task Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"task\": {\n    \"id\": \"8e8cfde8-345b-42b8-b3e2-0c61eb11e00f\",\n    \"state\": \"pending\",\n    \"created_at\": \"2026-01-24T12:36:24.685Z\",\n    \"modified_at\": \"2026-01-24T12:36:24.685Z\",\n    \"input\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f715e1f6-b4a7-436f-a85a-ccabfa34fd92",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaa50ca2-9468-4fd9-bba1-ce8ec1c1f2b6",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15b58243-bf6e-4022-a08f-dc0599bbce68",
+              "name": "Agent Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Agent not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "351a994e-be4d-4df5-9bd3-aa7244937c23",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "106ea499-7407-4fe9-95c7-10efc397540f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agent\": \"google_search\",\n  \"params\": {\n    \"query\": \"What happened last night in the NBA?\",\n    \"storage_url\": \"s3://mu-s3-bucket.com/\",\n    \"storage_type\": \"s3\",\n    \"callback_url\": \"https://my-callback-url.com/\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9422786c-cb1d-4008-b765-f55839ce29b0",
+          "name": "Agent Batch",
+          "request": {
+            "name": "Agent Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"params\": \"<object>\",\n      \"localization\": \"<boolean>\",\n      \"formats\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"params\": \"<object>\",\n      \"localization\": \"<boolean>\",\n      \"formats\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"<string>\",\n    \"params\": \"<object>\",\n    \"localization\": \"<boolean>\",\n    \"formats\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5527f8f4-25e1-43ee-ab5c-7a09dd6f1151",
+              "name": "Agent Batch Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"headers\",\n        \"html\"\n      ]\n    },\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"google_search\",\n    \"params\": {\n      \"params\": {\n        \"keyword\": \"iphone 17\",\n        \"zip_code\": \"90210\"\n      }\n    },\n    \"localization\": false,\n    \"formats\": [\n      \"html\",\n      \"html\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n  \"batch_size\": 1,\n  \"tasks\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"state\": \"pending\",\n      \"output_url\": \"string\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"modified_at\": \"2024-01-15T10:35:00Z\",\n      \"account_name\": \"string\",\n      \"input\": null,\n      \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n      \"status_code\": 200,\n      \"api_type\": \"extract\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da8c7f67-0703-4907-b86e-ed37ae11044d",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"headers\",\n        \"html\"\n      ]\n    },\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"google_search\",\n    \"params\": {\n      \"params\": {\n        \"keyword\": \"iphone 17\",\n        \"zip_code\": \"90210\"\n      }\n    },\n    \"localization\": false,\n    \"formats\": [\n      \"html\",\n      \"html\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "283799eb-83a8-4208-bef7-bccbae02330d",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"headers\",\n        \"html\"\n      ]\n    },\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"google_search\",\n    \"params\": {\n      \"params\": {\n        \"keyword\": \"iphone 17\",\n        \"zip_code\": \"90210\"\n      }\n    },\n    \"localization\": false,\n    \"formats\": [\n      \"html\",\n      \"html\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72b681e3-4b94-4421-8abf-46615c93baf4",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"headers\",\n        \"html\"\n      ]\n    },\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"google_search\",\n    \"params\": {\n      \"params\": {\n        \"keyword\": \"iphone 17\",\n        \"zip_code\": \"90210\"\n      }\n    },\n    \"localization\": false,\n    \"formats\": [\n      \"html\",\n      \"html\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92f9afc8-e4e7-4cd7-9fc1-29a9c76f9455",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"headers\",\n        \"html\"\n      ]\n    },\n    {\n      \"params\": {\n        \"params\": {\n          \"keyword\": \"iphone 17\",\n          \"zip_code\": \"90210\"\n        }\n      },\n      \"localization\": false,\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ]\n    }\n  ],\n  \"shared_inputs\": {\n    \"agent\": \"google_search\",\n    \"params\": {\n      \"params\": {\n        \"keyword\": \"iphone 17\",\n        \"zip_code\": \"90210\"\n      }\n    },\n    \"localization\": false,\n    \"formats\": [\n      \"html\",\n      \"html\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04e2f7d4-6781-4645-9f25-b85ebe659e46",
+          "name": "Generate Agent",
+          "request": {
+            "name": "Generate Agent",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "generations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"url\": \"<string>\",\n  \"agent_name\": \"<string>\",\n  \"metadata\": {\n    \"data_source\": \"<string>\",\n    \"description\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"domain\": \"<string>\",\n    \"vertical\": \"<string>\",\n    \"entity_type\": \"<string>\"\n  },\n  \"input_schema\": {\n    \"key_0\": 6691\n  },\n  \"output_schema\": {\n    \"key_0\": 8403.973071138234,\n    \"key_1\": 6908.379164444639\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "853d0973-76fc-43a3-b7ae-11c9970e332c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"string\",\n  \"url\": \"https://www.amazon.com/s?k=laptop\",\n  \"agent_name\": \"string\",\n  \"metadata\": {\n    \"data_source\": \"Amazon\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"tags\": [\n      \"Ecommerce\",\n      \"Search\"\n    ],\n    \"domain\": \"www.amazon.com\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"86441962-c8f5-4c24-b271-ee877d2dd865\",\n  \"status\": \"queued\",\n  \"agent_name\": \"books_toscrape_categories_nkjansdkj_2026_03_24_zco2isqi\",\n  \"source_version_id\": \"c51d09fc-c8f2-4b3a-a9bc-eaab88316217\",\n  \"created_at\": \"2026-03-24T19:19:39.300002+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0af60cd-799c-4468-a698-b1dff4dae81b",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"string\",\n  \"url\": \"https://www.amazon.com/s?k=laptop\",\n  \"agent_name\": \"string\",\n  \"metadata\": {\n    \"data_source\": \"Amazon\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"tags\": [\n      \"Ecommerce\",\n      \"Search\"\n    ],\n    \"domain\": \"www.amazon.com\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2b3518b-f872-44b4-b5b1-757e536fdec6",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"string\",\n  \"url\": \"https://www.amazon.com/s?k=laptop\",\n  \"agent_name\": \"string\",\n  \"metadata\": {\n    \"data_source\": \"Amazon\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"tags\": [\n      \"Ecommerce\",\n      \"Search\"\n    ],\n    \"domain\": \"www.amazon.com\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4be1c219-c9a0-4b56-9492-098eee038fb5",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"string\",\n  \"url\": \"https://www.amazon.com/s?k=laptop\",\n  \"agent_name\": \"string\",\n  \"metadata\": {\n    \"data_source\": \"Amazon\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"tags\": [\n      \"Ecommerce\",\n      \"Search\"\n    ],\n    \"domain\": \"www.amazon.com\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a976472-257e-47db-ad87-380ae10fb0ae",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"string\",\n  \"url\": \"https://www.amazon.com/s?k=laptop\",\n  \"agent_name\": \"string\",\n  \"metadata\": {\n    \"data_source\": \"Amazon\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"tags\": [\n      \"Ecommerce\",\n      \"Search\"\n    ],\n    \"domain\": \"www.amazon.com\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df21e19c-a41f-49ab-bdfc-fea90b456650",
+          "name": "Get Generation",
+          "request": {
+            "name": "Get Generation",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                "generations",
+                ":generation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "generation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "50d5307f-3497-4a5a-b6bf-7be0d55d2d9f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations",
+                    ":generation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "generation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"86441962-c8f5-4c24-b271-ee877d2dd865\",\n  \"status\": \"success\",\n  \"agent_name\": \"books_toscrape_categories_nkjansdkj_2026_03_24_zco2isqi\",\n  \"source_version_id\": \"c51d09fc-c8f2-4b3a-a9bc-eaab88316217\",\n  \"generated_version_id\": \"fee30209-2439-459b-985a-ba7f8d8d2325\",\n  \"generated_version\": {\n    \"id\": \"fee30209-2439-459b-985a-ba7f8d8d2325\",\n    \"agent_name\": \"books_toscrape_categories_nkjansdkj_2026_03_24_zco2isqi\",\n    \"version_number\": 2,\n    \"metadata\": {\n      \"vertical\": \"Other\",\n      \"data_source\": \"books.toscrape.com\",\n      \"display_name\": \"books_toscrape_categories_nkjansdkj\",\n      \"tags\": [],\n      \"domain\": \"books.toscrape.com\",\n      \"is_displayed\": false\n    },\n    \"steps\": [],\n    \"artifacts\": {}\n  },\n  \"summary\": \"Done! The agent for **books.toscrape.com** category pages is fully configured and preview ran successfully. Here's a summary of what was set up:\\n\\n- **Browsing**: Navigates to category pages using a URL template with `category_slug` and `category_id` as inputs (e.g., `mystery` / `3`)\\n- **Parsing**: Extracts book data — `name`, `price`, `url`, and `availability` — from each listing on the category page\",\n  \"created_at\": \"2026-03-24T19:19:39.300002+00:00\",\n  \"started_at\": \"2026-03-24T19:19:39.307295+00:00\",\n  \"completed_at\": \"2026-03-24T19:22:01.638660+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0a310fb-7476-485e-ae69-6a802c8d6660",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations",
+                    ":generation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "generation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81a50ff4-e5db-4d13-bbfb-0027db716e93",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations",
+                    ":generation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "generation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b693f79-cfeb-4aff-8618-22ce2d28ffb0",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations",
+                    ":generation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "generation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d055b799-f8bb-46b2-b526-ba45b2cd9c0d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    "generations",
+                    ":generation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "generation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b4ece00-eebf-4bc9-83c4-1277d788ac96",
+          "name": "List Agents",
+          "request": {
+            "name": "List Agents",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "privacy",
+                  "value": "all",
+                  "description": "Filter by privacy level"
+                },
+                {
+                  "disabled": false,
+                  "key": "managed_by",
+                  "value": "<string>",
+                  "description": "Filter by who manage the agent"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9b30113a-bbe8-42be-99a2-20d616291635",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "privacy",
+                      "value": "all"
+                    },
+                    {
+                      "key": "managed_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"aldi_clp\",\n    \"is_public\": true,\n    \"display_name\": \"Aldi Category Landing Page\",\n    \"description\": \"The Aldi Browse Products agent extracts structured product listings from Aldi’s category pages. This agent is ideal for monitoring category-level assortment, analyzing competitive inventory, and powering product discovery and pricing intelligence use cases\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Category Landing Page (CLP)\",\n    \"domain\": \"www.aldi.us\",\n    \"managed_by\": \"nimble\"\n  },\n  {\n    \"name\": \"aldi_pdp\",\n    \"is_public\": true,\n    \"display_name\": \"Aldi Product Details Page\",\n    \"description\": \"The Aldi Product Detail Page Agent extracts structured data from individual product pages on Aldi. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\\n\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\",\n    \"domain\": \"https://www.aldi.us/\",\n    \"managed_by\": \"nimble\"\n  },\n  {\n    \"name\": \"amazon_plp\",\n    \"is_public\": true,\n    \"display_name\": \"Amazon CLP\",\n    \"description\": \"The Amazon Browse Products agent extracts structured product listings from Amazon’s category pages. This agent is ideal for monitoring category-level assortment, analyzing competitive inventory, and powering product discovery and pricing intelligence use cases\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Category Landing Page (CLP)\",\n    \"domain\": \"www.amazon.com\",\n    \"managed_by\": \"nimble\"\n  },\n  {\n    \"name\": \"amazon_pdp\",\n    \"is_public\": true,\n    \"display_name\": \"Amazon Product Details Page\",\n    \"description\": \"The Amazon Product Detail Page Agent extracts structured data from individual product pages on Amazon. This agent is ideal for tracking competitor pricing, monitoring catalog changes, and powering product intelligence use cases.\",\n    \"vertical\": \"Ecommerce\",\n    \"entity_type\": \"Product Detail Page (PDP)\",\n    \"domain\": \"www.amazon.com\",\n    \"managed_by\": \"nimble\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9c5c614-4706-4c88-8f38-56403707003c",
+          "name": "Get Agent Details",
+          "request": {
+            "name": "Get Agent Details",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "agents",
+                ":agent_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "agent_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3b5497e5-9866-4411-8a95-92f8b0c12030",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "agents",
+                    ":agent_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "agent_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"is_public\": false,\n  \"display_name\": \"string\",\n  \"managed_by\": \"string\",\n  \"description\": \"string\",\n  \"vertical\": \"string\",\n  \"entity_type\": \"string\",\n  \"domain\": \"string\",\n  \"output_schema\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2361\n  },\n  \"input_properties\": [\n    {\n      \"name\": \"\",\n      \"required\": false,\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"is_localization_param\": false,\n      \"is_pagination_param\": false,\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"examples\": [\n        \"string\",\n        \"string\"\n      ],\n      \"default\": \"string\"\n    },\n    {\n      \"name\": \"\",\n      \"required\": false,\n      \"type\": \"string\",\n      \"description\": \"string\",\n      \"is_localization_param\": false,\n      \"is_pagination_param\": false,\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"examples\": [\n        \"string\",\n        \"string\"\n      ],\n      \"default\": \"string\"\n    }\n  ],\n  \"feature_flags\": {\n    \"is_localization_supported\": false,\n    \"is_pagination_supported\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sdk.nimbleway.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d932379c-a52c-4fd4-9bab-e4c414bd9a8e",
+    "name": "Nimble SDK Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI-Native SDK for Real-Time Web Data at scale",
+      "type": "text/plain"
+    }
+  }
+}

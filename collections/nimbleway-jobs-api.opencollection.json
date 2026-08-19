@@ -1,0 +1,353 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents Jobs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search by name or display name"
+              },
+              {
+                "name": "agent_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by agent name"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Jobs"
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Job"
+        },
+        {
+          "info": {
+            "name": "Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Job"
+        },
+        {
+          "info": {
+            "name": "Update Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://sdk.nimbleway.com/v1/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Job"
+        },
+        {
+          "info": {
+            "name": "Delete Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sdk.nimbleway.com/v1/jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Job"
+        },
+        {
+          "info": {
+            "name": "List Runs for Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/:job_id/runs",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Runs for Job"
+        },
+        {
+          "info": {
+            "name": "Trigger Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/jobs/:job_id/runs",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Trigger Run"
+        },
+        {
+          "info": {
+            "name": "Get Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Run"
+        },
+        {
+          "info": {
+            "name": "Cancel Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id/cancel",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel Run"
+        },
+        {
+          "info": {
+            "name": "List Run Artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id/artifacts",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Run Artifacts"
+        },
+        {
+          "info": {
+            "name": "Get Run Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id/artifacts/:artifact_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Run Artifact"
+        },
+        {
+          "info": {
+            "name": "Preview Run Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id/artifacts/:artifact_id/preview",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Preview Run Artifact"
+        },
+        {
+          "info": {
+            "name": "Get Run Artifact Download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/jobs/runs/:run_id/artifacts/:artifact_id/download-url",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "artifact_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Run Artifact Download URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

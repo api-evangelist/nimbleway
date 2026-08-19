@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents Domain Knowledge API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domain Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Driver",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/domain-knowledge/driver",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Target domain to resolve driver for (e.g. amazon.com)."
+              },
+              {
+                "name": "agent",
+                "value": "",
+                "type": "query",
+                "description": "Agent name to resolve driver for (e.g. nimble-ecommerce)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resolves the suggested driver for a given URL or agent name. Exactly one of `url` or `agent` must be provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

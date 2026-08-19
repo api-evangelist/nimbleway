@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "d1bfa429-ea30-41af-a371-5732e0e1743e",
+      "name": "Search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb469de8-dc16-4200-ade7-3ea01f96705d",
+          "name": "Search",
+          "request": {
+            "name": "Search",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"locale\": \"en\",\n  \"country\": \"US\",\n  \"output_format\": \"markdown\",\n  \"max_results\": 3,\n  \"focus\": \"<string>\",\n  \"content_type\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search_depth\": \"lite\",\n  \"exclude_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"start_date\": \"<string>\",\n  \"end_date\": \"<string>\",\n  \"time_range\": \"<string>\",\n  \"max_subagents\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ac9cae7-540d-4558-9044-f2dfdd1a1bf4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"Nike brand perception consumer reviews 2025\",\n  \"focus\": \"social\",\n  \"max_results\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_results\": 10,\n  \"results\": [\n    {\n      \"title\": \"Top 10 Web Scraping Tools for 2024\",\n      \"description\": \"Comprehensive guide to the best web scraping tools...\",\n      \"url\": \"https://example.com/article1\",\n      \"content\": \"Full parsed content from the page...\",\n      \"metadata\": {\n        \"published_date\": \"2024-01-15\"\n      }\n    },\n    {\n      \"title\": \"Web Scraping Tools Comparison\",\n      \"description\": \"Compare features, pricing, and performance...\",\n      \"url\": \"https://example2.com/comparison\",\n      \"content\": \"Full parsed content from the page...\",\n      \"metadata\": {}\n    }\n  ],\n  \"request_id\": \"123e4567-e89b-12d3-a456-426614174000\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d036cf64-dbaf-45e1-94b8-941c897c13fd",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"Nike brand perception consumer reviews 2025\",\n  \"focus\": \"social\",\n  \"max_results\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d667db5-a3db-446a-9352-066dd303764e",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"Nike brand perception consumer reviews 2025\",\n  \"focus\": \"social\",\n  \"max_results\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92fd81af-4e96-4bfb-b439-3d5c33d81858",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"Nike brand perception consumer reviews 2025\",\n  \"focus\": \"social\",\n  \"max_results\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b54871-bf82-47a2-93c2-a92b093031e9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"Nike brand perception consumer reviews 2025\",\n  \"focus\": \"social\",\n  \"max_results\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sdk.nimbleway.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f8db175a-123a-4c0c-a65e-11e4cf756eff",
+    "name": "Nimble SDK Agents Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI-Native SDK for Real-Time Web Data at scale",
+      "type": "text/plain"
+    }
+  }
+}

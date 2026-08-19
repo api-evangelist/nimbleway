@@ -1,0 +1,1427 @@
+{
+  "item": [
+    {
+      "id": "9e0b2dd4-2b2c-4c4b-837d-2356bf8e525a",
+      "name": "Crawl",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8701252-dff2-4b1c-af6a-9058f5dfe2e2",
+          "name": "Create Crawl",
+          "request": {
+            "name": "Create Crawl",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "crawl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"name\": \"<string>\",\n  \"sitemap\": \"<string>\",\n  \"crawl_entire_domain\": \"<boolean>\",\n  \"limit\": \"<integer>\",\n  \"max_discovery_depth\": \"<integer>\",\n  \"exclude_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_paths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ignore_query_parameters\": \"<boolean>\",\n  \"allow_external_links\": \"<boolean>\",\n  \"allow_subdomains\": \"<boolean>\",\n  \"callback\": {\n    \"url\": \"<uri>\",\n    \"headers\": \"<object>\",\n    \"metadata\": \"<object>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"extract_options\": {\n    \"url\": \"<uri>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"city\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"render\": \"<boolean>\",\n    \"parse\": \"<boolean>\",\n    \"parser\": {\n      \"key_0\": {\n        \"type\": \"<string>\",\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"key_1\": {\n        \"type\": \"<string>\",\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"driver\": \"<string>\",\n    \"auto_driver_configuration\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\"\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"<string>\",\n        \"url\": {\n          \"value\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"resource_type\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"validation\": \"<boolean>\",\n        \"wait_for_requests_count\": \"<number>\",\n        \"wait_for_requests_count_timeout\": \"<number>\"\n      },\n      {\n        \"method\": \"<string>\",\n        \"url\": {\n          \"value\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"resource_type\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"validation\": \"<boolean>\",\n        \"wait_for_requests_count\": \"<number>\",\n        \"wait_for_requests_count_timeout\": \"<number>\"\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": \"<uri>\",\n        \"wait\": \"<string>\",\n        \"wait_for_element\": \"<string>\",\n        \"click\": \"<string>\",\n        \"press\": \"<string>\",\n        \"fill\": {\n          \"selector\": \"<string>\",\n          \"value\": \"<string>\",\n          \"mode\": \"<string>\",\n          \"timeout\": \"<number>\",\n          \"typing_interval\": \"<number>\",\n          \"click_on_element\": \"<boolean>\",\n          \"scroll\": \"<boolean>\",\n          \"visible\": \"<boolean>\",\n          \"delay\": \"<number>\",\n          \"required\": \"<boolean>\"\n        },\n        \"scroll\": \"<number>\",\n        \"auto_scroll\": \"<boolean>\",\n        \"screenshot\": \"<boolean>\",\n        \"get_cookies\": \"<boolean>\",\n        \"fetch\": \"<uri>\"\n      },\n      {\n        \"goto\": \"<uri>\",\n        \"wait\": \"<string>\",\n        \"wait_for_element\": \"<string>\",\n        \"click\": \"<string>\",\n        \"press\": \"<string>\",\n        \"fill\": {\n          \"selector\": \"<string>\",\n          \"value\": \"<string>\",\n          \"mode\": \"<string>\",\n          \"timeout\": \"<number>\",\n          \"typing_interval\": \"<number>\",\n          \"click_on_element\": \"<boolean>\",\n          \"scroll\": \"<boolean>\",\n          \"visible\": \"<boolean>\",\n          \"delay\": \"<number>\",\n          \"required\": \"<boolean>\"\n        },\n        \"scroll\": \"<number>\",\n        \"auto_scroll\": \"<boolean>\",\n        \"screenshot\": \"<boolean>\",\n        \"get_cookies\": \"<boolean>\",\n        \"fetch\": \"<uri>\"\n      }\n    ],\n    \"browser\": \"<string>\",\n    \"os\": \"<string>\",\n    \"no_userbrowser\": \"<boolean>\",\n    \"device\": \"<string>\",\n    \"tag\": \"<string>\",\n    \"is_xhr\": \"<boolean>\",\n    \"http2\": \"<boolean>\",\n    \"expected_status_codes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"referrer_type\": \"<string>\",\n    \"method\": \"<string>\",\n    \"render_options\": {\n      \"render_type\": \"<string>\",\n      \"headless\": \"<boolean>\",\n      \"timeout\": \"<number>\",\n      \"userbrowser\": \"<boolean>\",\n      \"include_iframes\": \"<boolean>\",\n      \"disabled_resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"adblock\": \"<boolean>\",\n      \"blocked_domains\": [\n        \"<string>\"\n      ],\n      \"with_performance_metrics\": \"<boolean>\",\n      \"no_accept_encoding\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b0d6253-386f-4e7b-8982-af3ce139c488",
+              "name": "Successful Response - Crawl Task Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://example.com\",\n  \"name\": \"my-crawler-1\",\n  \"sitemap\": \"include\",\n  \"limit\": 100,\n  \"max_discovery_depth\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"crawl_id\": \"85b21e98-69c5-4aa5-9d25-261a55bbf0db\",\n  \"name\": \"my-crawler-1\",\n  \"url\": \"https://www.amazon.com/dp\",\n  \"status\": \"queued\",\n  \"account_name\": \"ACCOUNT_NAME\",\n  \"created_at\": \"2026-02-11T13:55:45.512Z\",\n  \"updated_at\": \"2026-02-11T13:55:45.512Z\",\n  \"completed_at\": null,\n  \"crawl_options\": {\n    \"sitemap\": \"include\",\n    \"crawl_entire_domain\": false,\n    \"limit\": 10,\n    \"max_discovery_depth\": 5,\n    \"ignore_query_parameters\": false,\n    \"allow_external_links\": false,\n    \"allow_subdomains\": false\n  },\n  \"extract_options\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3feed47c-e163-4316-943e-0e8711fcb091",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://example.com\",\n  \"name\": \"my-crawler-1\",\n  \"sitemap\": \"include\",\n  \"limit\": 100,\n  \"max_discovery_depth\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10b619bf-f1e7-4898-a222-9cf8e9900c6b",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://example.com\",\n  \"name\": \"my-crawler-1\",\n  \"sitemap\": \"include\",\n  \"limit\": 100,\n  \"max_discovery_depth\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b6cedc2-86e4-487c-8259-d162d259197e",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://example.com\",\n  \"name\": \"my-crawler-1\",\n  \"sitemap\": \"include\",\n  \"limit\": 100,\n  \"max_discovery_depth\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afc347f4-cb90-4a14-88cc-42043443d340",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://example.com\",\n  \"name\": \"my-crawler-1\",\n  \"sitemap\": \"include\",\n  \"limit\": 100,\n  \"max_discovery_depth\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dff8b39-7fa6-4fe1-a7a6-4de609bbf610",
+          "name": "List Crawls",
+          "request": {
+            "name": "List Crawls",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "crawl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "(Required) Filter crawls by their status"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<null>",
+                  "description": "Cursor for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of crawls to return per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b239f64c-edf1-494d-aae3-1a84cfe80448",
+              "name": "Successful Response - List of Crawl Tasks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"crawl_id\": \"7011020c-864b-b205-b982-838cbbc7f703\",\n      \"name\": \"string\",\n      \"url\": \"http://CLzPDDAbFfrgbx.sjVzIDeZ-Kfwv3FUpGycbriAoZwli820qnyVhnPzlHGwchdxdIlSAfh,v,F.oA,SyypKe\",\n      \"account_name\": \"string\",\n      \"status\": \"failed\",\n      \"total\": 7958,\n      \"completed\": 413,\n      \"failed\": 9972,\n      \"pending\": 615,\n      \"created_at\": \"1965-01-24T04:06:28.312Z\",\n      \"updated_at\": \"1997-01-25T11:46:53.777Z\",\n      \"completed_at\": \"1954-10-17T05:14:52.345Z\",\n      \"crawl_options\": {},\n      \"extract_options\": {},\n      \"tasks\": [\n        {\n          \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n          \"status\": \"completed\",\n          \"completed_at\": \"string\",\n          \"updated_at\": \"string\"\n        },\n        {\n          \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n          \"status\": \"completed\",\n          \"completed_at\": \"string\",\n          \"updated_at\": \"string\"\n        }\n      ]\n    },\n    {\n      \"crawl_id\": \"2b087111-3587-af2a-8adc-36d6209d71d8\",\n      \"name\": \"string\",\n      \"url\": \"http://ZKcNHkCfJJvokqQJQexrBbbwSKDgX.hruhxdtE22ieQxAT.XFLh.Tube5vHsqrWafEd+hRx-vNvtRNP3dTV1GPs\",\n      \"account_name\": \"string\",\n      \"status\": \"canceled\",\n      \"total\": 3075,\n      \"completed\": 700,\n      \"failed\": 3070,\n      \"pending\": 5894,\n      \"created_at\": \"1960-12-04T06:59:25.080Z\",\n      \"updated_at\": \"1973-10-18T06:18:43.536Z\",\n      \"completed_at\": \"1953-09-19T16:37:33.062Z\",\n      \"crawl_options\": {},\n      \"extract_options\": {},\n      \"tasks\": [\n        {\n          \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n          \"status\": \"completed\",\n          \"completed_at\": \"string\",\n          \"updated_at\": \"string\"\n        },\n        {\n          \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n          \"status\": \"completed\",\n          \"completed_at\": \"string\",\n          \"updated_at\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"hasNext\": true,\n    \"nextCursor\": \"string\",\n    \"total\": 1548\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8ac0c9b-4a67-428a-950c-c0760c8fd273",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3793ca35-beef-4040-a0ab-46e745b14fd8",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93ac9dff-0e83-43e3-937b-43d7f8924dce",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "016e7bac-4eef-4165-a773-c4d32202ec80",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<null>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a5d187b-910a-48be-bdaf-339cf5344844",
+          "name": "Crawl by ID",
+          "request": {
+            "name": "Crawl by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "crawl",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the crawl task"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed664471-5fd6-4be1-895a-7b71cc4c9509",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"succeeded\",\n  \"crawl_id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"name\": \"string\",\n  \"total\": 10,\n  \"completed\": 2,\n  \"created_at\": \"string\",\n  \"completed_at\": \"string\",\n  \"tasks\": [\n    {\n      \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n      \"status\": \"completed\",\n      \"completed_at\": \"string\",\n      \"updated_at\": \"string\"\n    },\n    {\n      \"task_id\": \"abc12345-e89b-12d3-a456-426614174001\",\n      \"status\": \"completed\",\n      \"completed_at\": \"string\",\n      \"updated_at\": \"string\"\n    }\n  ],\n  \"account_name\": \"string\",\n  \"failed\": 2,\n  \"pending\": 2,\n  \"updated_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "084dedf8-9802-4cc8-b83a-d79881440c05",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02a3d7ba-e3e9-442e-9b84-228a9049cfbb",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f497e2f-a29e-4ac1-998d-976320eb6d7d",
+              "name": "Crawl Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Crawl not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59cf5d53-1e3e-4810-a7a5-9d093b606634",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8740469e-eec6-45a3-8c00-64c0ec0b9744",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac0c21d2-1e18-48a2-81d4-abc23e0dd0ba",
+          "name": "Cancel Crawl",
+          "request": {
+            "name": "Cancel Crawl",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "crawl",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the crawl task"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ac24fc7-46a1-4813-a4ef-e3735c579bc1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"canceled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99d989ba-60c5-4e24-9cc7-10bf82c167d6",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d3aa649-51eb-4c41-ab73-e329e5c3dcb6",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7121002a-3d7b-44a9-b1e7-0104d7b66a8d",
+              "name": "Crawl Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"error\": \"Crawl not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5d85f9b-29a8-4f7b-a08e-d31cc71de9af",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9626ebee-e7a9-4777-bdf9-bb0419691e05",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "crawl",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the crawl task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sdk.nimbleway.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9b65aa4f-e7e6-462f-8dad-599ab48ca1fe",
+    "name": "Nimble SDK Agents Crawl API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI-Native SDK for Real-Time Web Data at scale",
+      "type": "text/plain"
+    }
+  }
+}

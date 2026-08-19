@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agent Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/agents/run",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Execute Search Agent Realtime Endpoint"
+        },
+        {
+          "info": {
+            "name": "Agent Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/agents/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Execute Search Agent Async Endpoint"
+        },
+        {
+          "info": {
+            "name": "Agent Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/agents/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Agent Batch"
+        },
+        {
+          "info": {
+            "name": "Generate Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/agents/generations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate Agent"
+        },
+        {
+          "info": {
+            "name": "Get Generation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/agents/generations/:generation_id",
+            "params": [
+              {
+                "name": "generation_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Generation"
+        },
+        {
+          "info": {
+            "name": "List Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/agents",
+            "params": [
+              {
+                "name": "privacy",
+                "value": "",
+                "type": "query",
+                "description": "Filter by privacy level"
+              },
+              {
+                "name": "managed_by",
+                "value": "",
+                "type": "query",
+                "description": "Filter by who manage the agent"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Agents"
+        },
+        {
+          "info": {
+            "name": "Get Agent Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/agents/:agent_name",
+            "params": [
+              {
+                "name": "agent_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

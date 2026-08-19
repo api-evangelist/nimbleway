@@ -2,46 +2,49 @@ generated: '2026-07-20'
 method: searched
 status: published
 source: https://docs.nimbleway.com/integrations/mcp-server/mcp-server
-description: >-
-  Official Nimble MCP Server. Exposes Nimble's full web data platform (search,
-  extract, map, crawl, structured-data agents) as MCP tools to any compatible AI
-  client. Listed on Azure MCP Center, Databricks Marketplace, the Smithery MCP
-  registry, and Snowflake Cortex. Confirmed live: https://mcp.nimbleway.com/mcp
-  returns HTTP 401 (auth required) to unauthenticated probes.
+description: 'Official Nimble MCP Server. Exposes Nimble''s full web data platform (search, extract, map,
+  crawl, structured-data agents) as MCP tools to any compatible AI client. Listed on Azure MCP Center,
+  Databricks Marketplace, the Smithery MCP registry, and Snowflake Cortex. Confirmed live: https://mcp.nimbleway.com/mcp
+  returns HTTP 401 (auth required) to unauthenticated probes.'
 server:
   name: nimble-mcp-server
   transport: http
   url: https://mcp.nimbleway.com/mcp
   auth:
-    - method: api_key
-      detail: "Authorization: Bearer <NIMBLE_API_KEY> header"
-    - method: oauth2.1
-      detail: OAuth 2.1 with PKCE (e.g. one-click install via Azure MCP Center / VS Code)
+  - method: api_key
+    detail: 'Authorization: Bearer <NIMBLE_API_KEY> header'
+  - method: oauth2.1
+    detail: OAuth 2.1 with PKCE (e.g. one-click install via Azure MCP Center / VS Code)
   tool_count: 18
 registries:
-  - name: Azure MCP Center
-    url: https://mcp.azure.com/detail/nimble-mcp
-  - name: Databricks Marketplace
-    url: https://docs.nimbleway.com/integrations/partnerships/databricks/marketplace-mcp
-  - name: Smithery
-    url: https://docs.nimbleway.com/integrations/connectors/smithery
-  - name: Snowflake Cortex
-    url: https://docs.nimbleway.com/integrations/partnerships/snowflake/cortex-code
-# Tool surface (families the server exposes per the docs; 18 tools total).
-# Mapped to the underlying OpenAPI operations they front.
+- name: Azure MCP Center
+  url: https://mcp.azure.com/detail/nimble-mcp
+- name: Databricks Marketplace
+  url: https://docs.nimbleway.com/integrations/partnerships/databricks/marketplace-mcp
+- name: Smithery
+  url: https://docs.nimbleway.com/integrations/connectors/smithery
+- name: Snowflake Cortex
+  url: https://docs.nimbleway.com/integrations/partnerships/snowflake/cortex-code
 tools:
-  - name: search
-    description: Web search across multiple engines with configurable depth and focus modes.
-    source_operation: openapi/nimbleway-openapi.json#POST /v1/search
-  - name: extract
-    description: Extract content from any URL (sync and async with task polling).
-    source_operation: openapi/nimbleway-openapi.json#POST /v1/extract
-  - name: map
-    description: Discover all URLs on a website via link-following and sitemaps.
-    source_operation: openapi/nimbleway-openapi.json#POST /v1/map
-  - name: crawl
-    description: Crawl multiple pages with path filtering and subdomain control.
-    source_operation: openapi/nimbleway-openapi.json#POST /v1/crawl
-  - name: agents
-    description: Browse, create, run, and publish custom Web Search Agents.
-    source_operation: openapi/nimbleway-openapi.json#POST /v1/agents/run
+- name: search
+  description: Web search across multiple engines with configurable depth and focus modes.
+  source_operation: openapi/nimbleway-openapi.json#POST /v1/search
+- name: extract
+  description: Extract content from any URL (sync and async with task polling).
+  source_operation: openapi/nimbleway-openapi.json#POST /v1/extract
+- name: map
+  description: Discover all URLs on a website via link-following and sitemaps.
+  source_operation: openapi/nimbleway-openapi.json#POST /v1/map
+- name: crawl
+  description: Crawl multiple pages with path filtering and subdomain control.
+  source_operation: openapi/nimbleway-openapi.json#POST /v1/crawl
+- name: agents
+  description: Browse, create, run, and publish custom Web Search Agents.
+  source_operation: openapi/nimbleway-openapi.json#POST /v1/agents/run
+deployment:
+  mode: remote
+  endpoint: https://mcp.nimbleway.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

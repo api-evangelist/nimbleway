@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents Tasks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/tasks",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination. Use the next_cursor from the previous response."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tasks to return per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of tasks for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Task Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/tasks/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the async task"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the status and results of an async task by ID. Works for all async task types (extract, search, map, agent, crawl)."
+        },
+        {
+          "info": {
+            "name": "Task Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/tasks/:task_id/results",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the async task"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the status and results of an async task by ID. Works for all async task types (extract, search, map, agent, crawl)."
+        },
+        {
+          "info": {
+            "name": "List batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/batches",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a paginated list of batches for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Get batch details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/batches/:batch_id",
+            "params": [
+              {
+                "name": "batch_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the batch."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the details of a batch including all its tasks and completion status."
+        },
+        {
+          "info": {
+            "name": "Get batch progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/batches/:batch_id/progress",
+            "params": [
+              {
+                "name": "batch_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the batch."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve lightweight progress information for a batch without fetching all task details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

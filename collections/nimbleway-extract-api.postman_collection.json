@@ -1,0 +1,986 @@
+{
+  "item": [
+    {
+      "id": "b7c4cf1a-a7a4-4d21-98e8-96e7eba9ade3",
+      "name": "Extract",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "66cc7e6f-7380-406e-a2c3-c4901b8c9fdd",
+          "name": "Extract",
+          "request": {
+            "name": "Extract",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "extract"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"render\": \"<boolean>\",\n  \"parse\": \"<boolean>\",\n  \"parser\": {\n    \"key_0\": {\n      \"type\": \"<string>\",\n      \"selector\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"css_selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extractor\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"post_processor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"driver\": \"<string>\",\n  \"auto_driver_configuration\": {\n    \"key_0\": \"<integer>\",\n    \"key_1\": \"<integer>\"\n  },\n  \"network_capture\": [\n    {\n      \"method\": \"<string>\",\n      \"url\": {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"resource_type\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"validation\": \"<boolean>\",\n      \"wait_for_requests_count\": \"<number>\",\n      \"wait_for_requests_count_timeout\": \"<number>\"\n    },\n    {\n      \"method\": \"<string>\",\n      \"url\": {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"resource_type\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"validation\": \"<boolean>\",\n      \"wait_for_requests_count\": \"<number>\",\n      \"wait_for_requests_count_timeout\": \"<number>\"\n    }\n  ],\n  \"browser_actions\": [\n    {\n      \"goto\": \"<uri>\",\n      \"wait\": \"<string>\",\n      \"wait_for_element\": \"<string>\",\n      \"click\": \"<string>\",\n      \"press\": \"<string>\",\n      \"fill\": {\n        \"selector\": \"<string>\",\n        \"value\": \"<string>\",\n        \"mode\": \"<string>\",\n        \"timeout\": \"<number>\",\n        \"typing_interval\": \"<number>\",\n        \"click_on_element\": \"<boolean>\",\n        \"scroll\": \"<boolean>\",\n        \"visible\": \"<boolean>\",\n        \"delay\": \"<number>\",\n        \"required\": \"<boolean>\"\n      },\n      \"scroll\": \"<number>\",\n      \"auto_scroll\": \"<boolean>\",\n      \"screenshot\": \"<boolean>\",\n      \"get_cookies\": \"<boolean>\",\n      \"fetch\": \"<uri>\"\n    },\n    {\n      \"goto\": \"<uri>\",\n      \"wait\": \"<string>\",\n      \"wait_for_element\": \"<string>\",\n      \"click\": \"<string>\",\n      \"press\": \"<string>\",\n      \"fill\": {\n        \"selector\": \"<string>\",\n        \"value\": \"<string>\",\n        \"mode\": \"<string>\",\n        \"timeout\": \"<number>\",\n        \"typing_interval\": \"<number>\",\n        \"click_on_element\": \"<boolean>\",\n        \"scroll\": \"<boolean>\",\n        \"visible\": \"<boolean>\",\n        \"delay\": \"<number>\",\n        \"required\": \"<boolean>\"\n      },\n      \"scroll\": \"<number>\",\n      \"auto_scroll\": \"<boolean>\",\n      \"screenshot\": \"<boolean>\",\n      \"get_cookies\": \"<boolean>\",\n      \"fetch\": \"<uri>\"\n    }\n  ],\n  \"browser\": \"<string>\",\n  \"os\": \"<string>\",\n  \"no_userbrowser\": \"<boolean>\",\n  \"device\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"is_xhr\": \"<boolean>\",\n  \"http2\": \"<boolean>\",\n  \"expected_status_codes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"referrer_type\": \"<string>\",\n  \"method\": \"<string>\",\n  \"render_options\": {\n    \"render_type\": \"<string>\",\n    \"headless\": \"<boolean>\",\n    \"timeout\": \"<number>\",\n    \"userbrowser\": \"<boolean>\",\n    \"include_iframes\": \"<boolean>\",\n    \"disabled_resources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"adblock\": \"<boolean>\",\n    \"blocked_domains\": [\n      \"<string>\"\n    ],\n    \"with_performance_metrics\": \"<boolean>\",\n    \"no_accept_encoding\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f1e0a34-518a-4074-9602-9afdbca8891f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://www.example.com/\",\n  \"task_id\": \"e8ed8ef6-2657-43ba-98d5-a5c79ea7b551\",\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"data\": {\n    \"html\": \"...\",\n    \"markdown\": \"MARKDOWN\",\n    \"parsing\": {},\n    \"cookies\": {},\n    \"screenshot\": \"iVBORw0KGgoAAAANSUhEUgAAA...\",\n    \"fetch_request\": [],\n    \"network_capture\": [],\n    \"browser_actions\": [],\n    \"headers\": {}\n  },\n  \"metadata\": {\n    \"query_time\": \"2026-02-09T10:26:05.817Z\",\n    \"query_duration\": 1877,\n    \"response_parameters\": {\n      \"input_url\": \"https://www.example.com/\"\n    },\n    \"driver\": \"vx8\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7daf03a1-1ce3-4719-977a-72998b304ee4",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "008a2e42-2d41-45e9-ba33-d0570b15e749",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d870914-d5a4-42fc-afdc-c97c7e679afe",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f7dcb2-5d8d-4a3b-b7e1-b566e12efc51",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e779e56d-d86a-4b55-90d5-4c5b2501a807",
+          "name": "Extract Async",
+          "request": {
+            "name": "Extract Async",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "extract",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"country\": \"<string>\",\n  \"state\": \"<string>\",\n  \"city\": \"<string>\",\n  \"locale\": \"<string>\",\n  \"render\": \"<boolean>\",\n  \"parse\": \"<boolean>\",\n  \"parser\": {\n    \"key_0\": {\n      \"type\": \"<string>\",\n      \"selector\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"css_selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extractor\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"post_processor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"key_1\": {\n      \"type\": \"<string>\",\n      \"selector\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"css_selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extractor\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"post_processor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  \"formats\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"driver\": \"<string>\",\n  \"auto_driver_configuration\": {\n    \"key_0\": \"<integer>\"\n  },\n  \"network_capture\": [\n    {\n      \"method\": \"<string>\",\n      \"url\": {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"resource_type\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"validation\": \"<boolean>\",\n      \"wait_for_requests_count\": \"<number>\",\n      \"wait_for_requests_count_timeout\": \"<number>\"\n    },\n    {\n      \"method\": \"<string>\",\n      \"url\": {\n        \"value\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"resource_type\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"validation\": \"<boolean>\",\n      \"wait_for_requests_count\": \"<number>\",\n      \"wait_for_requests_count_timeout\": \"<number>\"\n    }\n  ],\n  \"browser_actions\": [\n    {\n      \"goto\": \"<uri>\",\n      \"wait\": \"<string>\",\n      \"wait_for_element\": \"<string>\",\n      \"click\": \"<string>\",\n      \"press\": \"<string>\",\n      \"fill\": {\n        \"selector\": \"<string>\",\n        \"value\": \"<string>\",\n        \"mode\": \"<string>\",\n        \"timeout\": \"<number>\",\n        \"typing_interval\": \"<number>\",\n        \"click_on_element\": \"<boolean>\",\n        \"scroll\": \"<boolean>\",\n        \"visible\": \"<boolean>\",\n        \"delay\": \"<number>\",\n        \"required\": \"<boolean>\"\n      },\n      \"scroll\": \"<number>\",\n      \"auto_scroll\": \"<boolean>\",\n      \"screenshot\": \"<boolean>\",\n      \"get_cookies\": \"<boolean>\",\n      \"fetch\": \"<uri>\"\n    },\n    {\n      \"goto\": \"<uri>\",\n      \"wait\": \"<string>\",\n      \"wait_for_element\": \"<string>\",\n      \"click\": \"<string>\",\n      \"press\": \"<string>\",\n      \"fill\": {\n        \"selector\": \"<string>\",\n        \"value\": \"<string>\",\n        \"mode\": \"<string>\",\n        \"timeout\": \"<number>\",\n        \"typing_interval\": \"<number>\",\n        \"click_on_element\": \"<boolean>\",\n        \"scroll\": \"<boolean>\",\n        \"visible\": \"<boolean>\",\n        \"delay\": \"<number>\",\n        \"required\": \"<boolean>\"\n      },\n      \"scroll\": \"<number>\",\n      \"auto_scroll\": \"<boolean>\",\n      \"screenshot\": \"<boolean>\",\n      \"get_cookies\": \"<boolean>\",\n      \"fetch\": \"<uri>\"\n    }\n  ],\n  \"browser\": \"<string>\",\n  \"os\": \"<string>\",\n  \"no_userbrowser\": \"<boolean>\",\n  \"device\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"is_xhr\": \"<boolean>\",\n  \"http2\": \"<boolean>\",\n  \"expected_status_codes\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"referrer_type\": \"<string>\",\n  \"method\": \"<string>\",\n  \"render_options\": {\n    \"render_type\": \"<string>\",\n    \"headless\": \"<boolean>\",\n    \"timeout\": \"<number>\",\n    \"userbrowser\": \"<boolean>\",\n    \"include_iframes\": \"<boolean>\",\n    \"disabled_resources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"adblock\": \"<boolean>\",\n    \"blocked_domains\": [\n      \"<string>\"\n    ],\n    \"with_performance_metrics\": \"<boolean>\",\n    \"no_accept_encoding\": \"<boolean>\"\n  },\n  \"storage_type\": \"<string>\",\n  \"storage_url\": \"<string>\",\n  \"callback_url\": \"<uri>\",\n  \"storage_compress\": \"<boolean>\",\n  \"storage_object_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4855987-ab39-460d-b562-72cc181c6678",
+              "name": "Async Task Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\",\n  \"storage_url\": \"s3://mu-s3-bucket.com/\",\n  \"storage_type\": \"s3\",\n  \"callback_url\": \"https://my-callback-url.com/\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"task\": {\n    \"id\": \"8e8cfde8-345b-42b8-b3e2-0c61eb11e00f\",\n    \"state\": \"pending\",\n    \"created_at\": \"2026-01-24T12:36:24.685Z\",\n    \"modified_at\": \"2026-01-24T12:36:24.685Z\",\n    \"input\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ccae9d7-15e1-40fc-aea0-4a680a12035d",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\",\n  \"storage_url\": \"s3://mu-s3-bucket.com/\",\n  \"storage_type\": \"s3\",\n  \"callback_url\": \"https://my-callback-url.com/\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86cf4ada-5401-4f4e-b3aa-b2009bf35d14",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\",\n  \"storage_url\": \"s3://mu-s3-bucket.com/\",\n  \"storage_type\": \"s3\",\n  \"callback_url\": \"https://my-callback-url.com/\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f06eee4-0e0f-4bdf-9724-19f92c96f849",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\",\n  \"storage_url\": \"s3://mu-s3-bucket.com/\",\n  \"storage_type\": \"s3\",\n  \"callback_url\": \"https://my-callback-url.com/\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec657ea9-db36-408d-b420-792ab077b95e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://www.example.com\",\n  \"render\": true,\n  \"country\": \"US\",\n  \"locale\": \"en-US\",\n  \"storage_url\": \"s3://mu-s3-bucket.com/\",\n  \"storage_type\": \"s3\",\n  \"callback_url\": \"https://my-callback-url.com/\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8816c05b-0d80-484d-b70a-50a5b63806ee",
+          "name": "Extract Batch",
+          "request": {
+            "name": "Extract Batch",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "extract",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"<uri>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"locale\": \"<string>\",\n      \"render\": \"<boolean>\",\n      \"parse\": \"<boolean>\",\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"driver\": \"<string>\",\n      \"auto_driver_configuration\": {\n        \"key_0\": \"<integer>\",\n        \"key_1\": \"<integer>\",\n        \"key_2\": \"<integer>\",\n        \"key_3\": \"<integer>\"\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"<string>\",\n      \"os\": \"<string>\",\n      \"no_userbrowser\": \"<boolean>\",\n      \"device\": \"<string>\",\n      \"tag\": \"<string>\",\n      \"is_xhr\": \"<boolean>\",\n      \"http2\": \"<boolean>\",\n      \"expected_status_codes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"referrer_type\": \"<string>\",\n      \"method\": \"<string>\",\n      \"render_options\": {\n        \"render_type\": \"<string>\",\n        \"headless\": \"<boolean>\",\n        \"timeout\": \"<number>\",\n        \"userbrowser\": \"<boolean>\",\n        \"include_iframes\": \"<boolean>\",\n        \"disabled_resources\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"adblock\": \"<boolean>\",\n        \"blocked_domains\": [\n          \"<string>\"\n        ],\n        \"with_performance_metrics\": \"<boolean>\",\n        \"no_accept_encoding\": \"<boolean>\"\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"country\": \"<string>\",\n      \"state\": \"<string>\",\n      \"city\": \"<string>\",\n      \"locale\": \"<string>\",\n      \"render\": \"<boolean>\",\n      \"parse\": \"<boolean>\",\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"driver\": \"<string>\",\n      \"auto_driver_configuration\": {\n        \"key_0\": \"<integer>\",\n        \"key_1\": \"<integer>\",\n        \"key_2\": \"<integer>\",\n        \"key_3\": \"<integer>\"\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"<string>\",\n      \"os\": \"<string>\",\n      \"no_userbrowser\": \"<boolean>\",\n      \"device\": \"<string>\",\n      \"tag\": \"<string>\",\n      \"is_xhr\": \"<boolean>\",\n      \"http2\": \"<boolean>\",\n      \"expected_status_codes\": [\n        \"<integer>\",\n        \"<integer>\"\n      ],\n      \"referrer_type\": \"<string>\",\n      \"method\": \"<string>\",\n      \"render_options\": {\n        \"render_type\": \"<string>\",\n        \"headless\": \"<boolean>\",\n        \"timeout\": \"<number>\",\n        \"userbrowser\": \"<boolean>\",\n        \"include_iframes\": \"<boolean>\",\n        \"disabled_resources\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"adblock\": \"<boolean>\",\n        \"blocked_domains\": [\n          \"<string>\"\n        ],\n        \"with_performance_metrics\": \"<boolean>\",\n        \"no_accept_encoding\": \"<boolean>\"\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"<uri>\",\n    \"storage_type\": \"<string>\",\n    \"storage_url\": \"<string>\",\n    \"callback_url\": \"<uri>\",\n    \"storage_compress\": \"<boolean>\",\n    \"storage_object_name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"city\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"render\": \"<boolean>\",\n    \"parse\": \"<boolean>\",\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"key_1\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"driver\": \"<string>\",\n    \"auto_driver_configuration\": {\n      \"key_0\": \"<integer>\",\n      \"key_1\": \"<integer>\",\n      \"key_2\": \"<integer>\"\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"<string>\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": \"<boolean>\",\n        \"wait_for_requests_count\": \"<number>\",\n        \"wait_for_requests_count_timeout\": \"<number>\"\n      },\n      {\n        \"method\": \"<string>\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": \"<boolean>\",\n        \"wait_for_requests_count\": \"<number>\",\n        \"wait_for_requests_count_timeout\": \"<number>\"\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"<string>\",\n    \"os\": \"<string>\",\n    \"no_userbrowser\": \"<boolean>\",\n    \"device\": \"<string>\",\n    \"tag\": \"<string>\",\n    \"is_xhr\": \"<boolean>\",\n    \"http2\": \"<boolean>\",\n    \"expected_status_codes\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"referrer_type\": \"<string>\",\n    \"method\": \"<string>\",\n    \"render_options\": {\n      \"render_type\": \"<string>\",\n      \"headless\": \"<boolean>\",\n      \"timeout\": \"<number>\",\n      \"userbrowser\": \"<boolean>\",\n      \"include_iframes\": \"<boolean>\",\n      \"disabled_resources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"adblock\": \"<boolean>\",\n      \"blocked_domains\": [\n        \"<string>\"\n      ],\n      \"with_performance_metrics\": \"<boolean>\",\n      \"no_accept_encoding\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16149f14-0625-4e22-bb2b-d3d11dbb0a47",
+              "name": "Extract Batch Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        -8537654502473309,\n        7719863156211965\n      ],\n      \"referrer_type\": \"no-referer\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"websocket\",\n          \"fedcm\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"st\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    },\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        5350975613294017,\n        988786001216577\n      ],\n      \"referrer_type\": \"random\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"signedexchange\",\n          \"other\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"string\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"https://example.com/page\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"country\": \"US\",\n    \"state\": \"NY\",\n    \"city\": \"new_york\",\n    \"locale\": \"en-US\",\n    \"render\": false,\n    \"parse\": false,\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"html\",\n      \"markdown\"\n    ],\n    \"driver\": \"vx8\",\n    \"auto_driver_configuration\": {\n      \"vx6-fast\": 1,\n      \"vx8\": 3,\n      \"vx10-pro\": 2\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"HEAD\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 6251.462575766653,\n        \"wait_for_requests_count_timeout\": 252705.21869692288\n      },\n      {\n        \"method\": \"OPTIONS\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 9253.798342846885,\n        \"wait_for_requests_count_timeout\": 168936.80962660201\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"chrome\",\n    \"os\": \"windows\",\n    \"no_userbrowser\": false,\n    \"device\": \"desktop\",\n    \"tag\": \"campaign-2024-q1\",\n    \"is_xhr\": true,\n    \"http2\": true,\n    \"expected_status_codes\": [\n      -4040471580185774,\n      -285571545602758\n    ],\n    \"referrer_type\": \"random\",\n    \"method\": \"GET\",\n    \"render_options\": {\n      \"render_type\": \"idle2\",\n      \"headless\": true,\n      \"timeout\": 30000,\n      \"userbrowser\": true,\n      \"include_iframes\": true,\n      \"disabled_resources\": [\n        \"prefetch\",\n        \"manifest\"\n      ],\n      \"adblock\": true,\n      \"blocked_domains\": [\n        \"string\"\n      ],\n      \"with_performance_metrics\": true,\n      \"no_accept_encoding\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n  \"batch_size\": 1,\n  \"tasks\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"state\": \"pending\",\n      \"output_url\": \"string\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"modified_at\": \"2024-01-15T10:35:00Z\",\n      \"account_name\": \"string\",\n      \"input\": null,\n      \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n      \"status_code\": 200,\n      \"api_type\": \"extract\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25929cc9-2c97-42d5-b783-b2f3904bd8a1",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        -8537654502473309,\n        7719863156211965\n      ],\n      \"referrer_type\": \"no-referer\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"websocket\",\n          \"fedcm\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"st\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    },\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        5350975613294017,\n        988786001216577\n      ],\n      \"referrer_type\": \"random\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"signedexchange\",\n          \"other\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"string\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"https://example.com/page\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"country\": \"US\",\n    \"state\": \"NY\",\n    \"city\": \"new_york\",\n    \"locale\": \"en-US\",\n    \"render\": false,\n    \"parse\": false,\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"html\",\n      \"markdown\"\n    ],\n    \"driver\": \"vx8\",\n    \"auto_driver_configuration\": {\n      \"vx6-fast\": 1,\n      \"vx8\": 3,\n      \"vx10-pro\": 2\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"HEAD\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 6251.462575766653,\n        \"wait_for_requests_count_timeout\": 252705.21869692288\n      },\n      {\n        \"method\": \"OPTIONS\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 9253.798342846885,\n        \"wait_for_requests_count_timeout\": 168936.80962660201\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"chrome\",\n    \"os\": \"windows\",\n    \"no_userbrowser\": false,\n    \"device\": \"desktop\",\n    \"tag\": \"campaign-2024-q1\",\n    \"is_xhr\": true,\n    \"http2\": true,\n    \"expected_status_codes\": [\n      -4040471580185774,\n      -285571545602758\n    ],\n    \"referrer_type\": \"random\",\n    \"method\": \"GET\",\n    \"render_options\": {\n      \"render_type\": \"idle2\",\n      \"headless\": true,\n      \"timeout\": 30000,\n      \"userbrowser\": true,\n      \"include_iframes\": true,\n      \"disabled_resources\": [\n        \"prefetch\",\n        \"manifest\"\n      ],\n      \"adblock\": true,\n      \"blocked_domains\": [\n        \"string\"\n      ],\n      \"with_performance_metrics\": true,\n      \"no_accept_encoding\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "464876f5-3015-4d20-b2ce-ff3690d1d8d1",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        -8537654502473309,\n        7719863156211965\n      ],\n      \"referrer_type\": \"no-referer\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"websocket\",\n          \"fedcm\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"st\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    },\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        5350975613294017,\n        988786001216577\n      ],\n      \"referrer_type\": \"random\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"signedexchange\",\n          \"other\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"string\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"https://example.com/page\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"country\": \"US\",\n    \"state\": \"NY\",\n    \"city\": \"new_york\",\n    \"locale\": \"en-US\",\n    \"render\": false,\n    \"parse\": false,\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"html\",\n      \"markdown\"\n    ],\n    \"driver\": \"vx8\",\n    \"auto_driver_configuration\": {\n      \"vx6-fast\": 1,\n      \"vx8\": 3,\n      \"vx10-pro\": 2\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"HEAD\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 6251.462575766653,\n        \"wait_for_requests_count_timeout\": 252705.21869692288\n      },\n      {\n        \"method\": \"OPTIONS\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 9253.798342846885,\n        \"wait_for_requests_count_timeout\": 168936.80962660201\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"chrome\",\n    \"os\": \"windows\",\n    \"no_userbrowser\": false,\n    \"device\": \"desktop\",\n    \"tag\": \"campaign-2024-q1\",\n    \"is_xhr\": true,\n    \"http2\": true,\n    \"expected_status_codes\": [\n      -4040471580185774,\n      -285571545602758\n    ],\n    \"referrer_type\": \"random\",\n    \"method\": \"GET\",\n    \"render_options\": {\n      \"render_type\": \"idle2\",\n      \"headless\": true,\n      \"timeout\": 30000,\n      \"userbrowser\": true,\n      \"include_iframes\": true,\n      \"disabled_resources\": [\n        \"prefetch\",\n        \"manifest\"\n      ],\n      \"adblock\": true,\n      \"blocked_domains\": [\n        \"string\"\n      ],\n      \"with_performance_metrics\": true,\n      \"no_accept_encoding\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3db3201-2d15-4c3a-aa46-a722bc91bb47",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        -8537654502473309,\n        7719863156211965\n      ],\n      \"referrer_type\": \"no-referer\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"websocket\",\n          \"fedcm\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"st\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    },\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        5350975613294017,\n        988786001216577\n      ],\n      \"referrer_type\": \"random\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"signedexchange\",\n          \"other\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"string\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"https://example.com/page\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"country\": \"US\",\n    \"state\": \"NY\",\n    \"city\": \"new_york\",\n    \"locale\": \"en-US\",\n    \"render\": false,\n    \"parse\": false,\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"html\",\n      \"markdown\"\n    ],\n    \"driver\": \"vx8\",\n    \"auto_driver_configuration\": {\n      \"vx6-fast\": 1,\n      \"vx8\": 3,\n      \"vx10-pro\": 2\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"HEAD\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 6251.462575766653,\n        \"wait_for_requests_count_timeout\": 252705.21869692288\n      },\n      {\n        \"method\": \"OPTIONS\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 9253.798342846885,\n        \"wait_for_requests_count_timeout\": 168936.80962660201\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"chrome\",\n    \"os\": \"windows\",\n    \"no_userbrowser\": false,\n    \"device\": \"desktop\",\n    \"tag\": \"campaign-2024-q1\",\n    \"is_xhr\": true,\n    \"http2\": true,\n    \"expected_status_codes\": [\n      -4040471580185774,\n      -285571545602758\n    ],\n    \"referrer_type\": \"random\",\n    \"method\": \"GET\",\n    \"render_options\": {\n      \"render_type\": \"idle2\",\n      \"headless\": true,\n      \"timeout\": 30000,\n      \"userbrowser\": true,\n      \"include_iframes\": true,\n      \"disabled_resources\": [\n        \"prefetch\",\n        \"manifest\"\n      ],\n      \"adblock\": true,\n      \"blocked_domains\": [\n        \"string\"\n      ],\n      \"with_performance_metrics\": true,\n      \"no_accept_encoding\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57eba4b1-7a05-4520-85b6-d3e3db8d3a1b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "extract",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        -8537654502473309,\n        7719863156211965\n      ],\n      \"referrer_type\": \"no-referer\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"websocket\",\n          \"fedcm\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"st\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    },\n    {\n      \"url\": \"https://example.com/page\",\n      \"country\": \"US\",\n      \"state\": \"NY\",\n      \"city\": \"new_york\",\n      \"locale\": \"en-US\",\n      \"render\": false,\n      \"parse\": false,\n      \"parser\": {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"formats\": [\n        \"html\",\n        \"markdown\"\n      ],\n      \"driver\": \"vx8\",\n      \"auto_driver_configuration\": {\n        \"vx6-fast\": 1,\n        \"vx8\": 3,\n        \"vx10-pro\": 2\n      },\n      \"network_capture\": [\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"method\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"resource_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"validation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_requests_count_timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser_actions\": [\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"goto\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"wait_for_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"press\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fill\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auto_scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"screenshot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"get_cookies\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fetch\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"browser\": \"chrome\",\n      \"os\": \"windows\",\n      \"no_userbrowser\": false,\n      \"device\": \"desktop\",\n      \"tag\": \"campaign-2024-q1\",\n      \"is_xhr\": true,\n      \"http2\": true,\n      \"expected_status_codes\": [\n        5350975613294017,\n        988786001216577\n      ],\n      \"referrer_type\": \"random\",\n      \"method\": \"GET\",\n      \"render_options\": {\n        \"render_type\": \"idle2\",\n        \"headless\": true,\n        \"timeout\": 30000,\n        \"userbrowser\": true,\n        \"include_iframes\": true,\n        \"disabled_resources\": [\n          \"signedexchange\",\n          \"other\"\n        ],\n        \"adblock\": true,\n        \"blocked_domains\": [\n          \"string\"\n        ],\n        \"with_performance_metrics\": true,\n        \"no_accept_encoding\": true\n      }\n    }\n  ],\n  \"shared_inputs\": {\n    \"url\": \"https://example.com/page\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"country\": \"US\",\n    \"state\": \"NY\",\n    \"city\": \"new_york\",\n    \"locale\": \"en-US\",\n    \"render\": false,\n    \"parse\": false,\n    \"parser\": {\n      \"key_0\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"selector\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"extractor\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"formats\": [\n      \"html\",\n      \"markdown\"\n    ],\n    \"driver\": \"vx8\",\n    \"auto_driver_configuration\": {\n      \"vx6-fast\": 1,\n      \"vx8\": 3,\n      \"vx10-pro\": 2\n    },\n    \"network_capture\": [\n      {\n        \"method\": \"HEAD\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 6251.462575766653,\n        \"wait_for_requests_count_timeout\": 252705.21869692288\n      },\n      {\n        \"method\": \"OPTIONS\",\n        \"url\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"resource_type\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"validation\": true,\n        \"wait_for_requests_count\": 9253.798342846885,\n        \"wait_for_requests_count_timeout\": 168936.80962660201\n      }\n    ],\n    \"browser_actions\": [\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"goto\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"wait_for_element\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"click\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"press\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fill\": {\n          \"selector\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeout\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"typing_interval\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"click_on_element\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scroll\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"delay\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"required\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"auto_scroll\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"screenshot\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"get_cookies\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fetch\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"browser\": \"chrome\",\n    \"os\": \"windows\",\n    \"no_userbrowser\": false,\n    \"device\": \"desktop\",\n    \"tag\": \"campaign-2024-q1\",\n    \"is_xhr\": true,\n    \"http2\": true,\n    \"expected_status_codes\": [\n      -4040471580185774,\n      -285571545602758\n    ],\n    \"referrer_type\": \"random\",\n    \"method\": \"GET\",\n    \"render_options\": {\n      \"render_type\": \"idle2\",\n      \"headless\": true,\n      \"timeout\": 30000,\n      \"userbrowser\": true,\n      \"include_iframes\": true,\n      \"disabled_resources\": [\n        \"prefetch\",\n        \"manifest\"\n      ],\n      \"adblock\": true,\n      \"blocked_domains\": [\n        \"string\"\n      ],\n      \"with_performance_metrics\": true,\n      \"no_accept_encoding\": true\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sdk.nimbleway.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c2369fa-982f-4661-bdd6-13f2f2114b5c",
+    "name": "Nimble SDK Agents Extract API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI-Native SDK for Real-Time Web Data at scale",
+      "type": "text/plain"
+    }
+  }
+}

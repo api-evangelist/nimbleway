@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents Media API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Media Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/media",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Media Download"
+        },
+        {
+          "info": {
+            "name": "Media Download Async",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/media/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Media Download Async"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

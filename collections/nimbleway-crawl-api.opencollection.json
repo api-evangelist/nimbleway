@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nimble SDK Agents Crawl API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Crawl",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Crawls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/crawl",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter crawls by their status"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of crawls to return per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Crawls"
+        },
+        {
+          "info": {
+            "name": "Create Crawl",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sdk.nimbleway.com/v1/crawl",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Crawl"
+        },
+        {
+          "info": {
+            "name": "Crawl by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sdk.nimbleway.com/v1/crawl/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the crawl task"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Crawl by ID"
+        },
+        {
+          "info": {
+            "name": "Cancel Crawl",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://sdk.nimbleway.com/v1/crawl/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the crawl task"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel Crawl"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

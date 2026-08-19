@@ -1,0 +1,992 @@
+{
+  "item": [
+    {
+      "id": "ba1c34c6-e8e7-42d2-a48e-31144fc679c6",
+      "name": "SERP",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b04eb392-6266-4f4f-8ac8-c79f83906b9c",
+          "name": "SERP",
+          "request": {
+            "name": "SERP",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "serp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"search_engine\": \"<string>\",\n  \"query\": \"<string>\",\n  \"place_id\": \"<string>\",\n  \"coordinates\": {\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\"\n  },\n  \"time\": \"<string>\",\n  \"country\": \"US\",\n  \"locale\": \"<string>\",\n  \"location\": \"<string>\",\n  \"no_html\": false,\n  \"num_results\": \"<integer>\",\n  \"start\": \"<integer>\",\n  \"include_pages_html\": false,\n  \"device\": \"<string>\",\n  \"ads_optimization\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a33fae0-9d6b-4567-84a7-2ee7e57bebd6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task_id\": \"bd46cd9c-50f7-4736-9c4a-660a32e4dc87\",\n  \"status\": \"success\",\n  \"status_code\": 200,\n  \"parsing\": {},\n  \"query_time\": \"2026-03-05T13:47:16.435Z\",\n  \"url\": \"https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026\",\n  \"input_url\": \"https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026\",\n  \"html_content\": \"<!DOCTYPE html>...\",\n  \"driver\": \"vx6\",\n  \"nimble_links\": {\n    \"next_page\": \"string\"\n  },\n  \"nimble_payload\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73f28d36-f197-4fe8-97e6-a8f463c9f9bc",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "209dcabd-ed07-4e8a-b926-b6229dc0368a",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e873e1f-8718-43be-8984-cac7508da852",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6eae31c9-4b39-4951-bb60-2272f401dd8f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81214bca-8812-4cba-ad3a-5fc4aa4904a5",
+          "name": "SERP Async",
+          "request": {
+            "name": "SERP Async",
+            "description": {
+              "content": "Execute SERP Async Endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "serp",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"search_engine\": \"<string>\",\n  \"query\": \"<string>\",\n  \"place_id\": \"<string>\",\n  \"coordinates\": {\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\"\n  },\n  \"time\": \"<string>\",\n  \"country\": \"US\",\n  \"locale\": \"<string>\",\n  \"location\": \"<string>\",\n  \"no_html\": false,\n  \"num_results\": \"<integer>\",\n  \"start\": \"<integer>\",\n  \"include_pages_html\": false,\n  \"device\": \"<string>\",\n  \"ads_optimization\": false,\n  \"storage_type\": \"<string>\",\n  \"storage_url\": \"<string>\",\n  \"callback_url\": \"<uri>\",\n  \"storage_compress\": \"<boolean>\",\n  \"storage_object_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8570dfcf-6f28-42a0-9067-1f9d487453d3",
+              "name": "Async Task Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"task\": {\n    \"id\": \"8e8cfde8-345b-42b8-b3e2-0c61eb11e00f\",\n    \"state\": \"pending\",\n    \"created_at\": \"2026-01-24T12:36:24.685Z\",\n    \"modified_at\": \"2026-01-24T12:36:24.685Z\",\n    \"input\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df420764-3a07-4314-99de-e5d9a4282428",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55a23fd7-69d2-4495-8122-5efa88f9cde2",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f068c4e-8b04-495a-a796-841bcc384144",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0abd23d1-f31a-4ee6-bd7d-3cc2b128401a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search_engine\": \"google_search\",\n  \"query\": \"NBA Allstar 2026\",\n  \"country\": \"US\",\n  \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8f545ce-e839-47aa-81a2-6e8d7e3b1acc",
+          "name": "SERP Batch",
+          "request": {
+            "name": "SERP Batch",
+            "description": {
+              "content": "Execute SERP Batch Endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "serp",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"<string>\",\n      \"query\": \"<string>\",\n      \"place_id\": \"<string>\",\n      \"coordinates\": {\n        \"latitude\": \"<string>\",\n        \"longitude\": \"<string>\"\n      },\n      \"time\": \"<string>\",\n      \"country\": \"US\",\n      \"locale\": \"<string>\",\n      \"location\": \"<string>\",\n      \"no_html\": false,\n      \"num_results\": \"<integer>\",\n      \"start\": \"<integer>\",\n      \"include_pages_html\": false,\n      \"device\": \"<string>\",\n      \"ads_optimization\": false\n    },\n    {\n      \"search_engine\": \"<string>\",\n      \"query\": \"<string>\",\n      \"place_id\": \"<string>\",\n      \"coordinates\": {\n        \"latitude\": \"<string>\",\n        \"longitude\": \"<string>\"\n      },\n      \"time\": \"<string>\",\n      \"country\": \"US\",\n      \"locale\": \"<string>\",\n      \"location\": \"<string>\",\n      \"no_html\": false,\n      \"num_results\": \"<integer>\",\n      \"start\": \"<integer>\",\n      \"include_pages_html\": false,\n      \"device\": \"<string>\",\n      \"ads_optimization\": false\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"<string>\",\n    \"storage_type\": \"<string>\",\n    \"storage_url\": \"<string>\",\n    \"callback_url\": \"<uri>\",\n    \"storage_compress\": \"<boolean>\",\n    \"storage_object_name\": \"<string>\",\n    \"query\": \"<string>\",\n    \"place_id\": \"<string>\",\n    \"coordinates\": {\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\"\n    },\n    \"time\": \"<string>\",\n    \"country\": \"US\",\n    \"locale\": \"<string>\",\n    \"location\": \"<string>\",\n    \"no_html\": false,\n    \"num_results\": \"<integer>\",\n    \"start\": \"<integer>\",\n    \"include_pages_html\": false,\n    \"device\": \"<string>\",\n    \"ads_optimization\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f26f26a8-0fb5-42f6-9320-279282c292db",
+              "name": "SERP Batch Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    },\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"google_search\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"query\": \"NBA Allstars 2026\",\n    \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n    \"coordinates\": {\n      \"latitude\": \"40.7123695\",\n      \"longitude\": \"-74.0357317\"\n    },\n    \"time\": \"hour\",\n    \"country\": \"US\",\n    \"locale\": \"en\",\n    \"location\": \"United States\",\n    \"no_html\": true,\n    \"num_results\": 10,\n    \"start\": 10,\n    \"include_pages_html\": true,\n    \"device\": \"mobile\",\n    \"ads_optimization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n  \"batch_size\": 1,\n  \"tasks\": [\n    {\n      \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n      \"state\": \"pending\",\n      \"output_url\": \"string\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"modified_at\": \"2024-01-15T10:35:00Z\",\n      \"account_name\": \"string\",\n      \"input\": null,\n      \"batch_id\": \"4b0a90bf-c951-42e4-95b3-a95a65ba69fc\",\n      \"status_code\": 200,\n      \"api_type\": \"serp\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4acfa924-0cdb-4d4e-ae33-09ceae1d13bb",
+              "name": "Unprocessable Entity - Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    },\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"google_search\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"query\": \"NBA Allstars 2026\",\n    \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n    \"coordinates\": {\n      \"latitude\": \"40.7123695\",\n      \"longitude\": \"-74.0357317\"\n    },\n    \"time\": \"hour\",\n    \"country\": \"US\",\n    \"locale\": \"en\",\n    \"location\": \"United States\",\n    \"no_html\": true,\n    \"num_results\": 10,\n    \"start\": 10,\n    \"include_pages_html\": true,\n    \"device\": \"mobile\",\n    \"ads_optimization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Invalid request parameters\",\n  \"error\": \"PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR\",\n  \"details\": {\n    \"schema_validation_errors\": [\n      {\n        \"instancePath\": \"\",\n        \"schemaPath\": \"#/required\",\n        \"keyword\": \"required\",\n        \"params\": {\n          \"missingProperty\": \"search_engine\"\n        },\n        \"message\": \"must have required property 'search_engine'\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abfc2ab1-98b0-4149-b71d-406d8b083df5",
+              "name": "Payment Required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    },\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"google_search\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"query\": \"NBA Allstars 2026\",\n    \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n    \"coordinates\": {\n      \"latitude\": \"40.7123695\",\n      \"longitude\": \"-74.0357317\"\n    },\n    \"time\": \"hour\",\n    \"country\": \"US\",\n    \"locale\": \"en\",\n    \"location\": \"United States\",\n    \"no_html\": true,\n    \"num_results\": 10,\n    \"start\": 10,\n    \"include_pages_html\": true,\n    \"device\": \"mobile\",\n    \"ads_optimization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"trial expired\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a701e9c-e0df-460e-8f91-1c3594c44e3c",
+              "name": "Rate Limit Exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    },\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"google_search\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"query\": \"NBA Allstars 2026\",\n    \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n    \"coordinates\": {\n      \"latitude\": \"40.7123695\",\n      \"longitude\": \"-74.0357317\"\n    },\n    \"time\": \"hour\",\n    \"country\": \"US\",\n    \"locale\": \"en\",\n    \"location\": \"United States\",\n    \"no_html\": true,\n    \"num_results\": 10,\n    \"start\": 10,\n    \"include_pages_html\": true,\n    \"device\": \"mobile\",\n    \"ads_optimization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failed\",\n  \"msg\": \"Rate limit exceeded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4ddc126-ef14-4440-a7f9-c947adc84f5d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "serp",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputs\": [\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    },\n    {\n      \"search_engine\": \"google_search\",\n      \"query\": \"NBA Allstars 2026\",\n      \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n      \"coordinates\": {\n        \"latitude\": \"40.7123695\",\n        \"longitude\": \"-74.0357317\"\n      },\n      \"time\": \"hour\",\n      \"country\": \"US\",\n      \"locale\": \"en\",\n      \"location\": \"United States\",\n      \"no_html\": true,\n      \"num_results\": 10,\n      \"start\": 10,\n      \"include_pages_html\": true,\n      \"device\": \"mobile\",\n      \"ads_optimization\": true\n    }\n  ],\n  \"shared_inputs\": {\n    \"search_engine\": \"google_search\",\n    \"storage_type\": \"s3\",\n    \"storage_url\": \"s3://Your.Repository.Path/\",\n    \"callback_url\": \"https://your.callback.url/path\",\n    \"storage_compress\": false,\n    \"storage_object_name\": \"my task\",\n    \"query\": \"NBA Allstars 2026\",\n    \"place_id\": \"ChIJtRq8oUjLw4kR_tN2GQKUOXs\",\n    \"coordinates\": {\n      \"latitude\": \"40.7123695\",\n      \"longitude\": \"-74.0357317\"\n    },\n    \"time\": \"hour\",\n    \"country\": \"US\",\n    \"locale\": \"en\",\n    \"location\": \"United States\",\n    \"no_html\": true,\n    \"num_results\": 10,\n    \"start\": 10,\n    \"include_pages_html\": true,\n    \"device\": \"mobile\",\n    \"ads_optimization\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"false\",\n  \"task_id\": \"1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3\",\n  \"message\": \"can't download the query response - please try again\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sdk.nimbleway.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fa7ec831-15c7-4619-8cba-9ade1481e393",
+    "name": "Nimble SDK Agents SERP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AI-Native SDK for Real-Time Web Data at scale",
+      "type": "text/plain"
+    }
+  }
+}
