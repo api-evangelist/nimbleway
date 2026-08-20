@@ -40,6 +40,15 @@ tags:
 - Web Search
 - Proxies
 - AI Agents
+- MCP
+tags_raw:
+- Company
+- Web Data
+- Web Scraping
+- Data Extraction
+- Web Search
+- Proxies
+- AI Agents
 - Model Context Protocol
 apis:
 - aid: nimbleway:nimbleway-agents-api
@@ -118,6 +127,8 @@ apis:
   humanURL: https://docs.nimbleway.com/home
   baseURL: https://sdk.nimbleway.com/v1
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -188,6 +199,8 @@ apis:
   humanURL: https://docs.nimbleway.com/home
   baseURL: https://sdk.nimbleway.com/v1
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
