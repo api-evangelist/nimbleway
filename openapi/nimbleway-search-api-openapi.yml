@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nimble SDK Agents Search API
+  title: Nimble SDK Search API
   version: 1.0.0
   description: The AI-Native SDK for Real-Time Web Data at scale
 servers:
@@ -72,8 +72,184 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: postV1Search
+      x-operation-id-source: derived
 components:
   schemas:
+    SearchPayload:
+      properties:
+        query:
+          type: string
+          minLength: 1
+          title: Query
+          description: Search query string
+        locale:
+          description: Language/locale code (e.g., 'en', 'fr', 'de')
+          examples:
+          - en-US
+          type: string
+          default: en
+        country:
+          description: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
+          examples:
+          - US
+          type: string
+          default: US
+        output_format:
+          type: string
+          enum:
+          - plain_text
+          - markdown
+          - simplified_html
+          title: ParsingType
+          description: 'Output format: plain_text, markdown, or simplified_html'
+          default: markdown
+        max_results:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 3
+          title: Num Results
+          description: Maximum number of results to return. Actual count may be lower depending on availability
+        focus:
+          oneOf:
+          - type: string
+            enum:
+            - general
+            - news
+            - location
+            - coding
+            - geo
+            - shopping
+            - social
+            - academic
+            title: Search Focus
+            description: Search focus mode (e.g., '`general`', '`news`', '`shopping`')
+          - type: array
+            maxItems: 10
+            items:
+              type: string
+            description: List of explicit subagent names (e.g., ['`amazon_serp`', '`target_serp`'])
+        content_type:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            maxItems: 50
+            nullable: true
+          description: Filter by content type (only supported with focus=general). Supports semantic groups ('documents', 'spreadsheets', 'presentations') and specific formats ('pdf', 'docx', 'xlsx', etc.)
+        search_depth:
+          type: string
+          enum:
+          - lite
+          - fast
+          - deep
+          default: lite
+          title: Search Depth
+          description: Controls content richness and latency. `lite` = metadata only (title, snippet, URL), `fast` = rich content (~2K chars), `deep` = full page scraping
+        exclude_domains:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            maxItems: 50
+            nullable: true
+          title: Exclude Domains
+          description: List of domains to exclude from search results. Maximum 50 domains
+        include_domains:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            maxItems: 50
+            nullable: true
+          title: Include Domains
+          description: List of domains to include in search results. Maximum 50 domains
+        start_date:
+          anyOf:
+          - type: string
+            nullable: true
+          title: Start Date
+          description: 'Filter results after this date (format: YYYY-MM-DD or YYYY)'
+        end_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: End Date
+          description: 'Filter results before this date (format: YYYY-MM-DD or YYYY)'
+        time_range:
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+          title: TimeRange
+          description: 'Filter by recency: hour, day, week, month, or year. Cannot be combined with start_date/end_date'
+        max_subagents:
+          type: integer
+          maximum: 10
+          minimum: 1
+          default: 3
+          title: Max Subagents
+          description: Maximum number of subagents to execute in parallel for WSA focus modes (shopping, social, geo). Ignored for SERP focus modes
+      type: object
+      required:
+      - query
+      title: SearchPayload
+      description: Request body model for the /search endpoint
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
     Error400:
       type: object
       title: Error400
@@ -204,129 +380,6 @@ components:
           content: Full parsed content from the page...
           metadata: {}
         request_id: 123e4567-e89b-12d3-a456-426614174000
-    SearchPayload:
-      properties:
-        query:
-          type: string
-          minLength: 1
-          title: Query
-          description: Search query string
-        locale:
-          description: Language/locale code (e.g., 'en', 'fr', 'de')
-          examples:
-          - en-US
-          type: string
-          default: en
-        country:
-          description: Country code for geo-targeted results (e.g., 'US', 'GB', 'IL')
-          examples:
-          - US
-          type: string
-          default: US
-        output_format:
-          type: string
-          enum:
-          - plain_text
-          - markdown
-          - simplified_html
-          title: ParsingType
-          description: 'Output format: plain_text, markdown, or simplified_html'
-          default: markdown
-        max_results:
-          type: integer
-          maximum: 100
-          minimum: 1
-          default: 3
-          title: Num Results
-          description: Maximum number of results to return. Actual count may be lower depending on availability
-        focus:
-          oneOf:
-          - type: string
-            enum:
-            - general
-            - news
-            - location
-            - coding
-            - geo
-            - shopping
-            - social
-            - academic
-            title: Search Focus
-            description: Search focus mode (e.g., '`general`', '`news`', '`shopping`')
-          - type: array
-            maxItems: 10
-            items:
-              type: string
-            description: List of explicit subagent names (e.g., ['`amazon_serp`', '`target_serp`'])
-        content_type:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            maxItems: 50
-            nullable: true
-          description: Filter by content type (only supported with focus=general). Supports semantic groups ('documents', 'spreadsheets', 'presentations') and specific formats ('pdf', 'docx', 'xlsx', etc.)
-        search_depth:
-          type: string
-          enum:
-          - lite
-          - fast
-          - deep
-          default: lite
-          title: Search Depth
-          description: Controls content richness and latency. `lite` = metadata only (title, snippet, URL), `fast` = rich content (~2K chars), `deep` = full page scraping
-        exclude_domains:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            maxItems: 50
-            nullable: true
-          title: Exclude Domains
-          description: List of domains to exclude from search results. Maximum 50 domains
-        include_domains:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            maxItems: 50
-            nullable: true
-          title: Include Domains
-          description: List of domains to include in search results. Maximum 50 domains
-        start_date:
-          anyOf:
-          - type: string
-            nullable: true
-          title: Start Date
-          description: 'Filter results after this date (format: YYYY-MM-DD or YYYY)'
-        end_date:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: End Date
-          description: 'Filter results before this date (format: YYYY-MM-DD or YYYY)'
-        time_range:
-          type: string
-          enum:
-          - hour
-          - day
-          - week
-          - month
-          - year
-          title: TimeRange
-          description: 'Filter by recency: hour, day, week, month, or year. Cannot be combined with start_date/end_date'
-        max_subagents:
-          type: integer
-          maximum: 10
-          minimum: 1
-          default: 3
-          title: Max Subagents
-          description: Maximum number of subagents to execute in parallel for WSA focus modes (shopping, social, geo). Ignored for SERP focus modes
-      type: object
-      required:
-      - query
-      title: SearchPayload
-      description: Request body model for the /search endpoint
     Error429:
       type: object
       title: Error429
@@ -347,57 +400,6 @@ components:
       example:
         status: failed
         msg: Rate limit exceeded
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
   securitySchemes:
     BearerAuth:
       type: http

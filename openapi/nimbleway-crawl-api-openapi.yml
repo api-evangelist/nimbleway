@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nimble SDK Agents Crawl API
+  title: Nimble SDK Crawl API
   version: 1.0.0
   description: The AI-Native SDK for Real-Time Web Data at scale
 servers:
@@ -148,6 +148,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: postV1Crawl
+      x-operation-id-source: derived
     get:
       summary: List Crawls
       tags:
@@ -365,6 +367,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1Crawl
+      x-operation-id-source: derived
   /v1/crawl/{id}:
     get:
       summary: Crawl by ID
@@ -559,6 +563,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1CrawlById
+      x-operation-id-source: derived
     delete:
       summary: Cancel Crawl
       tags:
@@ -635,6 +641,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: deleteV1CrawlById
+      x-operation-id-source: derived
 components:
   schemas:
     ExtractPayload:
@@ -980,203 +988,6 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    CrawlPayload:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Url to crawl
-          examples:
-          - https://example.com
-        name:
-          type: string
-          description: Name of the crawl
-          examples:
-          - my-crawler-1
-        sitemap:
-          description: Sitemap and other methods will be used together to find URLs
-          examples:
-          - include
-          type: string
-          enum:
-          - skip
-          - include
-          - only
-        crawl_entire_domain:
-          description: Allows the crawler to follow internal links to sibling or parent URLs, not just child paths
-          examples:
-          - false
-          type: boolean
-        limit:
-          description: Maximum number of pages to crawl
-          examples:
-          - 100
-          type: integer
-          minimum: 1
-          maximum: 10000
-        max_discovery_depth:
-          description: Maximum depth to crawl based on discovery order
-          examples:
-          - 3
-          type: integer
-          minimum: 1
-          maximum: 20
-        exclude_paths:
-          description: URL pathname regex patterns that exclude matching URLs from the crawl
-          examples:
-          - - /exclude-this-path
-            - /and-this-path
-          type: array
-          items:
-            type: string
-        include_paths:
-          description: URL pathname regex patterns that include matching URLs in the crawl
-          examples:
-          - - /include-this-path
-            - /and-this-path
-          type: array
-          items:
-            type: string
-        ignore_query_parameters:
-          description: Do not re-scrape the same path with different (or none) query parameters
-          examples:
-          - false
-          type: boolean
-        allow_external_links:
-          description: Allows the crawler to follow links to external websites
-          examples:
-          - false
-          type: boolean
-        allow_subdomains:
-          description: Allows the crawler to follow links to subdomains of the main domain
-          examples:
-          - false
-          type: boolean
-        callback:
-          description: Webhook configuration for receiving crawl results
-          anyOf:
-          - type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: Webhook URL to receive crawl results
-                examples:
-                - https://example.com/webhook
-              headers:
-                description: Headers to send to the webhook URL
-                type: object
-              metadata:
-                description: Custom metadata that will be included in all webhook payloads for this crawl
-                type: object
-              events:
-                description: 'Type of events that should be sent to the webhook URL. (default: all)'
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - completed
-                  - page
-                  - failed
-                  - started
-            required:
-            - url
-          - type: string
-            format: uri
-        extract_options:
-          $ref: '#/components/schemas/ExtractPayload'
-      required:
-      - url
-    Parser:
-      type: object
-      description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
-      additionalProperties:
-        oneOf:
-        - type: object
-          description: Terminal parser - extract a single value
-          properties:
-            type:
-              type: string
-              enum:
-              - terminal
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            extractor:
-              $ref: '#/components/schemas/ParserExtractor'
-          required:
-          - type
-          - selector
-          - extractor
-        - type: object
-          description: Terminal list parser - extract multiple values
-          properties:
-            type:
-              type: string
-              enum:
-              - terminal_list
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            extractor:
-              $ref: '#/components/schemas/ParserExtractor'
-          required:
-          - type
-          - selector
-          - extractor
-        - type: object
-          description: Schema parser - extract nested object
-          properties:
-            type:
-              type: string
-              enum:
-              - schema
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            fields:
-              $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - fields
-        - type: object
-          description: Schema list parser - extract list of objects
-          properties:
-            type:
-              type: string
-              enum:
-              - schema_list
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            fields:
-              $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - fields
-        - type: object
-          description: Or parser - try multiple strategies
-          properties:
-            type:
-              type: string
-              enum:
-              - or
-            parsers:
-              type: array
-              items:
-                $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - parsers
-        - type: object
-          description: Const parser - return fixed value
-          properties:
-            type:
-              type: string
-              enum:
-              - const
-            value:
-              description: Fixed value to return
-          required:
-          - type
-          - value
     ParserExtractor:
       oneOf:
       - type: object
@@ -1227,42 +1038,6 @@ components:
             $ref: '#/components/schemas/PostProcessor'
         required:
         - type
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    PostProcessor:
-      type: object
-      description: Transform extracted data
-      properties:
-        type:
-          type: string
-          enum:
-          - number
-          - string
-          - date
-          - regex
-          - trim
-          - lowercase
-          - uppercase
-      required:
-      - type
     BrowserAction:
       type: object
       description: 'An action to perform in the browser (one of: goto, wait, wait_for_element, click, press, fill, scroll, auto_scroll, screenshot, get_cookies, fetch)'
@@ -1513,6 +1288,162 @@ components:
                 type: number
             required:
             - url
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Parser:
+      type: object
+      description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
+      additionalProperties:
+        oneOf:
+        - type: object
+          description: Terminal parser - extract a single value
+          properties:
+            type:
+              type: string
+              enum:
+              - terminal
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            extractor:
+              $ref: '#/components/schemas/ParserExtractor'
+          required:
+          - type
+          - selector
+          - extractor
+        - type: object
+          description: Terminal list parser - extract multiple values
+          properties:
+            type:
+              type: string
+              enum:
+              - terminal_list
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            extractor:
+              $ref: '#/components/schemas/ParserExtractor'
+          required:
+          - type
+          - selector
+          - extractor
+        - type: object
+          description: Schema parser - extract nested object
+          properties:
+            type:
+              type: string
+              enum:
+              - schema
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            fields:
+              $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - fields
+        - type: object
+          description: Schema list parser - extract list of objects
+          properties:
+            type:
+              type: string
+              enum:
+              - schema_list
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            fields:
+              $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - fields
+        - type: object
+          description: Or parser - try multiple strategies
+          properties:
+            type:
+              type: string
+              enum:
+              - or
+            parsers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - parsers
+        - type: object
+          description: Const parser - return fixed value
+          properties:
+            type:
+              type: string
+              enum:
+              - const
+            value:
+              description: Fixed value to return
+          required:
+          - type
+          - value
+    PostProcessor:
+      type: object
+      description: Transform extracted data
+      properties:
+        type:
+          type: string
+          enum:
+          - number
+          - string
+          - date
+          - regex
+          - trim
+          - lowercase
+          - uppercase
+      required:
+      - type
     ParserSelector:
       oneOf:
       - type: object
@@ -1580,30 +1511,114 @@ components:
             - root
         required:
         - type
-    Error402:
+    CrawlPayload:
       type: object
-      title: Error402
       properties:
-        status:
+        url:
           type: string
-          example: failed
+          format: uri
+          description: Url to crawl
           examples:
-          - failed
-        msg:
+          - https://example.com
+        name:
           type: string
-          description: Error message indicating the payment issue
-          example: trial expired
+          description: Name of the crawl
+          examples:
+          - my-crawler-1
+        sitemap:
+          description: Sitemap and other methods will be used together to find URLs
+          examples:
+          - include
+          type: string
           enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
+          - skip
+          - include
+          - only
+        crawl_entire_domain:
+          description: Allows the crawler to follow internal links to sibling or parent URLs, not just child paths
+          examples:
+          - false
+          type: boolean
+        limit:
+          description: Maximum number of pages to crawl
+          examples:
+          - 100
+          type: integer
+          minimum: 1
+          maximum: 10000
+        max_discovery_depth:
+          description: Maximum depth to crawl based on discovery order
+          examples:
+          - 3
+          type: integer
+          minimum: 1
+          maximum: 20
+        exclude_paths:
+          description: URL pathname regex patterns that exclude matching URLs from the crawl
+          examples:
+          - - /exclude-this-path
+            - /and-this-path
+          type: array
+          items:
+            type: string
+        include_paths:
+          description: URL pathname regex patterns that include matching URLs in the crawl
+          examples:
+          - - /include-this-path
+            - /and-this-path
+          type: array
+          items:
+            type: string
+        ignore_query_parameters:
+          description: Do not re-scrape the same path with different (or none) query parameters
+          examples:
+          - false
+          type: boolean
+        allow_external_links:
+          description: Allows the crawler to follow links to external websites
+          examples:
+          - false
+          type: boolean
+        allow_subdomains:
+          description: Allows the crawler to follow links to subdomains of the main domain
+          examples:
+          - false
+          type: boolean
+        callback:
+          description: Webhook configuration for receiving crawl results
+          anyOf:
+          - type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: Webhook URL to receive crawl results
+                examples:
+                - https://example.com/webhook
+              headers:
+                description: Headers to send to the webhook URL
+                type: object
+              metadata:
+                description: Custom metadata that will be included in all webhook payloads for this crawl
+                type: object
+              events:
+                description: 'Type of events that should be sent to the webhook URL. (default: all)'
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - completed
+                  - page
+                  - failed
+                  - started
+            required:
+            - url
+          - type: string
+            format: uri
+        extract_options:
+          $ref: '#/components/schemas/ExtractPayload'
       required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
+      - url
     NetworkCaptureFilter:
       type: object
       description: Configuration for capturing network requests made by the page
@@ -1663,33 +1678,26 @@ components:
           description: How long to wait in seconds
           minimum: 0
           maximum: 300000
-    Error500:
+    Error429:
       type: object
-      title: Error500
+      title: Error429
       properties:
-        success:
+        status:
           type: string
-          example: 'false'
+          example: failed
           examples:
-          - 'false'
-        task_id:
+          - failed
+        msg:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          example: Rate limit exceeded
           examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
+          - Rate limit exceeded
       required:
-      - success
-      - task_id
-      - message
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+        status: failed
+        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

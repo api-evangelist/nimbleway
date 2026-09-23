@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nimble SDK Agents Tasks API
+  title: Nimble SDK Tasks API
   version: 1.0.0
   description: The AI-Native SDK for Real-Time Web Data at scale
 servers:
@@ -108,6 +108,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1Tasks
+      x-operation-id-source: derived
   /v1/tasks/{task_id}:
     get:
       summary: Task Status
@@ -223,6 +225,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1TasksByTaskId
+      x-operation-id-source: derived
   /v1/tasks/{task_id}/results:
     get:
       summary: Task Result
@@ -317,6 +321,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1TasksByTaskIdResults
+      x-operation-id-source: derived
   /v1/batches:
     get:
       summary: List batches
@@ -399,6 +405,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1Batches
+      x-operation-id-source: derived
   /v1/batches/{batch_id}:
     get:
       summary: Get batch details
@@ -493,6 +501,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1BatchesByBatchId
+      x-operation-id-source: derived
   /v1/batches/{batch_id}/progress:
     get:
       summary: Get batch progress
@@ -570,6 +580,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: getV1BatchesByBatchIdProgress
+      x-operation-id-source: derived
 components:
   schemas:
     Error400:
@@ -619,7 +631,140 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    ExtractResponse:
+    BatchProgressResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        id:
+          type: string
+          description: Unique identifier for the batch.
+        completed:
+          type: boolean
+          description: Whether all tasks in the batch have finished.
+        completed_count:
+          type: number
+          description: Number of tasks that have completed so far.
+        completed_at:
+          description: ISO timestamp when the batch completed.
+          type: string
+        progress:
+          type: number
+          description: Completion ratio between 0 and 1.
+      required:
+      - status
+      - id
+      - completed
+      - completed_count
+      - progress
+      additionalProperties: false
+      description: Lightweight batch progress without task details.
+    BatchListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the batch.
+              account_name:
+                type: string
+                description: Name of the account that owns the batch.
+              completed:
+                type: boolean
+                description: Whether all tasks in the batch have finished.
+              created_at:
+                type: string
+                description: ISO timestamp when the batch was created.
+              tasks:
+                type: array
+                items:
+                  type: string
+                  description: Unique identifier for the task.
+            required:
+            - id
+            - account_name
+            - completed
+            - created_at
+            - tasks
+          description: List of batches.
+        pagination:
+          type: object
+          properties:
+            has_next:
+              type: boolean
+              description: Whether there are more batches available.
+            next_cursor:
+              type: string
+              description: Cursor to use for fetching the next page.
+            total:
+              type: number
+              description: Total number of batches.
+          required:
+          - has_next
+          - next_cursor
+          - total
+      required:
+      - data
+      - pagination
+      additionalProperties: false
+      description: List of batches.
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    AgentResponse:
       type: object
       properties:
         url:
@@ -693,6 +838,11 @@ components:
               description: Driver used for extraction (depends on target domain and rendering configuration)
               examples:
               - vx8
+            agent:
+              type: string
+              description: Agent name used for extraction
+              examples:
+              - amazon_pdp
         warnings:
           type: array
           description: List of warnings
@@ -831,26 +981,6 @@ components:
       - tasks
       additionalProperties: false
       description: Response containing batch details with all tasks.
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
     TaskListResponse:
       type: object
       properties:
@@ -968,7 +1098,7 @@ components:
       - pagination
       additionalProperties: false
       description: Paginated list of tasks response.
-    AgentResponse:
+    ExtractResponse:
       type: object
       properties:
         url:
@@ -1042,11 +1172,6 @@ components:
               description: Driver used for extraction (depends on target domain and rendering configuration)
               examples:
               - vx8
-            agent:
-              type: string
-              description: Agent name used for extraction
-              examples:
-              - amazon_pdp
         warnings:
           type: array
           description: List of warnings
@@ -1059,62 +1184,9 @@ components:
       - status_code
       - data
       - metadata
-    BatchListResponse:
+    Error429:
       type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Unique identifier for the batch.
-              account_name:
-                type: string
-                description: Name of the account that owns the batch.
-              completed:
-                type: boolean
-                description: Whether all tasks in the batch have finished.
-              created_at:
-                type: string
-                description: ISO timestamp when the batch was created.
-              tasks:
-                type: array
-                items:
-                  type: string
-                  description: Unique identifier for the task.
-            required:
-            - id
-            - account_name
-            - completed
-            - created_at
-            - tasks
-          description: List of batches.
-        pagination:
-          type: object
-          properties:
-            has_next:
-              type: boolean
-              description: Whether there are more batches available.
-            next_cursor:
-              type: string
-              description: Cursor to use for fetching the next page.
-            total:
-              type: number
-              description: Total number of batches.
-          required:
-          - has_next
-          - next_cursor
-          - total
-      required:
-      - data
-      - pagination
-      additionalProperties: false
-      description: List of batches.
-    Error402:
-      type: object
-      title: Error402
+      title: Error429
       properties:
         status:
           type: string
@@ -1123,75 +1195,15 @@ components:
           - failed
         msg:
           type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
       required:
       - status
       - msg
       example:
         status: failed
-        msg: trial expired
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
-    BatchProgressResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: success
-        id:
-          type: string
-          description: Unique identifier for the batch.
-        completed:
-          type: boolean
-          description: Whether all tasks in the batch have finished.
-        completed_count:
-          type: number
-          description: Number of tasks that have completed so far.
-        completed_at:
-          description: ISO timestamp when the batch completed.
-          type: string
-        progress:
-          type: number
-          description: Completion ratio between 0 and 1.
-      required:
-      - status
-      - id
-      - completed
-      - completed_count
-      - progress
-      additionalProperties: false
-      description: Lightweight batch progress without task details.
+        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

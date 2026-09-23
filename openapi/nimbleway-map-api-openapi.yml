@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Nimble SDK Agents Map API
+  title: Nimble SDK Map API
   version: 1.0.0
   description: The AI-Native SDK for Real-Time Web Data at scale
 servers:
@@ -70,55 +70,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error500'
+      operationId: postV1Map
+      x-operation-id-source: derived
 components:
   schemas:
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
     MapResponse:
       type: object
       properties:
@@ -169,26 +124,33 @@ components:
         - url: https://www.nimbleway.com/nimble-api/web
         - title: API Documentation
           url: https://www.example.com/docs
-    Error429:
+    Error500:
       type: object
-      title: Error429
+      title: Error500
       properties:
-        status:
+        success:
           type: string
-          example: failed
+          example: 'false'
           examples:
-          - failed
-        msg:
+          - 'false'
+        task_id:
           type: string
-          example: Rate limit exceeded
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
           examples:
-          - Rate limit exceeded
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
       required:
-      - status
-      - msg
+      - success
+      - task_id
+      - message
       example:
-        status: failed
-        msg: Rate limit exceeded
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
     Error402:
       type: object
       title: Error402
@@ -259,33 +221,73 @@ components:
       - url
       title: MapPayload
       description: Request body model for the /map endpoint
-    Error500:
+    Error400:
       type: object
-      title: Error500
+      title: Error400
       properties:
-        success:
+        status:
           type: string
-          example: 'false'
+          example: failed
           examples:
-          - 'false'
-        task_id:
+          - failed
+        msg:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
           examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
+          - Invalid request parameters
+        error:
           type: string
-          example: can't download the query response - please try again
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
           examples:
-          - can't download the query response - please try again
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
       required:
-      - success
-      - task_id
-      - message
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

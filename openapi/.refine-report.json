@@ -1,17 +1,7 @@
 {
   "provider": "nimbleway",
   "sources": [
-    "nimbleway-agents-api-openapi.yml",
-    "nimbleway-crawl-api-openapi.yml",
-    "nimbleway-domain-knowledge-api-openapi.yml",
-    "nimbleway-extract-api-openapi.yml",
-    "nimbleway-fast-serp-api-openapi.yml",
-    "nimbleway-jobs-api-openapi.yml",
-    "nimbleway-map-api-openapi.yml",
-    "nimbleway-media-api-openapi.yml",
-    "nimbleway-search-api-openapi.yml",
-    "nimbleway-serp-api-openapi.yml",
-    "nimbleway-tasks-api-openapi.yml"
+    "_original/nimbleway-openapi.json"
   ],
   "outputs": [
     "nimbleway-agents-api-openapi.yml",
@@ -22,13 +12,40 @@
     "nimbleway-jobs-api-openapi.yml",
     "nimbleway-map-api-openapi.yml",
     "nimbleway-media-api-openapi.yml",
-    "nimbleway-search-api-openapi.yml",
     "nimbleway-serp-api-openapi.yml",
+    "nimbleway-search-api-openapi.yml",
     "nimbleway-tasks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nimbleway-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "nimbleway-openapi.json: declared missing tag: Agents",
+    "nimbleway-openapi.json: declared missing tag: Crawl",
+    "nimbleway-openapi.json: declared missing tag: Domain Knowledge",
+    "nimbleway-openapi.json: declared missing tag: Extract",
+    "nimbleway-openapi.json: declared missing tag: Fast SERP",
+    "nimbleway-openapi.json: declared missing tag: Jobs",
+    "nimbleway-openapi.json: declared missing tag: Map",
+    "nimbleway-openapi.json: declared missing tag: Media",
+    "nimbleway-openapi.json: declared missing tag: SERP",
+    "nimbleway-openapi.json: declared missing tag: Search",
+    "nimbleway-openapi.json: declared missing tag: Tasks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nimbleway-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-crawl-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-domain-knowledge-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-extract-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-fast-serp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-map-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-serp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nimbleway-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

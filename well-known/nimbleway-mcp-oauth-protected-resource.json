@@ -1,0 +1,1 @@
+{"resource":"https://mcp.nimbleway.com/mcp","authorization_servers":["https://api.nimbleway.com/"],"scopes_supported":["openid","nimble:read","nimble:write","offline_access"],"bearer_methods_supported":["header"],"resource_name":"Nimble MCP Server","resource_documentation":"https://nimbleway.com/"}
