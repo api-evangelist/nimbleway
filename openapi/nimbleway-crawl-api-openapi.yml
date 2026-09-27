@@ -988,56 +988,160 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    ParserExtractor:
+    PostProcessor:
+      type: object
+      description: Transform extracted data
+      properties:
+        type:
+          type: string
+          enum:
+          - number
+          - string
+          - date
+          - regex
+          - trim
+          - lowercase
+          - uppercase
+      required:
+      - type
+    ParserSelector:
       oneOf:
       - type: object
-        description: Extract text content
+        description: CSS selector
         properties:
           type:
             type: string
             enum:
-            - text
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
+            - css
+          css_selector:
+            type: string
+            description: CSS selector string
         required:
         - type
+        - css_selector
       - type: object
-        description: Extract attribute value
+        description: XPath selector
         properties:
           type:
             type: string
             enum:
-            - attr
-          attr:
+            - xpath
+          path:
             type: string
-            description: Attribute name (e.g., href, src)
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
+            description: XPath expression
         required:
         - type
-        - attr
+        - path
       - type: object
-        description: Extract as JSON
+        description: JSON selector
         properties:
           type:
             type: string
             enum:
             - json
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
+          path:
+            type: string
+            description: JSONPath expression
+          coercion_filter:
+            type: string
+            description: JSONPath filter for multiple objects
         required:
         - type
+        - path
       - type: object
-        description: Extract raw HTML
+        description: Sequence of selectors
         properties:
           type:
             type: string
             enum:
-            - raw
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
+            - sequence
+          sequence:
+            type: array
+            items:
+              $ref: '#/components/schemas/ParserSelector'
         required:
         - type
+        - sequence
+      - type: object
+        description: Root selector
+        properties:
+          type:
+            type: string
+            enum:
+            - root
+        required:
+        - type
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
     BrowserAction:
       type: object
       description: 'An action to perform in the browser (one of: goto, wait, wait_for_element, click, press, fill, scroll, auto_scroll, screenshot, get_cookies, fetch)'
@@ -1288,57 +1392,56 @@ components:
                 type: number
             required:
             - url
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+    ParserExtractor:
+      oneOf:
+      - type: object
+        description: Extract text content
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract attribute value
+        properties:
+          type:
+            type: string
+            enum:
+            - attr
+          attr:
+            type: string
+            description: Attribute name (e.g., href, src)
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+        - attr
+      - type: object
+        description: Extract as JSON
+        properties:
+          type:
+            type: string
+            enum:
+            - json
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract raw HTML
+        properties:
+          type:
+            type: string
+            enum:
+            - raw
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
     Parser:
       type: object
       description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
@@ -1428,89 +1531,6 @@ components:
           required:
           - type
           - value
-    PostProcessor:
-      type: object
-      description: Transform extracted data
-      properties:
-        type:
-          type: string
-          enum:
-          - number
-          - string
-          - date
-          - regex
-          - trim
-          - lowercase
-          - uppercase
-      required:
-      - type
-    ParserSelector:
-      oneOf:
-      - type: object
-        description: CSS selector
-        properties:
-          type:
-            type: string
-            enum:
-            - css
-          css_selector:
-            type: string
-            description: CSS selector string
-        required:
-        - type
-        - css_selector
-      - type: object
-        description: XPath selector
-        properties:
-          type:
-            type: string
-            enum:
-            - xpath
-          path:
-            type: string
-            description: XPath expression
-        required:
-        - type
-        - path
-      - type: object
-        description: JSON selector
-        properties:
-          type:
-            type: string
-            enum:
-            - json
-          path:
-            type: string
-            description: JSONPath expression
-          coercion_filter:
-            type: string
-            description: JSONPath filter for multiple objects
-        required:
-        - type
-        - path
-      - type: object
-        description: Sequence of selectors
-        properties:
-          type:
-            type: string
-            enum:
-            - sequence
-          sequence:
-            type: array
-            items:
-              $ref: '#/components/schemas/ParserSelector'
-        required:
-        - type
-        - sequence
-      - type: object
-        description: Root selector
-        properties:
-          type:
-            type: string
-            enum:
-            - root
-        required:
-        - type
     CrawlPayload:
       type: object
       properties:
@@ -1678,26 +1698,6 @@ components:
           description: How long to wait in seconds
           minimum: 0
           maximum: 300000
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

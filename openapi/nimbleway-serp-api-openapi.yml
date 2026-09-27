@@ -348,6 +348,119 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AsyncResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          examples:
+          - success
+        task:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Unique task identifier
+              examples:
+              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+            state:
+              type: string
+              description: Current state of the task
+              enum:
+              - pending
+              - processing
+              - completed
+              - failed
+              examples:
+              - pending
+            created_at:
+              type: string
+              format: date-time
+              description: Task creation timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            account_name:
+              type: string
+              description: The user account name
+              examples:
+              - my-account
+            api_type:
+              type: string
+              description: The api endpoint used
+              enum:
+              - agent
+              - extract
+              examples:
+              - extract
+            modified_at:
+              type: string
+              format: date-time
+              description: Task last modification timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            input:
+              type: object
+              description: Original request input parameters
+          required:
+          - id
+          - state
+          - created_at
+          - modified_at
+          - input
+      required:
+      - status
+      - task
+      examples:
+      - status: success
+        task:
+          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+          state: pending
+          account_name: my-account
+          api_type: extract
+          created_at: '2026-01-24T12:36:24.685Z'
+          modified_at: '2026-01-24T12:36:24.685Z'
+          input: {}
+    SerpBatchPayload:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/SerpPayload'
+        shared_inputs:
+          allOf:
+          - $ref: '#/components/schemas/AsyncOptions'
+          - $ref: '#/components/schemas/SerpPayload'
+            required: []
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
     BatchResponse:
       type: object
       properties:
@@ -449,116 +562,6 @@ components:
           description: List of created tasks.
       additionalProperties: false
       description: Response when a batch of extract tasks is created successfully.
-    SerpBatchPayload:
-      type: object
-      properties:
-        inputs:
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/SerpPayload'
-        shared_inputs:
-          allOf:
-          - $ref: '#/components/schemas/AsyncOptions'
-          - $ref: '#/components/schemas/SerpPayload'
-            required: []
-    SerpResponse:
-      type: object
-      title: SerpResponse
-      description: Response from the Fast SERP realtime API. All engines share the same top-level envelope; entity types under parsing.entities vary by search_engine.
-      properties:
-        task_id:
-          type: string
-          description: Unique identifier for this request
-          examples:
-          - bd46cd9c-50f7-4736-9c4a-660a32e4dc87
-        status:
-          type: string
-          enum:
-          - success
-          - error
-          description: Request status
-          examples:
-          - success
-        query_time:
-          type: string
-          format: date-time
-          description: ISO timestamp of when the query ran
-          examples:
-          - '2026-03-05T13:47:16.435Z'
-        status_code:
-          type: integer
-          description: HTTP status code from the upstream source
-          examples:
-          - 200
-        url:
-          type: string
-          description: The upstream URL that was queried
-          examples:
-          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
-        input_url:
-          type: string
-          description: The original input URL before any redirects
-          examples:
-          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
-        html_content:
-          type: string
-          nullable: true
-          description: Raw HTML of the response page. Omitted when no_html is true.
-          examples:
-          - <!DOCTYPE html>...
-        driver:
-          type: string
-          description: Internal routing driver used for this request
-          examples:
-          - vx6
-        parsing:
-          type: object
-          description: Structured parsing output. Entity types under entities vary by search_engine.
-        nimble_links:
-          type: object
-          nullable: true
-          description: Pagination links as ready-to-use Nimble API URLs (Maps engines)
-          properties:
-            next_page:
-              type: string
-              description: URL to fetch the next page of results
-        nimble_payload:
-          type: object
-          nullable: true
-          description: Next-page parameters as a structured object (web search engines)
-      required:
-      - task_id
-      - status
-      - status_code
-      - parsing
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
     Error402:
       type: object
       title: Error402
@@ -583,6 +586,58 @@ components:
       example:
         status: failed
         msg: trial expired
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
+    AsyncOptions:
+      type: object
+      properties:
+        storage_type:
+          type: string
+          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
+          enum:
+          - s3
+          - gs
+          examples:
+          - s3
+        storage_url:
+          type: string
+          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
+          examples:
+          - s3://Your.Repository.Path/
+        callback_url:
+          type: string
+          format: uri
+          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
+          examples:
+          - https://your.callback.url/path
+        storage_compress:
+          type: boolean
+          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
+          examples:
+          - false
+        storage_object_name:
+          type: string
+          description: Custom name for the stored object instead of the default task ID
+          examples:
+          - my task
     SerpPayload:
       type: object
       title: SerpPayload
@@ -693,111 +748,6 @@ components:
       required:
       - search_engine
       description: Request body model for the fast serp endpoint
-    AsyncResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          examples:
-          - success
-        task:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Unique task identifier
-              examples:
-              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-            state:
-              type: string
-              description: Current state of the task
-              enum:
-              - pending
-              - processing
-              - completed
-              - failed
-              examples:
-              - pending
-            created_at:
-              type: string
-              format: date-time
-              description: Task creation timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            account_name:
-              type: string
-              description: The user account name
-              examples:
-              - my-account
-            api_type:
-              type: string
-              description: The api endpoint used
-              enum:
-              - agent
-              - extract
-              examples:
-              - extract
-            modified_at:
-              type: string
-              format: date-time
-              description: Task last modification timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            input:
-              type: object
-              description: Original request input parameters
-          required:
-          - id
-          - state
-          - created_at
-          - modified_at
-          - input
-      required:
-      - status
-      - task
-      examples:
-      - status: success
-        task:
-          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-          state: pending
-          account_name: my-account
-          api_type: extract
-          created_at: '2026-01-24T12:36:24.685Z'
-          modified_at: '2026-01-24T12:36:24.685Z'
-          input: {}
-    AsyncOptions:
-      type: object
-      properties:
-        storage_type:
-          type: string
-          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
-          enum:
-          - s3
-          - gs
-          examples:
-          - s3
-        storage_url:
-          type: string
-          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
-          examples:
-          - s3://Your.Repository.Path/
-        callback_url:
-          type: string
-          format: uri
-          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
-          examples:
-          - https://your.callback.url/path
-        storage_compress:
-          type: boolean
-          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
-          examples:
-          - false
-        storage_object_name:
-          type: string
-          description: Custom name for the stored object instead of the default task ID
-          examples:
-          - my task
     Error400:
       type: object
       title: Error400
@@ -845,26 +795,76 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    Error429:
+    SerpResponse:
       type: object
-      title: Error429
+      title: SerpResponse
+      description: Response from the Fast SERP realtime API. All engines share the same top-level envelope; entity types under parsing.entities vary by search_engine.
       properties:
+        task_id:
+          type: string
+          description: Unique identifier for this request
+          examples:
+          - bd46cd9c-50f7-4736-9c4a-660a32e4dc87
         status:
           type: string
-          example: failed
+          enum:
+          - success
+          - error
+          description: Request status
           examples:
-          - failed
-        msg:
+          - success
+        query_time:
           type: string
-          example: Rate limit exceeded
+          format: date-time
+          description: ISO timestamp of when the query ran
           examples:
-          - Rate limit exceeded
+          - '2026-03-05T13:47:16.435Z'
+        status_code:
+          type: integer
+          description: HTTP status code from the upstream source
+          examples:
+          - 200
+        url:
+          type: string
+          description: The upstream URL that was queried
+          examples:
+          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
+        input_url:
+          type: string
+          description: The original input URL before any redirects
+          examples:
+          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
+        html_content:
+          type: string
+          nullable: true
+          description: Raw HTML of the response page. Omitted when no_html is true.
+          examples:
+          - <!DOCTYPE html>...
+        driver:
+          type: string
+          description: Internal routing driver used for this request
+          examples:
+          - vx6
+        parsing:
+          type: object
+          description: Structured parsing output. Entity types under entities vary by search_engine.
+        nimble_links:
+          type: object
+          nullable: true
+          description: Pagination links as ready-to-use Nimble API URLs (Maps engines)
+          properties:
+            next_page:
+              type: string
+              description: URL to fetch the next page of results
+        nimble_payload:
+          type: object
+          nullable: true
+          description: Next-page parameters as a structured object (web search engines)
       required:
+      - task_id
       - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
+      - status_code
+      - parsing
   securitySchemes:
     BearerAuth:
       type: http

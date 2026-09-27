@@ -74,56 +74,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    MapResponse:
-      type: object
-      properties:
-        task_id:
-          type: string
-          description: Unique identifier for the map task
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-        success:
-          type: boolean
-          description: Indicates if the map request was successful
-          examples:
-          - true
-        links:
-          type: array
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-              title:
-                type: string
-              description:
-                type: string
-            required:
-            - url
-            additionalProperties: false
-          description: Array of mapped links with optional titles and descriptions
-          examples:
-          - url: https://example.com/page1
-            title: Example Page 1
-            description: This is an example description for page 1
-          - url: https://example.com/page2
-      required:
-      - task_id
-      - success
-      - links
-      additionalProperties: false
-      description: Response schema for map requests
-      examples:
-      - task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        success: true
-        links:
-        - title: Web Scraping API
-          url: https://www.example.com/page1
-          description: Complete guide to web scraping
-        - url: https://www.nimbleway.com/nimble-api/web
-        - title: API Documentation
-          url: https://www.example.com/docs
     Error500:
       type: object
       title: Error500
@@ -175,6 +125,26 @@ components:
       example:
         status: failed
         msg: trial expired
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
     MapPayload:
       properties:
         url:
@@ -221,6 +191,56 @@ components:
       - url
       title: MapPayload
       description: Request body model for the /map endpoint
+    MapResponse:
+      type: object
+      properties:
+        task_id:
+          type: string
+          description: Unique identifier for the map task
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+        success:
+          type: boolean
+          description: Indicates if the map request was successful
+          examples:
+          - true
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+              title:
+                type: string
+              description:
+                type: string
+            required:
+            - url
+            additionalProperties: false
+          description: Array of mapped links with optional titles and descriptions
+          examples:
+          - url: https://example.com/page1
+            title: Example Page 1
+            description: This is an example description for page 1
+          - url: https://example.com/page2
+      required:
+      - task_id
+      - success
+      - links
+      additionalProperties: false
+      description: Response schema for map requests
+      examples:
+      - task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        success: true
+        links:
+        - title: Web Scraping API
+          url: https://www.example.com/page1
+          description: Complete guide to web scraping
+        - url: https://www.nimbleway.com/nimble-api/web
+        - title: API Documentation
+          url: https://www.example.com/docs
     Error400:
       type: object
       title: Error400
@@ -268,26 +288,6 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

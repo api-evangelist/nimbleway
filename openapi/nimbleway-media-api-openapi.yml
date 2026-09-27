@@ -140,57 +140,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error500:
+    MediaPayload:
       type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
       required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
-    Error402:
-      type: object
-      title: Error402
+      - url
       properties:
-        status:
+        url:
           type: string
-          example: failed
-          examples:
-          - failed
-        msg:
+          format: uri
+          description: URL of the media file to download
+          example: https://example.com/image.jpg
+        country:
           type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
+          default: US
+          minLength: 2
+          maxLength: 2
+          description: Country used to access the target URL, use ISO Alpha-2 Codes
+          example: US
+        locale:
+          type: string
+          description: LCID standard locale used for the URL request. Alternatively, user can use 'auto' for automatic locale based on geo-location
+          example: en-US
+        expected_mime_types:
+          type: array
+          items:
+            type: string
+          description: Allowed MIME types (supports wildcards like image/*)
+          example:
+          - image/*
+          - video/mp4
     AsyncResponse:
       type: object
       properties:
@@ -264,6 +242,77 @@ components:
           created_at: '2026-01-24T12:36:24.685Z'
           modified_at: '2026-01-24T12:36:24.685Z'
           input: {}
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
     AsyncOptions:
       type: object
       properties:
@@ -296,35 +345,6 @@ components:
           description: Custom name for the stored object instead of the default task ID
           examples:
           - my task
-    MediaPayload:
-      type: object
-      required:
-      - url
-      properties:
-        url:
-          type: string
-          format: uri
-          description: URL of the media file to download
-          example: https://example.com/image.jpg
-        country:
-          type: string
-          default: US
-          minLength: 2
-          maxLength: 2
-          description: Country used to access the target URL, use ISO Alpha-2 Codes
-          example: US
-        locale:
-          type: string
-          description: LCID standard locale used for the URL request. Alternatively, user can use 'auto' for automatic locale based on geo-location
-          example: en-US
-        expected_mime_types:
-          type: array
-          items:
-            type: string
-          description: Allowed MIME types (supports wildcards like image/*)
-          example:
-          - image/*
-          - video/mp4
     Error400:
       type: object
       title: Error400
@@ -372,26 +392,6 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
   securitySchemes:
     BearerAuth:
       type: http

@@ -157,6 +157,8 @@ apis:
   humanURL: https://docs.nimbleway.com/home
   baseURL: https://sdk.nimbleway.com/v1
   tags:
+  - Maps
+  tags_raw:
   - Map
   properties:
   - type: OpenAPI
