@@ -1216,15 +1216,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AgentPayload:
+    AgentBatchInputsPayload:
       type: object
-      title: AgentPayload
+      title: AgentBatchInputsPayload
       properties:
-        agent:
-          type: string
-          description: The agent's name to execute
-          examples:
-          - google_search
         params:
           type: object
           description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
@@ -1252,165 +1247,43 @@ components:
       - agent
       - params
       description: Request body model for the /agent/run endpoint
-    CreateAgentGenerationRequest:
-      properties:
-        prompt:
-          type: string
-          title: Prompt
-          description: The prompt to use for the agent generation
-        agent_name:
-          type: string
-          title: Agent Name
-          description: The name of the agent to generate
-        url:
-          type: string
-          title: Url
-          description: The URL to use for the agent generation
-          examples:
-          - https://www.amazon.com/s?k=laptop
-        metadata:
-          anyOf:
-          - $ref: '#/components/schemas/AgentVersionMetadata'
-          - type: 'null'
-          title: Metadata
-          description: The metadata of the agent version
-        input_schema:
-          additionalProperties: true
-          type: object
-          title: Input Schema
-          description: The input schema for the agent generation
-          examples:
-            type: object
-            properties:
-              category:
-                type: string
-        output_schema:
-          additionalProperties: true
-          type: object
-          title: Output Schema
-          description: The output schema for the agent generation
-          examples:
-            type: object
-            properties:
-              name:
-                type: string
+    AgentAsyncPayload:
       type: object
-      required:
-      - prompt
-      - url
-      title: CreateAgentGenerationRequest
-    AsyncResponse:
-      type: object
+      title: AgentPayload
       properties:
-        status:
+        agent:
           type: string
+          description: The agent's name to execute
           examples:
-          - success
-        task:
+          - google_search
+        params:
           type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Unique task identifier
-              examples:
-              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-            state:
-              type: string
-              description: Current state of the task
-              enum:
-              - pending
-              - processing
-              - completed
-              - failed
-              examples:
-              - pending
-            created_at:
-              type: string
-              format: date-time
-              description: Task creation timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            account_name:
-              type: string
-              description: The user account name
-              examples:
-              - my-account
-            api_type:
-              type: string
-              description: The api endpoint used
-              enum:
-              - agent
-              - extract
-              examples:
-              - extract
-            modified_at:
-              type: string
-              format: date-time
-              description: Task last modification timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            input:
-              type: object
-              description: Original request input parameters
-          required:
-          - id
-          - state
-          - created_at
-          - modified_at
-          - input
+          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
+          allOf:
+          - $ref: '#/components/schemas/AgentParams'
+          - $ref: '#/components/schemas/AsyncOptions'
+          examples:
+          - params:
+              keyword: iphone 17
+              zip_code: '90210'
+          required: []
+        localization:
+          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
+          type: boolean
+        formats:
+          type: array
+          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
+          items:
+            type: string
+            enum:
+            - html
+            - markdown
+            - headers
+            - links
       required:
-      - status
-      - task
-      examples:
-      - status: success
-        task:
-          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-          state: pending
-          account_name: my-account
-          api_type: extract
-          created_at: '2026-01-24T12:36:24.685Z'
-          modified_at: '2026-01-24T12:36:24.685Z'
-          input: {}
-    AgentGenerationResponse:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The id of the agent generation
-        status:
-          type: string
-          title: Status
-          description: The status of the agent generation
-        agent_name:
-          type: string
-          title: Agent Name
-          description: The name of the agent
-        version_id:
-          type: string
-          format: uuid
-          title: Version Id
-          description: The version id of the agent
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-          description: The summary of the agent generation
-        error:
-          anyOf:
-          - type: string
-            title: Error
-            description: The error of the agent generation
-          - type: 'null'
-          title: Error
-          description: The error of the agent generation
-      type: object
-      required:
-      - id
-      - status
-      title: AgentGenerationResponse
+      - agent
+      - params
+      description: Request body model for the /agent/run endpoint
     AgentVersionMetadata:
       properties:
         data_source:
@@ -1471,6 +1344,170 @@ components:
       required: []
       title: AgentVersionMetadata
       description: The metadata of the agent version
+    AgentResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL that was extracted
+        task_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the extraction task
+        status:
+          type: string
+          description: Status of the extraction
+          enum:
+          - success
+          - failed
+        status_code:
+          type: integer
+          description: HTTP status code from the target website
+        data:
+          type: object
+          description: Data from the extraction
+          properties:
+            html:
+              type: string
+              description: Raw HTML content of the page
+            headers:
+              type: object
+              description: Response headers from the target website
+            parsing:
+              type: object
+              description: Parsed data when parsing is enabled
+            markdown:
+              type: string
+              description: Markdown content when markdown conversion is enabled
+            cookies:
+              type: object
+              description: Cookies when cookie capture is enabled
+            fetch_request:
+              type: array
+              description: Captured executed fetch requests when enabled
+              items:
+                type: object
+            network_capture:
+              type: array
+              description: Captured network activity when enabled
+              items:
+                type: object
+            browser_actions:
+              type: array
+              description: Browser actions results
+              items:
+                type: object
+            screenshot:
+              type: string
+              description: Base64 encoded screenshot when enabled (requires rendering)
+        metadata:
+          type: object
+          description: Metadata from the extraction
+          properties:
+            query_time:
+              type: string
+              format: date-time
+              description: Timestamp when the query was executed
+            input_url:
+              type: string
+              format: uri
+              description: The original input URL
+            driver:
+              type: string
+              description: Driver used for extraction (depends on target domain and rendering configuration)
+              examples:
+              - vx8
+            agent:
+              type: string
+              description: Agent name used for extraction
+              examples:
+              - amazon_pdp
+        warnings:
+          type: array
+          description: List of warnings
+          items:
+            type: string
+      required:
+      - url
+      - task_id
+      - status
+      - status_code
+      - data
+      - metadata
+    Error400:
+      type: object
+      title: Error400
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    AgentParams:
+      type: object
+      minProperties: 1
+      description: Agent input parameters. At least one agent-specific key-value pair is required (e.g., `keyword`, `product_id`). Refer to the specific agent's documentation.
+      additionalProperties: true
+      properties:
+        country:
+          type: string
+          description: Country used to access the target URL, use ISO Alpha-2 Codes
+          examples:
+          - US
+        locale:
+          type: string
+          description: Language preference for the search results. Use LCID standard
+          examples:
+          - en
+        tag:
+          type: string
+          description: User-defined tag for request identification
+          examples:
+          - campaign-2024-q1
+        parse:
+          type: boolean
+          description: Whether to parse the response content
+          examples:
+          - true
     Error500:
       type: object
       title: Error500
@@ -1498,43 +1535,53 @@ components:
         success: 'false'
         task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
         message: can't download the query response - please try again
-    AgentAsyncPayload:
-      type: object
-      title: AgentPayload
+    CreateAgentGenerationRequest:
       properties:
-        agent:
+        prompt:
           type: string
-          description: The agent's name to execute
+          title: Prompt
+          description: The prompt to use for the agent generation
+        agent_name:
+          type: string
+          title: Agent Name
+          description: The name of the agent to generate
+        url:
+          type: string
+          title: Url
+          description: The URL to use for the agent generation
           examples:
-          - google_search
-        params:
+          - https://www.amazon.com/s?k=laptop
+        metadata:
+          anyOf:
+          - $ref: '#/components/schemas/AgentVersionMetadata'
+          - type: 'null'
+          title: Metadata
+          description: The metadata of the agent version
+        input_schema:
+          additionalProperties: true
           type: object
-          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
-          allOf:
-          - $ref: '#/components/schemas/AgentParams'
-          - $ref: '#/components/schemas/AsyncOptions'
+          title: Input Schema
+          description: The input schema for the agent generation
           examples:
-          - params:
-              keyword: iphone 17
-              zip_code: '90210'
-          required: []
-        localization:
-          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
-          type: boolean
-        formats:
-          type: array
-          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
-          items:
-            type: string
-            enum:
-            - html
-            - markdown
-            - headers
-            - links
+            type: object
+            properties:
+              category:
+                type: string
+        output_schema:
+          additionalProperties: true
+          type: object
+          title: Output Schema
+          description: The output schema for the agent generation
+          examples:
+            type: object
+            properties:
+              name:
+                type: string
+      type: object
       required:
-      - agent
-      - params
-      description: Request body model for the /agent/run endpoint
+      - prompt
+      - url
+      title: CreateAgentGenerationRequest
     BatchResponse:
       type: object
       properties:
@@ -1636,76 +1683,23 @@ components:
           description: List of created tasks.
       additionalProperties: false
       description: Response when a batch of extract tasks is created successfully.
-    Error429:
-      type: object
-      title: Error429
+    CreateAgentRefinementRequest:
       properties:
-        status:
+        prompt:
           type: string
-          example: failed
-          examples:
-          - failed
-        msg:
+          title: Prompt
+          description: The prompt to use for the agent refinement
+        from_agent:
           type: string
-          example: Rate limit exceeded
+          title: From Agent
+          description: The name of the agent to refine
           examples:
-          - Rate limit exceeded
+          - amazon_pdp
+      type: object
       required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    AgentParams:
-      type: object
-      minProperties: 1
-      description: Agent input parameters. At least one agent-specific key-value pair is required (e.g., `keyword`, `product_id`). Refer to the specific agent's documentation.
-      additionalProperties: true
-      properties:
-        country:
-          type: string
-          description: Country used to access the target URL, use ISO Alpha-2 Codes
-          examples:
-          - US
-        locale:
-          type: string
-          description: Language preference for the search results. Use LCID standard
-          examples:
-          - en
-        tag:
-          type: string
-          description: User-defined tag for request identification
-          examples:
-          - campaign-2024-q1
-        parse:
-          type: boolean
-          description: Whether to parse the response content
-          examples:
-          - true
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
+      - prompt
+      - from_agent
+      title: CreateAgentRefinementRequest
     AgentBatchBody:
       type: object
       properties:
@@ -1723,37 +1717,6 @@ components:
       - inputs
       - shared_inputs
       description: Request body for executing a batch of agent requests
-    AgentBatchInputsPayload:
-      type: object
-      title: AgentBatchInputsPayload
-      properties:
-        params:
-          type: object
-          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
-          allOf:
-          - $ref: '#/components/schemas/AgentParams'
-          examples:
-          - params:
-              keyword: iphone 17
-              zip_code: '90210'
-          required: []
-        localization:
-          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
-          type: boolean
-        formats:
-          type: array
-          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
-          items:
-            type: string
-            enum:
-            - html
-            - markdown
-            - headers
-            - links
-      required:
-      - agent
-      - params
-      description: Request body model for the /agent/run endpoint
     AsyncOptions:
       type: object
       properties:
@@ -1786,26 +1749,118 @@ components:
           description: Custom name for the stored object instead of the default task ID
           examples:
           - my task
-    CreateAgentRefinementRequest:
+    AgentPayload:
+      type: object
+      title: AgentPayload
       properties:
-        prompt:
+        agent:
           type: string
-          title: Prompt
-          description: The prompt to use for the agent refinement
-        from_agent:
-          type: string
-          title: From Agent
-          description: The name of the agent to refine
+          description: The agent's name to execute
           examples:
-          - amazon_pdp
-      type: object
+          - google_search
+        params:
+          type: object
+          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
+          allOf:
+          - $ref: '#/components/schemas/AgentParams'
+          examples:
+          - params:
+              keyword: iphone 17
+              zip_code: '90210'
+          required: []
+        localization:
+          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
+          type: boolean
+        formats:
+          type: array
+          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
+          items:
+            type: string
+            enum:
+            - html
+            - markdown
+            - headers
+            - links
       required:
-      - prompt
-      - from_agent
-      title: CreateAgentRefinementRequest
-    Error400:
+      - agent
+      - params
+      description: Request body model for the /agent/run endpoint
+    AsyncResponse:
       type: object
-      title: Error400
+      properties:
+        status:
+          type: string
+          examples:
+          - success
+        task:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Unique task identifier
+              examples:
+              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+            state:
+              type: string
+              description: Current state of the task
+              enum:
+              - pending
+              - processing
+              - completed
+              - failed
+              examples:
+              - pending
+            created_at:
+              type: string
+              format: date-time
+              description: Task creation timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            account_name:
+              type: string
+              description: The user account name
+              examples:
+              - my-account
+            api_type:
+              type: string
+              description: The api endpoint used
+              enum:
+              - agent
+              - extract
+              examples:
+              - extract
+            modified_at:
+              type: string
+              format: date-time
+              description: Task last modification timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            input:
+              type: object
+              description: Original request input parameters
+          required:
+          - id
+          - state
+          - created_at
+          - modified_at
+          - input
+      required:
+      - status
+      - task
+      examples:
+      - status: success
+        task:
+          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+          state: pending
+          account_name: my-account
+          api_type: extract
+          created_at: '2026-01-24T12:36:24.685Z'
+          modified_at: '2026-01-24T12:36:24.685Z'
+          input: {}
+    Error429:
+      type: object
+      title: Error429
       properties:
         status:
           type: string
@@ -1814,133 +1869,78 @@ components:
           - failed
         msg:
           type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
+          example: Rate limit exceeded
           examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
+          - Rate limit exceeded
       required:
       - status
       - msg
       example:
         status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
-    AgentResponse:
-      type: object
+        msg: Rate limit exceeded
+    AgentGenerationResponse:
       properties:
-        url:
-          type: string
-          format: uri
-          description: The URL that was extracted
-        task_id:
+        id:
           type: string
           format: uuid
-          description: Unique identifier for the extraction task
+          title: Id
+          description: The id of the agent generation
         status:
           type: string
-          description: Status of the extraction
-          enum:
-          - success
-          - failed
-        status_code:
-          type: integer
-          description: HTTP status code from the target website
-        data:
-          type: object
-          description: Data from the extraction
-          properties:
-            html:
-              type: string
-              description: Raw HTML content of the page
-            headers:
-              type: object
-              description: Response headers from the target website
-            parsing:
-              type: object
-              description: Parsed data when parsing is enabled
-            markdown:
-              type: string
-              description: Markdown content when markdown conversion is enabled
-            cookies:
-              type: object
-              description: Cookies when cookie capture is enabled
-            fetch_request:
-              type: array
-              description: Captured executed fetch requests when enabled
-              items:
-                type: object
-            network_capture:
-              type: array
-              description: Captured network activity when enabled
-              items:
-                type: object
-            browser_actions:
-              type: array
-              description: Browser actions results
-              items:
-                type: object
-            screenshot:
-              type: string
-              description: Base64 encoded screenshot when enabled (requires rendering)
-        metadata:
-          type: object
-          description: Metadata from the extraction
-          properties:
-            query_time:
-              type: string
-              format: date-time
-              description: Timestamp when the query was executed
-            input_url:
-              type: string
-              format: uri
-              description: The original input URL
-            driver:
-              type: string
-              description: Driver used for extraction (depends on target domain and rendering configuration)
-              examples:
-              - vx8
-            agent:
-              type: string
-              description: Agent name used for extraction
-              examples:
-              - amazon_pdp
-        warnings:
-          type: array
-          description: List of warnings
-          items:
-            type: string
+          title: Status
+          description: The status of the agent generation
+        agent_name:
+          type: string
+          title: Agent Name
+          description: The name of the agent
+        version_id:
+          type: string
+          format: uuid
+          title: Version Id
+          description: The version id of the agent
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: The summary of the agent generation
+        error:
+          anyOf:
+          - type: string
+            title: Error
+            description: The error of the agent generation
+          - type: 'null'
+          title: Error
+          description: The error of the agent generation
+      type: object
       required:
-      - url
-      - task_id
+      - id
       - status
-      - status_code
-      - data
-      - metadata
+      title: AgentGenerationResponse
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
   securitySchemes:
     BearerAuth:
       type: http

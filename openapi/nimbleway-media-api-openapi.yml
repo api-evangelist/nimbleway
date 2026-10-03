@@ -140,6 +140,53 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error400:
+      type: object
+      title: Error400
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
     MediaPayload:
       type: object
       required:
@@ -169,6 +216,65 @@ components:
           example:
           - image/*
           - video/mp4
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    AsyncOptions:
+      type: object
+      properties:
+        storage_type:
+          type: string
+          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
+          enum:
+          - s3
+          - gs
+          examples:
+          - s3
+        storage_url:
+          type: string
+          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
+          examples:
+          - s3://Your.Repository.Path/
+        callback_url:
+          type: string
+          format: uri
+          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
+          examples:
+          - https://your.callback.url/path
+        storage_compress:
+          type: boolean
+          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
+          examples:
+          - false
+        storage_object_name:
+          type: string
+          description: Custom name for the stored object instead of the default task ID
+          examples:
+          - my task
     AsyncResponse:
       type: object
       properties:
@@ -242,33 +348,26 @@ components:
           created_at: '2026-01-24T12:36:24.685Z'
           modified_at: '2026-01-24T12:36:24.685Z'
           input: {}
-    Error500:
+    Error429:
       type: object
-      title: Error500
+      title: Error429
       properties:
-        success:
+        status:
           type: string
-          example: 'false'
+          example: failed
           examples:
-          - 'false'
-        task_id:
+          - failed
+        msg:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          example: Rate limit exceeded
           examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
+          - Rate limit exceeded
       required:
-      - success
-      - task_id
-      - message
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+        status: failed
+        msg: Rate limit exceeded
     Error402:
       type: object
       title: Error402
@@ -293,105 +392,6 @@ components:
       example:
         status: failed
         msg: trial expired
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    AsyncOptions:
-      type: object
-      properties:
-        storage_type:
-          type: string
-          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
-          enum:
-          - s3
-          - gs
-          examples:
-          - s3
-        storage_url:
-          type: string
-          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
-          examples:
-          - s3://Your.Repository.Path/
-        callback_url:
-          type: string
-          format: uri
-          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
-          examples:
-          - https://your.callback.url/path
-        storage_compress:
-          type: boolean
-          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
-          examples:
-          - false
-        storage_object_name:
-          type: string
-          description: Custom name for the stored object instead of the default task ID
-          examples:
-          - my task
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
   securitySchemes:
     BearerAuth:
       type: http

@@ -645,6 +645,652 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error400:
+      type: object
+      title: Error400
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    CrawlPayload:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Url to crawl
+          examples:
+          - https://example.com
+        name:
+          type: string
+          description: Name of the crawl
+          examples:
+          - my-crawler-1
+        sitemap:
+          description: Sitemap and other methods will be used together to find URLs
+          examples:
+          - include
+          type: string
+          enum:
+          - skip
+          - include
+          - only
+        crawl_entire_domain:
+          description: Allows the crawler to follow internal links to sibling or parent URLs, not just child paths
+          examples:
+          - false
+          type: boolean
+        limit:
+          description: Maximum number of pages to crawl
+          examples:
+          - 100
+          type: integer
+          minimum: 1
+          maximum: 10000
+        max_discovery_depth:
+          description: Maximum depth to crawl based on discovery order
+          examples:
+          - 3
+          type: integer
+          minimum: 1
+          maximum: 20
+        exclude_paths:
+          description: URL pathname regex patterns that exclude matching URLs from the crawl
+          examples:
+          - - /exclude-this-path
+            - /and-this-path
+          type: array
+          items:
+            type: string
+        include_paths:
+          description: URL pathname regex patterns that include matching URLs in the crawl
+          examples:
+          - - /include-this-path
+            - /and-this-path
+          type: array
+          items:
+            type: string
+        ignore_query_parameters:
+          description: Do not re-scrape the same path with different (or none) query parameters
+          examples:
+          - false
+          type: boolean
+        allow_external_links:
+          description: Allows the crawler to follow links to external websites
+          examples:
+          - false
+          type: boolean
+        allow_subdomains:
+          description: Allows the crawler to follow links to subdomains of the main domain
+          examples:
+          - false
+          type: boolean
+        callback:
+          description: Webhook configuration for receiving crawl results
+          anyOf:
+          - type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: Webhook URL to receive crawl results
+                examples:
+                - https://example.com/webhook
+              headers:
+                description: Headers to send to the webhook URL
+                type: object
+              metadata:
+                description: Custom metadata that will be included in all webhook payloads for this crawl
+                type: object
+              events:
+                description: 'Type of events that should be sent to the webhook URL. (default: all)'
+                type: array
+                items:
+                  type: string
+                  enum:
+                  - completed
+                  - page
+                  - failed
+                  - started
+            required:
+            - url
+          - type: string
+            format: uri
+        extract_options:
+          $ref: '#/components/schemas/ExtractPayload'
+      required:
+      - url
+    ParserExtractor:
+      oneOf:
+      - type: object
+        description: Extract text content
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract attribute value
+        properties:
+          type:
+            type: string
+            enum:
+            - attr
+          attr:
+            type: string
+            description: Attribute name (e.g., href, src)
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+        - attr
+      - type: object
+        description: Extract as JSON
+        properties:
+          type:
+            type: string
+            enum:
+            - json
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract raw HTML
+        properties:
+          type:
+            type: string
+            enum:
+            - raw
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+    NetworkCaptureFilter:
+      type: object
+      description: Configuration for capturing network requests made by the page
+      properties:
+        method:
+          type: string
+          description: Filter by HTTP method
+          enum:
+          - GET
+          - HEAD
+          - POST
+          - PUT
+          - DELETE
+          - CONNECT
+          - OPTIONS
+          - TRACE
+          - PATCH
+        url:
+          type: object
+          description: URL matching configuration
+          properties:
+            type:
+              type: string
+              description: How to match URLs
+              enum:
+              - exact
+              - contains
+            value:
+              type: string
+              description: The URL or URL pattern to match
+          required:
+          - value
+        resource_type:
+          description: Filter by request type
+          type: array
+          items:
+            type: string
+            enum:
+            - xhr
+            - fetch
+            - stylesheet
+            - script
+            - document
+            - image
+          examples:
+          - xhr
+          - fetch
+        validation:
+          type: boolean
+          description: Validate response content
+        wait_for_requests_count:
+          type: number
+          description: Wait for this many matching requests
+          minimum: 0
+        wait_for_requests_count_timeout:
+          type: number
+          description: How long to wait in seconds
+          minimum: 0
+          maximum: 300000
+    PostProcessor:
+      type: object
+      description: Transform extracted data
+      properties:
+        type:
+          type: string
+          enum:
+          - number
+          - string
+          - date
+          - regex
+          - trim
+          - lowercase
+          - uppercase
+      required:
+      - type
+    BrowserAction:
+      type: object
+      description: 'An action to perform in the browser (one of: goto, wait, wait_for_element, click, press, fill, scroll, auto_scroll, screenshot, get_cookies, fetch)'
+      properties:
+        goto:
+          description: Navigate to a URL
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+            properties:
+              url:
+                type: string
+                format: uri
+              timeout:
+                type: number
+              referer:
+                type: string
+              wait_until:
+                type: string
+                enum:
+                - load
+                - domcontentloaded
+                - networkidle
+                - commit
+            required:
+            - url
+        wait:
+          description: Pause for a duration
+          oneOf:
+          - type: string
+            examples:
+            - 2s
+          - type: object
+            properties:
+              duration:
+                type: string
+                examples:
+                - 2s
+              required:
+                type: boolean
+            required:
+            - duration
+        wait_for_element:
+          description: Wait for element(s) to appear
+          oneOf:
+          - type: string
+            description: CSS selector
+          - type: array
+            items:
+              type: string
+            description: Array of CSS selectors
+          - type: object
+            properties:
+              selector:
+                oneOf:
+                - type: string
+                - type: array
+                  items:
+                    type: string
+              timeout:
+                type: number
+              visible:
+                type: boolean
+            required:
+            - selector
+        click:
+          description: Click an element or coordinates
+          oneOf:
+          - type: string
+            description: CSS selector
+          - type: object
+            description: Click by selector or coordinates
+            properties:
+              selector:
+                type: string
+              x:
+                type: number
+              y:
+                type: number
+              relative_to:
+                type: string
+              timeout:
+                type: string
+              visible:
+                type: boolean
+              delay:
+                type: string
+              scroll:
+                type: boolean
+              count:
+                type: number
+              required:
+                type: boolean
+        press:
+          description: Press a keyboard key
+          oneOf:
+          - type: string
+            examples:
+            - Enter
+          - type: object
+            properties:
+              key:
+                type: string
+                examples:
+                - Enter
+              delay:
+                type: number
+            required:
+            - key
+        fill:
+          type: object
+          description: Fill an input field with text
+          properties:
+            selector:
+              type: string
+              description: CSS selector of input element
+            value:
+              type: string
+              description: Text to fill
+            mode:
+              type: string
+              enum:
+              - type
+              - paste
+            timeout:
+              type: number
+            typing_interval:
+              type: number
+              minimum: 10
+              maximum: 1000
+            click_on_element:
+              type: boolean
+            scroll:
+              type: boolean
+            visible:
+              type: boolean
+            delay:
+              type: number
+            required:
+              type: boolean
+          required:
+          - selector
+          - value
+        scroll:
+          description: Scroll the page
+          oneOf:
+          - type: number
+            description: Pixels to scroll (positive = down, negative = up)
+          - type: string
+            description: Scroll to bottom or CSS selector
+          - type: object
+            properties:
+              y:
+                type: number
+              x:
+                type: number
+              to:
+                type: string
+                description: CSS selector to scroll to
+              container:
+                type: string
+                description: CSS selector of container
+              visible:
+                type: boolean
+              required:
+                type: boolean
+        auto_scroll:
+          description: Automatically scroll to load dynamic content
+          oneOf:
+          - type: boolean
+          - type: number
+            description: Max duration in milliseconds
+          - type: object
+            properties:
+              max_duration:
+                type: number
+              delay_after_scroll:
+                type: number
+              step_size:
+                type: number
+                description: Pixels to scroll per step
+              click_selector:
+                type: string
+                description: CSS selector to click before scrolling
+              container:
+                type: string
+                description: CSS selector of container
+              idle_timeout:
+                type: number
+              pause_on_selector:
+                type: string
+              required:
+                type: boolean
+        screenshot:
+          description: Capture a screenshot
+          oneOf:
+          - type: boolean
+          - type: object
+            properties:
+              full_page:
+                type: boolean
+              format:
+                type: string
+                enum:
+                - png
+                - jpeg
+                - webp
+              quality:
+                type: number
+                minimum: 0
+                maximum: 100
+        get_cookies:
+          description: Retrieve cookies
+          oneOf:
+          - type: boolean
+          - type: object
+            properties:
+              domain:
+                type: string
+                description: Domain filter for cookies
+        fetch:
+          description: Make HTTP request from browser context
+          oneOf:
+          - type: string
+            format: uri
+          - type: object
+            properties:
+              url:
+                type: string
+                format: uri
+              method:
+                type: string
+                enum:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - PATCH
+              headers:
+                type: object
+                additionalProperties:
+                  type: string
+              body:
+                type: string
+                description: Request body
+              timeout:
+                type: number
+            required:
+            - url
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Parser:
+      type: object
+      description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
+      additionalProperties:
+        oneOf:
+        - type: object
+          description: Terminal parser - extract a single value
+          properties:
+            type:
+              type: string
+              enum:
+              - terminal
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            extractor:
+              $ref: '#/components/schemas/ParserExtractor'
+          required:
+          - type
+          - selector
+          - extractor
+        - type: object
+          description: Terminal list parser - extract multiple values
+          properties:
+            type:
+              type: string
+              enum:
+              - terminal_list
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            extractor:
+              $ref: '#/components/schemas/ParserExtractor'
+          required:
+          - type
+          - selector
+          - extractor
+        - type: object
+          description: Schema parser - extract nested object
+          properties:
+            type:
+              type: string
+              enum:
+              - schema
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            fields:
+              $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - fields
+        - type: object
+          description: Schema list parser - extract list of objects
+          properties:
+            type:
+              type: string
+              enum:
+              - schema_list
+            selector:
+              $ref: '#/components/schemas/ParserSelector'
+            fields:
+              $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - fields
+        - type: object
+          description: Or parser - try multiple strategies
+          properties:
+            type:
+              type: string
+              enum:
+              - or
+            parsers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Parser'
+          required:
+          - type
+          - parsers
+        - type: object
+          description: Const parser - return fixed value
+          properties:
+            type:
+              type: string
+              enum:
+              - const
+            value:
+              description: Fixed value to return
+          required:
+          - type
+          - value
     ExtractPayload:
       type: object
       properties:
@@ -941,69 +1587,6 @@ components:
       description: Request body model for the /extract endpoint
       required:
       - url
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
-    PostProcessor:
-      type: object
-      description: Transform extracted data
-      properties:
-        type:
-          type: string
-          enum:
-          - number
-          - string
-          - date
-          - regex
-          - trim
-          - lowercase
-          - uppercase
-      required:
-      - type
     ParserSelector:
       oneOf:
       - type: object
@@ -1071,33 +1654,26 @@ components:
             - root
         required:
         - type
-    Error500:
+    Error429:
       type: object
-      title: Error500
+      title: Error429
       properties:
-        success:
+        status:
           type: string
-          example: 'false'
+          example: failed
           examples:
-          - 'false'
-        task_id:
+          - failed
+        msg:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          example: Rate limit exceeded
           examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
+          - Rate limit exceeded
       required:
-      - success
-      - task_id
-      - message
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+        status: failed
+        msg: Rate limit exceeded
     Error402:
       type: object
       title: Error402
@@ -1122,582 +1698,6 @@ components:
       example:
         status: failed
         msg: trial expired
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    BrowserAction:
-      type: object
-      description: 'An action to perform in the browser (one of: goto, wait, wait_for_element, click, press, fill, scroll, auto_scroll, screenshot, get_cookies, fetch)'
-      properties:
-        goto:
-          description: Navigate to a URL
-          oneOf:
-          - type: string
-            format: uri
-          - type: object
-            properties:
-              url:
-                type: string
-                format: uri
-              timeout:
-                type: number
-              referer:
-                type: string
-              wait_until:
-                type: string
-                enum:
-                - load
-                - domcontentloaded
-                - networkidle
-                - commit
-            required:
-            - url
-        wait:
-          description: Pause for a duration
-          oneOf:
-          - type: string
-            examples:
-            - 2s
-          - type: object
-            properties:
-              duration:
-                type: string
-                examples:
-                - 2s
-              required:
-                type: boolean
-            required:
-            - duration
-        wait_for_element:
-          description: Wait for element(s) to appear
-          oneOf:
-          - type: string
-            description: CSS selector
-          - type: array
-            items:
-              type: string
-            description: Array of CSS selectors
-          - type: object
-            properties:
-              selector:
-                oneOf:
-                - type: string
-                - type: array
-                  items:
-                    type: string
-              timeout:
-                type: number
-              visible:
-                type: boolean
-            required:
-            - selector
-        click:
-          description: Click an element or coordinates
-          oneOf:
-          - type: string
-            description: CSS selector
-          - type: object
-            description: Click by selector or coordinates
-            properties:
-              selector:
-                type: string
-              x:
-                type: number
-              y:
-                type: number
-              relative_to:
-                type: string
-              timeout:
-                type: string
-              visible:
-                type: boolean
-              delay:
-                type: string
-              scroll:
-                type: boolean
-              count:
-                type: number
-              required:
-                type: boolean
-        press:
-          description: Press a keyboard key
-          oneOf:
-          - type: string
-            examples:
-            - Enter
-          - type: object
-            properties:
-              key:
-                type: string
-                examples:
-                - Enter
-              delay:
-                type: number
-            required:
-            - key
-        fill:
-          type: object
-          description: Fill an input field with text
-          properties:
-            selector:
-              type: string
-              description: CSS selector of input element
-            value:
-              type: string
-              description: Text to fill
-            mode:
-              type: string
-              enum:
-              - type
-              - paste
-            timeout:
-              type: number
-            typing_interval:
-              type: number
-              minimum: 10
-              maximum: 1000
-            click_on_element:
-              type: boolean
-            scroll:
-              type: boolean
-            visible:
-              type: boolean
-            delay:
-              type: number
-            required:
-              type: boolean
-          required:
-          - selector
-          - value
-        scroll:
-          description: Scroll the page
-          oneOf:
-          - type: number
-            description: Pixels to scroll (positive = down, negative = up)
-          - type: string
-            description: Scroll to bottom or CSS selector
-          - type: object
-            properties:
-              y:
-                type: number
-              x:
-                type: number
-              to:
-                type: string
-                description: CSS selector to scroll to
-              container:
-                type: string
-                description: CSS selector of container
-              visible:
-                type: boolean
-              required:
-                type: boolean
-        auto_scroll:
-          description: Automatically scroll to load dynamic content
-          oneOf:
-          - type: boolean
-          - type: number
-            description: Max duration in milliseconds
-          - type: object
-            properties:
-              max_duration:
-                type: number
-              delay_after_scroll:
-                type: number
-              step_size:
-                type: number
-                description: Pixels to scroll per step
-              click_selector:
-                type: string
-                description: CSS selector to click before scrolling
-              container:
-                type: string
-                description: CSS selector of container
-              idle_timeout:
-                type: number
-              pause_on_selector:
-                type: string
-              required:
-                type: boolean
-        screenshot:
-          description: Capture a screenshot
-          oneOf:
-          - type: boolean
-          - type: object
-            properties:
-              full_page:
-                type: boolean
-              format:
-                type: string
-                enum:
-                - png
-                - jpeg
-                - webp
-              quality:
-                type: number
-                minimum: 0
-                maximum: 100
-        get_cookies:
-          description: Retrieve cookies
-          oneOf:
-          - type: boolean
-          - type: object
-            properties:
-              domain:
-                type: string
-                description: Domain filter for cookies
-        fetch:
-          description: Make HTTP request from browser context
-          oneOf:
-          - type: string
-            format: uri
-          - type: object
-            properties:
-              url:
-                type: string
-                format: uri
-              method:
-                type: string
-                enum:
-                - GET
-                - POST
-                - PUT
-                - DELETE
-                - PATCH
-              headers:
-                type: object
-                additionalProperties:
-                  type: string
-              body:
-                type: string
-                description: Request body
-              timeout:
-                type: number
-            required:
-            - url
-    ParserExtractor:
-      oneOf:
-      - type: object
-        description: Extract text content
-        properties:
-          type:
-            type: string
-            enum:
-            - text
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-      - type: object
-        description: Extract attribute value
-        properties:
-          type:
-            type: string
-            enum:
-            - attr
-          attr:
-            type: string
-            description: Attribute name (e.g., href, src)
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-        - attr
-      - type: object
-        description: Extract as JSON
-        properties:
-          type:
-            type: string
-            enum:
-            - json
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-      - type: object
-        description: Extract raw HTML
-        properties:
-          type:
-            type: string
-            enum:
-            - raw
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-    Parser:
-      type: object
-      description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
-      additionalProperties:
-        oneOf:
-        - type: object
-          description: Terminal parser - extract a single value
-          properties:
-            type:
-              type: string
-              enum:
-              - terminal
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            extractor:
-              $ref: '#/components/schemas/ParserExtractor'
-          required:
-          - type
-          - selector
-          - extractor
-        - type: object
-          description: Terminal list parser - extract multiple values
-          properties:
-            type:
-              type: string
-              enum:
-              - terminal_list
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            extractor:
-              $ref: '#/components/schemas/ParserExtractor'
-          required:
-          - type
-          - selector
-          - extractor
-        - type: object
-          description: Schema parser - extract nested object
-          properties:
-            type:
-              type: string
-              enum:
-              - schema
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            fields:
-              $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - fields
-        - type: object
-          description: Schema list parser - extract list of objects
-          properties:
-            type:
-              type: string
-              enum:
-              - schema_list
-            selector:
-              $ref: '#/components/schemas/ParserSelector'
-            fields:
-              $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - fields
-        - type: object
-          description: Or parser - try multiple strategies
-          properties:
-            type:
-              type: string
-              enum:
-              - or
-            parsers:
-              type: array
-              items:
-                $ref: '#/components/schemas/Parser'
-          required:
-          - type
-          - parsers
-        - type: object
-          description: Const parser - return fixed value
-          properties:
-            type:
-              type: string
-              enum:
-              - const
-            value:
-              description: Fixed value to return
-          required:
-          - type
-          - value
-    CrawlPayload:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Url to crawl
-          examples:
-          - https://example.com
-        name:
-          type: string
-          description: Name of the crawl
-          examples:
-          - my-crawler-1
-        sitemap:
-          description: Sitemap and other methods will be used together to find URLs
-          examples:
-          - include
-          type: string
-          enum:
-          - skip
-          - include
-          - only
-        crawl_entire_domain:
-          description: Allows the crawler to follow internal links to sibling or parent URLs, not just child paths
-          examples:
-          - false
-          type: boolean
-        limit:
-          description: Maximum number of pages to crawl
-          examples:
-          - 100
-          type: integer
-          minimum: 1
-          maximum: 10000
-        max_discovery_depth:
-          description: Maximum depth to crawl based on discovery order
-          examples:
-          - 3
-          type: integer
-          minimum: 1
-          maximum: 20
-        exclude_paths:
-          description: URL pathname regex patterns that exclude matching URLs from the crawl
-          examples:
-          - - /exclude-this-path
-            - /and-this-path
-          type: array
-          items:
-            type: string
-        include_paths:
-          description: URL pathname regex patterns that include matching URLs in the crawl
-          examples:
-          - - /include-this-path
-            - /and-this-path
-          type: array
-          items:
-            type: string
-        ignore_query_parameters:
-          description: Do not re-scrape the same path with different (or none) query parameters
-          examples:
-          - false
-          type: boolean
-        allow_external_links:
-          description: Allows the crawler to follow links to external websites
-          examples:
-          - false
-          type: boolean
-        allow_subdomains:
-          description: Allows the crawler to follow links to subdomains of the main domain
-          examples:
-          - false
-          type: boolean
-        callback:
-          description: Webhook configuration for receiving crawl results
-          anyOf:
-          - type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: Webhook URL to receive crawl results
-                examples:
-                - https://example.com/webhook
-              headers:
-                description: Headers to send to the webhook URL
-                type: object
-              metadata:
-                description: Custom metadata that will be included in all webhook payloads for this crawl
-                type: object
-              events:
-                description: 'Type of events that should be sent to the webhook URL. (default: all)'
-                type: array
-                items:
-                  type: string
-                  enum:
-                  - completed
-                  - page
-                  - failed
-                  - started
-            required:
-            - url
-          - type: string
-            format: uri
-        extract_options:
-          $ref: '#/components/schemas/ExtractPayload'
-      required:
-      - url
-    NetworkCaptureFilter:
-      type: object
-      description: Configuration for capturing network requests made by the page
-      properties:
-        method:
-          type: string
-          description: Filter by HTTP method
-          enum:
-          - GET
-          - HEAD
-          - POST
-          - PUT
-          - DELETE
-          - CONNECT
-          - OPTIONS
-          - TRACE
-          - PATCH
-        url:
-          type: object
-          description: URL matching configuration
-          properties:
-            type:
-              type: string
-              description: How to match URLs
-              enum:
-              - exact
-              - contains
-            value:
-              type: string
-              description: The URL or URL pattern to match
-          required:
-          - value
-        resource_type:
-          description: Filter by request type
-          type: array
-          items:
-            type: string
-            enum:
-            - xhr
-            - fetch
-            - stylesheet
-            - script
-            - document
-            - image
-          examples:
-          - xhr
-          - fetch
-        validation:
-          type: boolean
-          description: Validate response content
-        wait_for_requests_count:
-          type: number
-          description: Wait for this many matching requests
-          minimum: 0
-        wait_for_requests_count_timeout:
-          type: number
-          description: How long to wait in seconds
-          minimum: 0
-          maximum: 300000
   securitySchemes:
     BearerAuth:
       type: http

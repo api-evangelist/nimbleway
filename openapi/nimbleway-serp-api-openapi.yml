@@ -348,92 +348,233 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AsyncResponse:
+    SerpResponse:
       type: object
+      title: SerpResponse
+      description: Response from the Fast SERP realtime API. All engines share the same top-level envelope; entity types under parsing.entities vary by search_engine.
+      properties:
+        task_id:
+          type: string
+          description: Unique identifier for this request
+          examples:
+          - bd46cd9c-50f7-4736-9c4a-660a32e4dc87
+        status:
+          type: string
+          enum:
+          - success
+          - error
+          description: Request status
+          examples:
+          - success
+        query_time:
+          type: string
+          format: date-time
+          description: ISO timestamp of when the query ran
+          examples:
+          - '2026-03-05T13:47:16.435Z'
+        status_code:
+          type: integer
+          description: HTTP status code from the upstream source
+          examples:
+          - 200
+        url:
+          type: string
+          description: The upstream URL that was queried
+          examples:
+          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
+        input_url:
+          type: string
+          description: The original input URL before any redirects
+          examples:
+          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
+        html_content:
+          type: string
+          nullable: true
+          description: Raw HTML of the response page. Omitted when no_html is true.
+          examples:
+          - <!DOCTYPE html>...
+        driver:
+          type: string
+          description: Internal routing driver used for this request
+          examples:
+          - vx6
+        parsing:
+          type: object
+          description: Structured parsing output. Entity types under entities vary by search_engine.
+        nimble_links:
+          type: object
+          nullable: true
+          description: Pagination links as ready-to-use Nimble API URLs (Maps engines)
+          properties:
+            next_page:
+              type: string
+              description: URL to fetch the next page of results
+        nimble_payload:
+          type: object
+          nullable: true
+          description: Next-page parameters as a structured object (web search engines)
+      required:
+      - task_id
+      - status
+      - status_code
+      - parsing
+    Error400:
+      type: object
+      title: Error400
       properties:
         status:
           type: string
+          example: failed
           examples:
-          - success
-        task:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
           type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Unique task identifier
-              examples:
-              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-            state:
-              type: string
-              description: Current state of the task
-              enum:
-              - pending
-              - processing
-              - completed
-              - failed
-              examples:
-              - pending
-            created_at:
-              type: string
-              format: date-time
-              description: Task creation timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            account_name:
-              type: string
-              description: The user account name
-              examples:
-              - my-account
-            api_type:
-              type: string
-              description: The api endpoint used
-              enum:
-              - agent
-              - extract
-              examples:
-              - extract
-            modified_at:
-              type: string
-              format: date-time
-              description: Task last modification timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            input:
-              type: object
-              description: Original request input parameters
-          required:
-          - id
-          - state
-          - created_at
-          - modified_at
-          - input
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
       required:
       - status
-      - task
-      examples:
-      - status: success
-        task:
-          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-          state: pending
-          account_name: my-account
-          api_type: extract
-          created_at: '2026-01-24T12:36:24.685Z'
-          modified_at: '2026-01-24T12:36:24.685Z'
-          input: {}
-    SerpBatchPayload:
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    SerpPayload:
       type: object
+      title: SerpPayload
       properties:
-        inputs:
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/SerpPayload'
-        shared_inputs:
-          allOf:
-          - $ref: '#/components/schemas/AsyncOptions'
-          - $ref: '#/components/schemas/SerpPayload'
-            required: []
+        search_engine:
+          type: string
+          description: The search engine to query
+          examples:
+          - google_search
+          enum:
+          - google_search
+          - google_aio
+          - google_maps_search
+          - google_maps_reviews
+          - google_maps_place
+          - google_news
+          - google_images
+          - bing_search
+          - yandex_search
+        query:
+          type: string
+          description: The search query string. Required for google_search, google_news, google_images, and google_maps_search
+          examples:
+          - NBA Allstars 2026
+        place_id:
+          type: string
+          description: Google Maps place identifier. Required for google_maps_place and google_maps_reviews
+          examples:
+          - ChIJtRq8oUjLw4kR_tN2GQKUOXs
+        coordinates:
+          type: object
+          properties:
+            latitude:
+              type: string
+              description: Google Maps place identifier. Required for google_maps_place and google_maps_reviews
+              examples:
+              - '40.7123695'
+            longitude:
+              type: string
+              examples:
+              - '-74.0357317'
+          examples:
+          - latitude: '40.7123695'
+            longitude: '-74.0357317'
+        time:
+          type: string
+          description: Filter results by time range. Only supported for google_search, google_news, and google_images
+          examples:
+          - hour
+          - day
+          - week
+          - month
+          - year
+        country:
+          type: string
+          default: US
+          description: Run the search as if from a specific country. Returns geo-localized results (optimized for US)
+          examples:
+          - US
+        locale:
+          type: string
+          description: Language preference for the search results. Use LCID standard
+          examples:
+          - en
+        location:
+          type: string
+          description: Location context for the search. Accepted for google_search, google_news, and google_images — not supported for Maps engines. Pass a location string (e.g. "United States", "New York, NY") or a raw Google UULE value.
+          examples:
+          - United States
+          - New York, NY
+        no_html:
+          type: boolean
+          default: false
+          description: When set to true, removes the html_content field from the response
+          examples:
+          - true
+        num_results:
+          description: Number of results to return (1–100).
+          examples:
+          - 10
+          maximum: 100
+          minimum: 1
+          type: integer
+        start:
+          description: Result offset for fetching beyond the first batch.
+          examples:
+          - 10
+          type: integer
+        include_pages_html:
+          type: boolean
+          default: false
+          description: When set to true, returns raw HTML per individual result page instead of a single stitched HTML string.
+          examples:
+          - true
+        device:
+          type: string
+          description: Emulate a specific device type.
+          examples:
+          - mobile
+          enum:
+          - mobile
+        ads_optimization:
+          type: boolean
+          default: false
+          description: When set to true, boosts sponsored results using incognito rendering (requires JS).
+          examples:
+          - true
+      required:
+      - search_engine
+      description: Request body model for the fast serp endpoint
     Error500:
       type: object
       title: Error500
@@ -562,50 +703,6 @@ components:
           description: List of created tasks.
       additionalProperties: false
       description: Response when a batch of extract tasks is created successfully.
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
     AsyncOptions:
       type: object
       properties:
@@ -638,119 +735,95 @@ components:
           description: Custom name for the stored object instead of the default task ID
           examples:
           - my task
-    SerpPayload:
+    SerpBatchPayload:
       type: object
-      title: SerpPayload
       properties:
-        search_engine:
+        inputs:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/SerpPayload'
+        shared_inputs:
+          allOf:
+          - $ref: '#/components/schemas/AsyncOptions'
+          - $ref: '#/components/schemas/SerpPayload'
+            required: []
+    AsyncResponse:
+      type: object
+      properties:
+        status:
           type: string
-          description: The search engine to query
           examples:
-          - google_search
-          enum:
-          - google_search
-          - google_aio
-          - google_maps_search
-          - google_maps_reviews
-          - google_maps_place
-          - google_news
-          - google_images
-          - bing_search
-          - yandex_search
-        query:
-          type: string
-          description: The search query string. Required for google_search, google_news, google_images, and google_maps_search
-          examples:
-          - NBA Allstars 2026
-        place_id:
-          type: string
-          description: Google Maps place identifier. Required for google_maps_place and google_maps_reviews
-          examples:
-          - ChIJtRq8oUjLw4kR_tN2GQKUOXs
-        coordinates:
+          - success
+        task:
           type: object
           properties:
-            latitude:
+            id:
               type: string
-              description: Google Maps place identifier. Required for google_maps_place and google_maps_reviews
+              format: uuid
+              description: Unique task identifier
               examples:
-              - '40.7123695'
-            longitude:
+              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+            state:
               type: string
+              description: Current state of the task
+              enum:
+              - pending
+              - processing
+              - completed
+              - failed
               examples:
-              - '-74.0357317'
-          examples:
-          - latitude: '40.7123695'
-            longitude: '-74.0357317'
-        time:
-          type: string
-          description: Filter results by time range. Only supported for google_search, google_news, and google_images
-          examples:
-          - hour
-          - day
-          - week
-          - month
-          - year
-        country:
-          type: string
-          default: US
-          description: Run the search as if from a specific country. Returns geo-localized results (optimized for US)
-          examples:
-          - US
-        locale:
-          type: string
-          description: Language preference for the search results. Use LCID standard
-          examples:
-          - en
-        location:
-          type: string
-          description: Location context for the search. Accepted for google_search, google_news, and google_images — not supported for Maps engines. Pass a location string (e.g. "United States", "New York, NY") or a raw Google UULE value.
-          examples:
-          - United States
-          - New York, NY
-        no_html:
-          type: boolean
-          default: false
-          description: When set to true, removes the html_content field from the response
-          examples:
-          - true
-        num_results:
-          description: Number of results to return (1–100).
-          examples:
-          - 10
-          maximum: 100
-          minimum: 1
-          type: integer
-        start:
-          description: Result offset for fetching beyond the first batch.
-          examples:
-          - 10
-          type: integer
-        include_pages_html:
-          type: boolean
-          default: false
-          description: When set to true, returns raw HTML per individual result page instead of a single stitched HTML string.
-          examples:
-          - true
-        device:
-          type: string
-          description: Emulate a specific device type.
-          examples:
-          - mobile
-          enum:
-          - mobile
-        ads_optimization:
-          type: boolean
-          default: false
-          description: When set to true, boosts sponsored results using incognito rendering (requires JS).
-          examples:
-          - true
+              - pending
+            created_at:
+              type: string
+              format: date-time
+              description: Task creation timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            account_name:
+              type: string
+              description: The user account name
+              examples:
+              - my-account
+            api_type:
+              type: string
+              description: The api endpoint used
+              enum:
+              - agent
+              - extract
+              examples:
+              - extract
+            modified_at:
+              type: string
+              format: date-time
+              description: Task last modification timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            input:
+              type: object
+              description: Original request input parameters
+          required:
+          - id
+          - state
+          - created_at
+          - modified_at
+          - input
       required:
-      - search_engine
-      description: Request body model for the fast serp endpoint
-    Error400:
+      - status
+      - task
+      examples:
+      - status: success
+        task:
+          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+          state: pending
+          account_name: my-account
+          api_type: extract
+          created_at: '2026-01-24T12:36:24.685Z'
+          modified_at: '2026-01-24T12:36:24.685Z'
+          input: {}
+    Error429:
       type: object
-      title: Error400
+      title: Error429
       properties:
         status:
           type: string
@@ -759,112 +832,39 @@ components:
           - failed
         msg:
           type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
+          example: Rate limit exceeded
           examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
+          - Rate limit exceeded
       required:
       - status
       - msg
       example:
         status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
-    SerpResponse:
+        msg: Rate limit exceeded
+    Error402:
       type: object
-      title: SerpResponse
-      description: Response from the Fast SERP realtime API. All engines share the same top-level envelope; entity types under parsing.entities vary by search_engine.
+      title: Error402
       properties:
-        task_id:
-          type: string
-          description: Unique identifier for this request
-          examples:
-          - bd46cd9c-50f7-4736-9c4a-660a32e4dc87
         status:
           type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
           enum:
-          - success
-          - error
-          description: Request status
-          examples:
-          - success
-        query_time:
-          type: string
-          format: date-time
-          description: ISO timestamp of when the query ran
-          examples:
-          - '2026-03-05T13:47:16.435Z'
-        status_code:
-          type: integer
-          description: HTTP status code from the upstream source
-          examples:
-          - 200
-        url:
-          type: string
-          description: The upstream URL that was queried
-          examples:
-          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
-        input_url:
-          type: string
-          description: The original input URL before any redirects
-          examples:
-          - https://www.google.com/search?hl=en&gl=us&q=NBA+Allstar+2026
-        html_content:
-          type: string
-          nullable: true
-          description: Raw HTML of the response page. Omitted when no_html is true.
-          examples:
-          - <!DOCTYPE html>...
-        driver:
-          type: string
-          description: Internal routing driver used for this request
-          examples:
-          - vx6
-        parsing:
-          type: object
-          description: Structured parsing output. Entity types under entities vary by search_engine.
-        nimble_links:
-          type: object
-          nullable: true
-          description: Pagination links as ready-to-use Nimble API URLs (Maps engines)
-          properties:
-            next_page:
-              type: string
-              description: URL to fetch the next page of results
-        nimble_payload:
-          type: object
-          nullable: true
-          description: Next-page parameters as a structured object (web search engines)
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
       required:
-      - task_id
       - status
-      - status_code
-      - parsing
+      - msg
+      example:
+        status: failed
+        msg: trial expired
   securitySchemes:
     BearerAuth:
       type: http

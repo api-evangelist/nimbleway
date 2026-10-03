@@ -76,33 +76,136 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error500:
+    Error400:
       type: object
-      title: Error500
+      title: Error400
       properties:
-        success:
+        status:
           type: string
-          example: 'false'
+          example: failed
           examples:
-          - 'false'
-        task_id:
+          - failed
+        msg:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
           examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
+          - Invalid request parameters
+        error:
           type: string
-          example: can't download the query response - please try again
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
           examples:
-          - can't download the query response - please try again
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
       required:
-      - success
-      - task_id
-      - message
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    SearchResponse:
+      properties:
+        total_results:
+          type: integer
+          title: Total Results
+          description: Total number of search results returned in this response
+          examples:
+          - 10
+        results:
+          items:
+            properties:
+              title:
+                type: string
+                title: Title
+                description: Page title from the search result
+                examples:
+                - Top 10 Web Scraping Tools for 2024
+              description:
+                type: string
+                title: Description
+                description: Meta description or snippet preview from the search result
+                examples:
+                - Comprehensive guide to the best web scraping tools...
+              url:
+                type: string
+                title: Url
+                description: Full URL of the search result page
+                examples:
+                - https://example.com/article1
+              content:
+                type: string
+                title: Content
+                description: Full extracted page content. Populated only when search_depth='deep'
+                examples:
+                - Full parsed content from the page...
+              extra_fields:
+                anyOf:
+                - type: object
+                  nullable: true
+                title: Extra Fields
+                description: Additional metadata extracted from the page (e.g., published date, author, tags). Content varies by page structure and availability.
+                examples:
+                - published_date: '2024-01-15'
+            type: object
+            required:
+            - title
+            - description
+            - url
+            - content
+            - metadata
+            title: SearchResultModel
+            description: Individual search result containing page information. Each result includes title, description, URL, extracted content (in Deep Search mode), and optional additional metadata in extra_fields.
+          type: array
+          title: Results
+          description: Array of search results, each containing title, description, URL, content (in Deep Search mode), and optional metadata
+        request_id:
+          type: string
+          title: Request Id
+          description: Unique identifier for tracking this search request
+          examples:
+          - 123e4567-e89b-12d3-a456-426614174000
+      type: object
+      required:
+      - total_results
+      - results
+      - request_id
+      title: SearchResponse
+      description: Search API response containing search results with titles, descriptions, URLs, and content
+      examples:
+      - total_results: 10
+        results:
+        - title: Top 10 Web Scraping Tools for 2024
+          description: Comprehensive guide to the best web scraping tools...
+          url: https://example.com/article1
+          content: Full parsed content from the page...
+          metadata:
+            published_date: '2024-01-15'
+        - title: Web Scraping Tools Comparison
+          description: Compare features, pricing, and performance...
+          url: https://example2.com/comparison
+          content: Full parsed content from the page...
+          metadata: {}
+        request_id: 123e4567-e89b-12d3-a456-426614174000
     SearchPayload:
       properties:
         query:
@@ -226,6 +329,53 @@ components:
       - query
       title: SearchPayload
       description: Request body model for the /search endpoint
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Rate limit exceeded
     Error402:
       type: object
       title: Error402
@@ -250,156 +400,6 @@ components:
       example:
         status: failed
         msg: trial expired
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    SearchResponse:
-      properties:
-        total_results:
-          type: integer
-          title: Total Results
-          description: Total number of search results returned in this response
-          examples:
-          - 10
-        results:
-          items:
-            properties:
-              title:
-                type: string
-                title: Title
-                description: Page title from the search result
-                examples:
-                - Top 10 Web Scraping Tools for 2024
-              description:
-                type: string
-                title: Description
-                description: Meta description or snippet preview from the search result
-                examples:
-                - Comprehensive guide to the best web scraping tools...
-              url:
-                type: string
-                title: Url
-                description: Full URL of the search result page
-                examples:
-                - https://example.com/article1
-              content:
-                type: string
-                title: Content
-                description: Full extracted page content. Populated only when search_depth='deep'
-                examples:
-                - Full parsed content from the page...
-              extra_fields:
-                anyOf:
-                - type: object
-                  nullable: true
-                title: Extra Fields
-                description: Additional metadata extracted from the page (e.g., published date, author, tags). Content varies by page structure and availability.
-                examples:
-                - published_date: '2024-01-15'
-            type: object
-            required:
-            - title
-            - description
-            - url
-            - content
-            - metadata
-            title: SearchResultModel
-            description: Individual search result containing page information. Each result includes title, description, URL, extracted content (in Deep Search mode), and optional additional metadata in extra_fields.
-          type: array
-          title: Results
-          description: Array of search results, each containing title, description, URL, content (in Deep Search mode), and optional metadata
-        request_id:
-          type: string
-          title: Request Id
-          description: Unique identifier for tracking this search request
-          examples:
-          - 123e4567-e89b-12d3-a456-426614174000
-      type: object
-      required:
-      - total_results
-      - results
-      - request_id
-      title: SearchResponse
-      description: Search API response containing search results with titles, descriptions, URLs, and content
-      examples:
-      - total_results: 10
-        results:
-        - title: Top 10 Web Scraping Tools for 2024
-          description: Comprehensive guide to the best web scraping tools...
-          url: https://example.com/article1
-          content: Full parsed content from the page...
-          metadata:
-            published_date: '2024-01-15'
-        - title: Web Scraping Tools Comparison
-          description: Compare features, pricing, and performance...
-          url: https://example2.com/comparison
-          content: Full parsed content from the page...
-          metadata: {}
-        request_id: 123e4567-e89b-12d3-a456-426614174000
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
   securitySchemes:
     BearerAuth:
       type: http
