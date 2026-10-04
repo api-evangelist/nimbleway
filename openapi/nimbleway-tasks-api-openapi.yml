@@ -584,121 +584,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BatchProgressResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: success
-        id:
-          type: string
-          description: Unique identifier for the batch.
-        completed:
-          type: boolean
-          description: Whether all tasks in the batch have finished.
-        completed_count:
-          type: number
-          description: Number of tasks that have completed so far.
-        completed_at:
-          description: ISO timestamp when the batch completed.
-          type: string
-        progress:
-          type: number
-          description: Completion ratio between 0 and 1.
-      required:
-      - status
-      - id
-      - completed
-      - completed_count
-      - progress
-      additionalProperties: false
-      description: Lightweight batch progress without task details.
-    ExtractResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: The URL that was extracted
-        task_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the extraction task
-        status:
-          type: string
-          description: Status of the extraction
-          enum:
-          - success
-          - failed
-        status_code:
-          type: integer
-          description: HTTP status code from the target website
-        data:
-          type: object
-          description: Data from the extraction
-          properties:
-            html:
-              type: string
-              description: Raw HTML content of the page
-            headers:
-              type: object
-              description: Response headers from the target website
-            parsing:
-              type: object
-              description: Parsed data when parsing is enabled
-            markdown:
-              type: string
-              description: Markdown content when markdown conversion is enabled
-            cookies:
-              type: object
-              description: Cookies when cookie capture is enabled
-            fetch_request:
-              type: array
-              description: Captured executed fetch requests when enabled
-              items:
-                type: object
-            network_capture:
-              type: array
-              description: Captured network activity when enabled
-              items:
-                type: object
-            browser_actions:
-              type: array
-              description: Browser actions results
-              items:
-                type: object
-            screenshot:
-              type: string
-              description: Base64 encoded screenshot when enabled (requires rendering)
-        metadata:
-          type: object
-          description: Metadata from the extraction
-          properties:
-            query_time:
-              type: string
-              format: date-time
-              description: Timestamp when the query was executed
-            input_url:
-              type: string
-              format: uri
-              description: The original input URL
-            driver:
-              type: string
-              description: Driver used for extraction (depends on target domain and rendering configuration)
-              examples:
-              - vx8
-        warnings:
-          type: array
-          description: List of warnings
-          items:
-            type: string
-      required:
-      - url
-      - task_id
-      - status
-      - status_code
-      - data
-      - metadata
     AgentResponse:
       type: object
       properties:
@@ -790,133 +675,6 @@ components:
       - status_code
       - data
       - metadata
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
-    BatchListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Unique identifier for the batch.
-              account_name:
-                type: string
-                description: Name of the account that owns the batch.
-              completed:
-                type: boolean
-                description: Whether all tasks in the batch have finished.
-              created_at:
-                type: string
-                description: ISO timestamp when the batch was created.
-              tasks:
-                type: array
-                items:
-                  type: string
-                  description: Unique identifier for the task.
-            required:
-            - id
-            - account_name
-            - completed
-            - created_at
-            - tasks
-          description: List of batches.
-        pagination:
-          type: object
-          properties:
-            has_next:
-              type: boolean
-              description: Whether there are more batches available.
-            next_cursor:
-              type: string
-              description: Cursor to use for fetching the next page.
-            total:
-              type: number
-              description: Total number of batches.
-          required:
-          - has_next
-          - next_cursor
-          - total
-      required:
-      - data
-      - pagination
-      additionalProperties: false
-      description: List of batches.
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
     TaskListResponse:
       type: object
       properties:
@@ -1034,6 +792,186 @@ components:
       - pagination
       additionalProperties: false
       description: Paginated list of tasks response.
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    BatchListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the batch.
+              account_name:
+                type: string
+                description: Name of the account that owns the batch.
+              completed:
+                type: boolean
+                description: Whether all tasks in the batch have finished.
+              created_at:
+                type: string
+                description: ISO timestamp when the batch was created.
+              tasks:
+                type: array
+                items:
+                  type: string
+                  description: Unique identifier for the task.
+            required:
+            - id
+            - account_name
+            - completed
+            - created_at
+            - tasks
+          description: List of batches.
+        pagination:
+          type: object
+          properties:
+            has_next:
+              type: boolean
+              description: Whether there are more batches available.
+            next_cursor:
+              type: string
+              description: Cursor to use for fetching the next page.
+            total:
+              type: number
+              description: Total number of batches.
+          required:
+          - has_next
+          - next_cursor
+          - total
+      required:
+      - data
+      - pagination
+      additionalProperties: false
+      description: List of batches.
+    BatchProgressResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        id:
+          type: string
+          description: Unique identifier for the batch.
+        completed:
+          type: boolean
+          description: Whether all tasks in the batch have finished.
+        completed_count:
+          type: number
+          description: Number of tasks that have completed so far.
+        completed_at:
+          description: ISO timestamp when the batch completed.
+          type: string
+        progress:
+          type: number
+          description: Completion ratio between 0 and 1.
+      required:
+      - status
+      - id
+      - completed
+      - completed_count
+      - progress
+      additionalProperties: false
+      description: Lightweight batch progress without task details.
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error400:
+      type: object
+      title: Error400
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
     BatchGetResponse:
       type: object
       properties:
@@ -1160,6 +1098,92 @@ components:
       - tasks
       additionalProperties: false
       description: Response containing batch details with all tasks.
+    ExtractResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL that was extracted
+        task_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the extraction task
+        status:
+          type: string
+          description: Status of the extraction
+          enum:
+          - success
+          - failed
+        status_code:
+          type: integer
+          description: HTTP status code from the target website
+        data:
+          type: object
+          description: Data from the extraction
+          properties:
+            html:
+              type: string
+              description: Raw HTML content of the page
+            headers:
+              type: object
+              description: Response headers from the target website
+            parsing:
+              type: object
+              description: Parsed data when parsing is enabled
+            markdown:
+              type: string
+              description: Markdown content when markdown conversion is enabled
+            cookies:
+              type: object
+              description: Cookies when cookie capture is enabled
+            fetch_request:
+              type: array
+              description: Captured executed fetch requests when enabled
+              items:
+                type: object
+            network_capture:
+              type: array
+              description: Captured network activity when enabled
+              items:
+                type: object
+            browser_actions:
+              type: array
+              description: Browser actions results
+              items:
+                type: object
+            screenshot:
+              type: string
+              description: Base64 encoded screenshot when enabled (requires rendering)
+        metadata:
+          type: object
+          description: Metadata from the extraction
+          properties:
+            query_time:
+              type: string
+              format: date-time
+              description: Timestamp when the query was executed
+            input_url:
+              type: string
+              format: uri
+              description: The original input URL
+            driver:
+              type: string
+              description: Driver used for extraction (depends on target domain and rendering configuration)
+              examples:
+              - vx8
+        warnings:
+          type: array
+          description: List of warnings
+          items:
+            type: string
+      required:
+      - url
+      - task_id
+      - status
+      - status_code
+      - data
+      - metadata
     Error429:
       type: object
       title: Error429
@@ -1180,30 +1204,6 @@ components:
       example:
         status: failed
         msg: Rate limit exceeded
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
   securitySchemes:
     BearerAuth:
       type: http

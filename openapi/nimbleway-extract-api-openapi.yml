@@ -221,189 +221,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExtractResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: The URL that was extracted
-        task_id:
-          type: string
-          format: uuid
-          description: Unique identifier for the extraction task
-        status:
-          type: string
-          description: Status of the extraction
-          enum:
-          - success
-          - failed
-        status_code:
-          type: integer
-          description: HTTP status code from the target website
-        data:
-          type: object
-          description: Data from the extraction
-          properties:
-            html:
-              type: string
-              description: Raw HTML content of the page
-            headers:
-              type: object
-              description: Response headers from the target website
-            parsing:
-              type: object
-              description: Parsed data when parsing is enabled
-            markdown:
-              type: string
-              description: Markdown content when markdown conversion is enabled
-            cookies:
-              type: object
-              description: Cookies when cookie capture is enabled
-            fetch_request:
-              type: array
-              description: Captured executed fetch requests when enabled
-              items:
-                type: object
-            network_capture:
-              type: array
-              description: Captured network activity when enabled
-              items:
-                type: object
-            browser_actions:
-              type: array
-              description: Browser actions results
-              items:
-                type: object
-            screenshot:
-              type: string
-              description: Base64 encoded screenshot when enabled (requires rendering)
-        metadata:
-          type: object
-          description: Metadata from the extraction
-          properties:
-            query_time:
-              type: string
-              format: date-time
-              description: Timestamp when the query was executed
-            input_url:
-              type: string
-              format: uri
-              description: The original input URL
-            driver:
-              type: string
-              description: Driver used for extraction (depends on target domain and rendering configuration)
-              examples:
-              - vx8
-        warnings:
-          type: array
-          description: List of warnings
-          items:
-            type: string
-      required:
-      - url
-      - task_id
-      - status
-      - status_code
-      - data
-      - metadata
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
-    ParserExtractor:
-      oneOf:
-      - type: object
-        description: Extract text content
-        properties:
-          type:
-            type: string
-            enum:
-            - text
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-      - type: object
-        description: Extract attribute value
-        properties:
-          type:
-            type: string
-            enum:
-            - attr
-          attr:
-            type: string
-            description: Attribute name (e.g., href, src)
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-        - attr
-      - type: object
-        description: Extract as JSON
-        properties:
-          type:
-            type: string
-            enum:
-            - json
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
-      - type: object
-        description: Extract raw HTML
-        properties:
-          type:
-            type: string
-            enum:
-            - raw
-          post_processor:
-            $ref: '#/components/schemas/PostProcessor'
-        required:
-        - type
     BrowserAction:
       type: object
       description: 'An action to perform in the browser (one of: goto, wait, wait_for_element, click, press, fill, scroll, auto_scroll, screenshot, get_cookies, fetch)'
@@ -654,209 +471,79 @@ components:
                 type: number
             required:
             - url
-    NetworkCaptureFilter:
+    AsyncResponse:
       type: object
-      description: Configuration for capturing network requests made by the page
       properties:
-        method:
+        status:
           type: string
-          description: Filter by HTTP method
-          enum:
-          - GET
-          - HEAD
-          - POST
-          - PUT
-          - DELETE
-          - CONNECT
-          - OPTIONS
-          - TRACE
-          - PATCH
-        url:
+          examples:
+          - success
+        task:
           type: object
-          description: URL matching configuration
           properties:
-            type:
+            id:
               type: string
-              description: How to match URLs
+              format: uuid
+              description: Unique task identifier
+              examples:
+              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+            state:
+              type: string
+              description: Current state of the task
               enum:
-              - exact
-              - contains
-            value:
+              - pending
+              - processing
+              - completed
+              - failed
+              examples:
+              - pending
+            created_at:
               type: string
-              description: The URL or URL pattern to match
+              format: date-time
+              description: Task creation timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            account_name:
+              type: string
+              description: The user account name
+              examples:
+              - my-account
+            api_type:
+              type: string
+              description: The api endpoint used
+              enum:
+              - agent
+              - extract
+              examples:
+              - extract
+            modified_at:
+              type: string
+              format: date-time
+              description: Task last modification timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            input:
+              type: object
+              description: Original request input parameters
           required:
-          - value
-        resource_type:
-          description: Filter by request type
-          type: array
-          items:
-            type: string
-            enum:
-            - xhr
-            - fetch
-            - stylesheet
-            - script
-            - document
-            - image
-          examples:
-          - xhr
-          - fetch
-        validation:
-          type: boolean
-          description: Validate response content
-        wait_for_requests_count:
-          type: number
-          description: Wait for this many matching requests
-          minimum: 0
-        wait_for_requests_count_timeout:
-          type: number
-          description: How long to wait in seconds
-          minimum: 0
-          maximum: 300000
-    PostProcessor:
-      type: object
-      description: Transform extracted data
-      properties:
-        type:
-          type: string
-          enum:
-          - number
-          - string
-          - date
-          - regex
-          - trim
-          - lowercase
-          - uppercase
+          - id
+          - state
+          - created_at
+          - modified_at
+          - input
       required:
-      - type
-    Error500:
-      type: object
-      title: Error500
-      properties:
-        success:
-          type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
-          type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
-          type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
-      required:
-      - success
-      - task_id
-      - message
-      example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
-    BatchResponse:
-      type: object
-      properties:
-        batch_id:
-          type: string
-          description: Unique identifier for the batch.
-        batch_size:
-          type: number
-          description: Number of tasks in the batch.
-        tasks:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                minLength: 1
-                description: Unique task identifier.
-                examples:
-                - 123e4567-e89b-12d3-a456-426614174000
-              state:
-                type: string
-                enum:
-                - pending
-                - success
-                - error
-                description: Current state of the task.
-                examples:
-                - pending
-              output_url:
-                description: Storage location of the output data.
-                type: string
-              status_url:
-                type: string
-                format: uri
-                description: URL for checking the task status.
-                examples:
-                - https://sdk.nimbleway.com/v1/tasks/123e4567-e89b-12d3-a456-426614174000
-              download_url:
-                description: URL for downloading the task results.
-                examples:
-                - https://sdk.nimbleway.com/v1/tasks/123e4567-e89b-12d3-a456-426614174000/results
-                type: string
-                format: uri
-              error:
-                description: Error message if the task failed.
-                examples:
-                - Connection timeout
-                type: string
-              error_type:
-                description: Classification of the error type.
-                examples:
-                - timeout_error
-                type: string
-              created_at:
-                description: Timestamp when the task was created.
-                examples:
-                - '2024-01-15T10:30:00Z'
-                type: string
-              modified_at:
-                description: Timestamp when the task was last modified.
-                examples:
-                - '2024-01-15T10:35:00Z'
-                type: string
-              account_name:
-                description: Account name that owns the task.
-                type: string
-              input:
-                description: Original input data for the task.
-              _query: {}
-              batch_id:
-                description: Batch ID if this task is part of a batch.
-                examples:
-                - 4b0a90bf-c951-42e4-95b3-a95a65ba69fc
-                type: string
-              status_code:
-                description: HTTP status code from the task execution.
-                examples:
-                - 200
-                type: number
-              api_type:
-                type: string
-                enum:
-                - web
-                - serp
-                - ecommerce
-                - social
-                - media
-                - agent
-                - extract
-            required:
-            - id
-            - state
-            - status_url
-            - created_at
-            - input
-            - _query
-            additionalProperties: false
-          description: List of created tasks.
-      additionalProperties: false
-      description: Response when a batch of extract tasks is created successfully.
+      - status
+      - task
+      examples:
+      - status: success
+        task:
+          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+          state: pending
+          account_name: my-account
+          api_type: extract
+          created_at: '2026-01-24T12:36:24.685Z'
+          modified_at: '2026-01-24T12:36:24.685Z'
+          input: {}
     Parser:
       type: object
       description: Custom extraction recipe defining what data to extract and how to structure it. Each property represents a field in the output.
@@ -946,6 +633,219 @@ components:
           required:
           - type
           - value
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    ExtractBatchPayload:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/ExtractPayload'
+        shared_inputs:
+          allOf:
+          - $ref: '#/components/schemas/AsyncOptions'
+          - $ref: '#/components/schemas/ExtractPayload'
+            required: []
+    ParserExtractor:
+      oneOf:
+      - type: object
+        description: Extract text content
+        properties:
+          type:
+            type: string
+            enum:
+            - text
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract attribute value
+        properties:
+          type:
+            type: string
+            enum:
+            - attr
+          attr:
+            type: string
+            description: Attribute name (e.g., href, src)
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+        - attr
+      - type: object
+        description: Extract as JSON
+        properties:
+          type:
+            type: string
+            enum:
+            - json
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+      - type: object
+        description: Extract raw HTML
+        properties:
+          type:
+            type: string
+            enum:
+            - raw
+          post_processor:
+            $ref: '#/components/schemas/PostProcessor'
+        required:
+        - type
+    ParserSelector:
+      oneOf:
+      - type: object
+        description: CSS selector
+        properties:
+          type:
+            type: string
+            enum:
+            - css
+          css_selector:
+            type: string
+            description: CSS selector string
+        required:
+        - type
+        - css_selector
+      - type: object
+        description: XPath selector
+        properties:
+          type:
+            type: string
+            enum:
+            - xpath
+          path:
+            type: string
+            description: XPath expression
+        required:
+        - type
+        - path
+      - type: object
+        description: JSON selector
+        properties:
+          type:
+            type: string
+            enum:
+            - json
+          path:
+            type: string
+            description: JSONPath expression
+          coercion_filter:
+            type: string
+            description: JSONPath filter for multiple objects
+        required:
+        - type
+        - path
+      - type: object
+        description: Sequence of selectors
+        properties:
+          type:
+            type: string
+            enum:
+            - sequence
+          sequence:
+            type: array
+            items:
+              $ref: '#/components/schemas/ParserSelector'
+        required:
+        - type
+        - sequence
+      - type: object
+        description: Root selector
+        properties:
+          type:
+            type: string
+            enum:
+            - root
+        required:
+        - type
+    NetworkCaptureFilter:
+      type: object
+      description: Configuration for capturing network requests made by the page
+      properties:
+        method:
+          type: string
+          description: Filter by HTTP method
+          enum:
+          - GET
+          - HEAD
+          - POST
+          - PUT
+          - DELETE
+          - CONNECT
+          - OPTIONS
+          - TRACE
+          - PATCH
+        url:
+          type: object
+          description: URL matching configuration
+          properties:
+            type:
+              type: string
+              description: How to match URLs
+              enum:
+              - exact
+              - contains
+            value:
+              type: string
+              description: The URL or URL pattern to match
+          required:
+          - value
+        resource_type:
+          description: Filter by request type
+          type: array
+          items:
+            type: string
+            enum:
+            - xhr
+            - fetch
+            - stylesheet
+            - script
+            - document
+            - image
+          examples:
+          - xhr
+          - fetch
+        validation:
+          type: boolean
+          description: Validate response content
+        wait_for_requests_count:
+          type: number
+          description: Wait for this many matching requests
+          minimum: 0
+        wait_for_requests_count_timeout:
+          type: number
+          description: How long to wait in seconds
+          minimum: 0
+          maximum: 300000
     AsyncOptions:
       type: object
       properties:
@@ -1274,146 +1174,166 @@ components:
       description: Request body model for the /extract endpoint
       required:
       - url
-    AsyncResponse:
+    Error500:
       type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    Error400:
+      type: object
+      title: Error400
       properties:
         status:
           type: string
+          example: failed
           examples:
-          - success
-        task:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
           type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Unique task identifier
-              examples:
-              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-            state:
-              type: string
-              description: Current state of the task
-              enum:
-              - pending
-              - processing
-              - completed
-              - failed
-              examples:
-              - pending
-            created_at:
-              type: string
-              format: date-time
-              description: Task creation timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            account_name:
-              type: string
-              description: The user account name
-              examples:
-              - my-account
-            api_type:
-              type: string
-              description: The api endpoint used
-              enum:
-              - agent
-              - extract
-              examples:
-              - extract
-            modified_at:
-              type: string
-              format: date-time
-              description: Task last modification timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            input:
-              type: object
-              description: Original request input parameters
-          required:
-          - id
-          - state
-          - created_at
-          - modified_at
-          - input
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
       required:
       - status
-      - task
-      examples:
-      - status: success
-        task:
-          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-          state: pending
-          account_name: my-account
-          api_type: extract
-          created_at: '2026-01-24T12:36:24.685Z'
-          modified_at: '2026-01-24T12:36:24.685Z'
-          input: {}
-    ParserSelector:
-      oneOf:
-      - type: object
-        description: CSS selector
-        properties:
-          type:
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
+    ExtractResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL that was extracted
+        task_id:
+          type: string
+          format: uuid
+          description: Unique identifier for the extraction task
+        status:
+          type: string
+          description: Status of the extraction
+          enum:
+          - success
+          - failed
+        status_code:
+          type: integer
+          description: HTTP status code from the target website
+        data:
+          type: object
+          description: Data from the extraction
+          properties:
+            html:
+              type: string
+              description: Raw HTML content of the page
+            headers:
+              type: object
+              description: Response headers from the target website
+            parsing:
+              type: object
+              description: Parsed data when parsing is enabled
+            markdown:
+              type: string
+              description: Markdown content when markdown conversion is enabled
+            cookies:
+              type: object
+              description: Cookies when cookie capture is enabled
+            fetch_request:
+              type: array
+              description: Captured executed fetch requests when enabled
+              items:
+                type: object
+            network_capture:
+              type: array
+              description: Captured network activity when enabled
+              items:
+                type: object
+            browser_actions:
+              type: array
+              description: Browser actions results
+              items:
+                type: object
+            screenshot:
+              type: string
+              description: Base64 encoded screenshot when enabled (requires rendering)
+        metadata:
+          type: object
+          description: Metadata from the extraction
+          properties:
+            query_time:
+              type: string
+              format: date-time
+              description: Timestamp when the query was executed
+            input_url:
+              type: string
+              format: uri
+              description: The original input URL
+            driver:
+              type: string
+              description: Driver used for extraction (depends on target domain and rendering configuration)
+              examples:
+              - vx8
+        warnings:
+          type: array
+          description: List of warnings
+          items:
             type: string
-            enum:
-            - css
-          css_selector:
-            type: string
-            description: CSS selector string
-        required:
-        - type
-        - css_selector
-      - type: object
-        description: XPath selector
-        properties:
-          type:
-            type: string
-            enum:
-            - xpath
-          path:
-            type: string
-            description: XPath expression
-        required:
-        - type
-        - path
-      - type: object
-        description: JSON selector
-        properties:
-          type:
-            type: string
-            enum:
-            - json
-          path:
-            type: string
-            description: JSONPath expression
-          coercion_filter:
-            type: string
-            description: JSONPath filter for multiple objects
-        required:
-        - type
-        - path
-      - type: object
-        description: Sequence of selectors
-        properties:
-          type:
-            type: string
-            enum:
-            - sequence
-          sequence:
-            type: array
-            items:
-              $ref: '#/components/schemas/ParserSelector'
-        required:
-        - type
-        - sequence
-      - type: object
-        description: Root selector
-        properties:
-          type:
-            type: string
-            enum:
-            - root
-        required:
-        - type
+      required:
+      - url
+      - task_id
+      - status
+      - status_code
+      - data
+      - metadata
     Error429:
       type: object
       title: Error429
@@ -1434,43 +1354,123 @@ components:
       example:
         status: failed
         msg: Rate limit exceeded
-    ExtractBatchPayload:
+    BatchResponse:
       type: object
       properties:
-        inputs:
+        batch_id:
+          type: string
+          description: Unique identifier for the batch.
+        batch_size:
+          type: number
+          description: Number of tasks in the batch.
+        tasks:
           type: array
           items:
-            anyOf:
-            - $ref: '#/components/schemas/ExtractPayload'
-        shared_inputs:
-          allOf:
-          - $ref: '#/components/schemas/AsyncOptions'
-          - $ref: '#/components/schemas/ExtractPayload'
-            required: []
-    Error402:
+            type: object
+            properties:
+              id:
+                type: string
+                minLength: 1
+                description: Unique task identifier.
+                examples:
+                - 123e4567-e89b-12d3-a456-426614174000
+              state:
+                type: string
+                enum:
+                - pending
+                - success
+                - error
+                description: Current state of the task.
+                examples:
+                - pending
+              output_url:
+                description: Storage location of the output data.
+                type: string
+              status_url:
+                type: string
+                format: uri
+                description: URL for checking the task status.
+                examples:
+                - https://sdk.nimbleway.com/v1/tasks/123e4567-e89b-12d3-a456-426614174000
+              download_url:
+                description: URL for downloading the task results.
+                examples:
+                - https://sdk.nimbleway.com/v1/tasks/123e4567-e89b-12d3-a456-426614174000/results
+                type: string
+                format: uri
+              error:
+                description: Error message if the task failed.
+                examples:
+                - Connection timeout
+                type: string
+              error_type:
+                description: Classification of the error type.
+                examples:
+                - timeout_error
+                type: string
+              created_at:
+                description: Timestamp when the task was created.
+                examples:
+                - '2024-01-15T10:30:00Z'
+                type: string
+              modified_at:
+                description: Timestamp when the task was last modified.
+                examples:
+                - '2024-01-15T10:35:00Z'
+                type: string
+              account_name:
+                description: Account name that owns the task.
+                type: string
+              input:
+                description: Original input data for the task.
+              _query: {}
+              batch_id:
+                description: Batch ID if this task is part of a batch.
+                examples:
+                - 4b0a90bf-c951-42e4-95b3-a95a65ba69fc
+                type: string
+              status_code:
+                description: HTTP status code from the task execution.
+                examples:
+                - 200
+                type: number
+              api_type:
+                type: string
+                enum:
+                - web
+                - serp
+                - ecommerce
+                - social
+                - media
+                - agent
+                - extract
+            required:
+            - id
+            - state
+            - status_url
+            - created_at
+            - input
+            - _query
+            additionalProperties: false
+          description: List of created tasks.
+      additionalProperties: false
+      description: Response when a batch of extract tasks is created successfully.
+    PostProcessor:
       type: object
-      title: Error402
+      description: Transform extracted data
       properties:
-        status:
+        type:
           type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
           enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
+          - number
+          - string
+          - date
+          - regex
+          - trim
+          - lowercase
+          - uppercase
       required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
+      - type
   securitySchemes:
     BearerAuth:
       type: http

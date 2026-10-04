@@ -76,53 +76,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error400:
-      type: object
-      title: Error400
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Validation error message describing what went wrong
-          example: Invalid request parameters
-          examples:
-          - Invalid request parameters
-        error:
-          type: string
-          description: The validation error type
-          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-          examples:
-          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          type: object
-          description: Detailed validation error information
-          example:
-            schema_validation_errors:
-            - instancePath: ''
-              schemaPath: '#/required'
-              keyword: required
-              params:
-                missingProperty: search_engine
-              message: must have required property 'search_engine'
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Invalid request parameters
-        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
-        details:
-          schema_validation_errors:
-          - instancePath: ''
-            schemaPath: '#/required'
-            keyword: required
-            params:
-              missingProperty: search_engine
-            message: must have required property 'search_engine'
     SearchResponse:
       properties:
         total_results:
@@ -329,6 +282,77 @@ components:
       - query
       title: SearchPayload
       description: Request body model for the /search endpoint
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    Error400:
+      type: object
+      title: Error400
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Validation error message describing what went wrong
+          example: Invalid request parameters
+          examples:
+          - Invalid request parameters
+        error:
+          type: string
+          description: The validation error type
+          example: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+          examples:
+          - PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          type: object
+          description: Detailed validation error information
+          example:
+            schema_validation_errors:
+            - instancePath: ''
+              schemaPath: '#/required'
+              keyword: required
+              params:
+                missingProperty: search_engine
+              message: must have required property 'search_engine'
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: Invalid request parameters
+        error: PARAMETERS_FAILED_JSON_SCHEMA_VALIDATION_ERROR
+        details:
+          schema_validation_errors:
+          - instancePath: ''
+            schemaPath: '#/required'
+            keyword: required
+            params:
+              missingProperty: search_engine
+            message: must have required property 'search_engine'
     Error500:
       type: object
       title: Error500
@@ -376,30 +400,6 @@ components:
       example:
         status: failed
         msg: Rate limit exceeded
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
   securitySchemes:
     BearerAuth:
       type: http

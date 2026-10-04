@@ -552,58 +552,6 @@ paths:
       - BearerAuth: []
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    JobSchedule:
-      properties:
-        cron:
-          type: string
-          title: Cron
-          description: Cron expression defining when the job runs.
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the schedule is currently active.
-      type: object
-      required:
-      - cron
-      - enabled
-      title: JobSchedule
-      description: Cron-based schedule controlling when a job runs automatically.
-    Artifact:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: Artifact identifier.
-        type:
-          type: string
-          title: Type
-          description: Artifact type.
-        description:
-          type: string
-          title: Description
-          description: Human-readable artifact description.
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: When the artifact was created.
-      type: object
-      required:
-      - id
-      - type
-      - description
-      - created_at
-      title: Artifact
-      description: A file produced by a run.
     JobRunList:
       properties:
         items:
@@ -632,6 +580,48 @@ components:
       - per_page
       title: JobRunList
       description: A page of job runs.
+    ArtifactPreview:
+      properties:
+        columns:
+          items:
+            type: string
+          type: array
+          title: Columns
+          description: Column names in the preview.
+        row_count:
+          type: integer
+          title: Row Count
+          description: Total number of rows in the artifact.
+        rows:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Rows
+          description: Sample rows from the artifact.
+      type: object
+      required:
+      - columns
+      - row_count
+      - rows
+      title: ArtifactPreview
+      description: A tabular preview of an artifact's contents.
+    JobSchedule:
+      properties:
+        cron:
+          type: string
+          title: Cron
+          description: Cron expression defining when the job runs.
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Whether the schedule is currently active.
+      type: object
+      required:
+      - cron
+      - enabled
+      title: JobSchedule
+      description: Cron-based schedule controlling when a job runs automatically.
     UpdateJobRequest:
       properties:
         display_name:
@@ -664,445 +654,6 @@ components:
       type: object
       title: UpdateJobRequest
       description: Partial update for an existing job; omitted fields are left unchanged.
-    ArtifactList:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Artifact'
-          type: array
-          title: Items
-          description: Artifacts produced by the run.
-      type: object
-      required:
-      - items
-      title: ArtifactList
-      description: Artifacts produced by a run.
-    CreateJobRequest:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Job name.
-        agent_name:
-          type: string
-          title: Agent Name
-          description: Name of the agent to run.
-        display_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Name
-          description: Human-friendly job name shown in the UI.
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Free-text description of the job.
-        schedule:
-          anyOf:
-          - $ref: '#/components/schemas/JobSchedule'
-          - type: 'null'
-          description: Cron schedule controlling automatic runs.
-        inputs:
-          anyOf:
-          - $ref: '#/components/schemas/JobInputs'
-          - type: 'null'
-          description: Input data configuration for the job.
-        destination:
-          anyOf:
-          - $ref: '#/components/schemas/JobDestination'
-          - type: 'null'
-          description: Where the job writes its results.
-      type: object
-      required:
-      - name
-      - agent_name
-      title: CreateJobRequest
-      description: Payload to create a new job.
-    JobRun:
-      properties:
-        id:
-          type: string
-          pattern: ^run_[1-9][0-9]*$
-          title: Id
-          description: Unique run identifier (run_<n>).
-        job_id:
-          type: string
-          pattern: ^job_[1-9][0-9]*$
-          title: Job Id
-          description: Identifier of the job this run belongs to.
-        status:
-          type: string
-          enum:
-          - PENDING
-          - RUNNING
-          - SUCCESS
-          - FAILED
-          - CANCELLED
-          - TIMEOUT
-          - WARNING
-          title: Status
-          description: Current run status.
-        triggered_by:
-          type: string
-          enum:
-          - schedule
-          - manual
-          title: Triggered By
-          description: 'What triggered the run: ''schedule'' or ''manual''.'
-        input_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Input Count
-          description: Number of input records processed.
-        result_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Result Count
-          description: Number of result records produced.
-        started_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Started At
-          description: When the run started executing.
-        finished_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Finished At
-          description: When the run finished.
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: When the run was created.
-      type: object
-      required:
-      - id
-      - job_id
-      - status
-      - triggered_by
-      - created_at
-      title: JobRun
-      description: A single execution of a job.
-    JobDestination:
-      properties:
-        type:
-          type: string
-          enum:
-          - file
-          - s3
-          title: Type
-          description: 'Destination kind: a local ''file'' or an ''s3'' bucket.'
-        path:
-          type: string
-          title: Path
-          description: Destination path the output is written to.
-        format:
-          type: string
-          enum:
-          - jsonl
-          - csv
-          - parquet
-          title: Format
-          default: parquet
-          description: Output file format.
-      type: object
-      required:
-      - type
-      - path
-      title: JobDestination
-      description: Where a job writes its results.
-    JobInputs:
-      properties:
-        type:
-          type: string
-          enum:
-          - s3
-          - inline
-          - file
-          title: Type
-          description: 'How inputs are supplied: an ''s3'' bucket, ''inline'' records, or an uploaded ''file''.'
-        file_path:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: File Path
-          description: Path to the input file; must start with 's3' or 'file_'. Used for 's3'/'file' types.
-        data:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Data
-          description: Inline list of input records. Used when type is 'inline'.
-      type: object
-      required:
-      - type
-      title: JobInputs
-      description: Configuration for the input data a job processes.
-    ArtifactPreview:
-      properties:
-        columns:
-          items:
-            type: string
-          type: array
-          title: Columns
-          description: Column names in the preview.
-        row_count:
-          type: integer
-          title: Row Count
-          description: Total number of rows in the artifact.
-        rows:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Rows
-          description: Sample rows from the artifact.
-      type: object
-      required:
-      - columns
-      - row_count
-      - rows
-      title: ArtifactPreview
-      description: A tabular preview of an artifact's contents.
-    ArtifactDownloadUrl:
-      properties:
-        url:
-          type: string
-          title: Url
-          description: Pre-signed URL to download the artifact.
-        expires_at:
-          type: string
-          format: date-time
-          title: Expires At
-          description: When the download URL expires.
-      type: object
-      required:
-      - url
-      - expires_at
-      title: ArtifactDownloadUrl
-      description: A pre-signed URL for downloading an artifact.
-    JobRunError:
-      properties:
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-          description: Human-readable error message.
-        step:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Step
-          description: Pipeline step where the error occurred.
-        errors_sample:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Errors Sample
-          description: Sample of individual error records from the run.
-      type: object
-      title: JobRunError
-      description: Error details for a failed run.
-    JobList:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Job'
-          type: array
-          title: Items
-          description: Jobs on this page.
-        total:
-          type: integer
-          title: Total
-          description: Total number of jobs matching the query.
-        page:
-          type: integer
-          title: Page
-          description: Current page number.
-        per_page:
-          type: integer
-          title: Per Page
-          description: Number of items per page.
-      type: object
-      required:
-      - items
-      - total
-      - page
-      - per_page
-      title: JobList
-      description: A page of jobs.
-    JobRunSummary:
-      properties:
-        input_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Input Count
-          description: Number of input records processed.
-        result_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Result Count
-          description: Number of result records produced.
-        match_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Match Rate
-          description: Fraction of inputs that produced a result (result_count / input_count), from 0.0 to 1.0.
-      type: object
-      title: JobRunSummary
-      description: Aggregate metrics for a run.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    JobRunDetail:
-      properties:
-        id:
-          type: string
-          pattern: ^run_[1-9][0-9]*$
-          title: Id
-          description: Unique run identifier (run_<n>).
-        status:
-          type: string
-          enum:
-          - PENDING
-          - RUNNING
-          - SUCCESS
-          - FAILED
-          - CANCELLED
-          - TIMEOUT
-          - WARNING
-          title: Status
-          description: Current run status.
-        triggered_by:
-          type: string
-          enum:
-          - schedule
-          - manual
-          title: Triggered By
-          description: 'What triggered the run: ''schedule'' or ''manual''.'
-        job:
-          $ref: '#/components/schemas/JobContext'
-          description: Context of the job this run belongs to.
-        summary:
-          anyOf:
-          - $ref: '#/components/schemas/JobRunSummary'
-          - type: 'null'
-          description: Aggregate metrics for the run.
-        inputs_sample:
-          anyOf:
-          - items: {}
-            type: array
-          - type: 'null'
-          title: Inputs Sample
-          description: Sample of the run's input records.
-        error:
-          anyOf:
-          - $ref: '#/components/schemas/JobRunError'
-          - type: 'null'
-          description: Error details when the run failed.
-        started_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Started At
-          description: When the run started executing.
-        finished_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Finished At
-          description: When the run finished.
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: When the run was created.
-      type: object
-      required:
-      - id
-      - status
-      - triggered_by
-      - job
-      - created_at
-      title: JobRunDetail
-      description: Full detail for a single run.
-    JobContext:
-      properties:
-        id:
-          type: string
-          pattern: ^job_[1-9][0-9]*$
-          title: Id
-          description: Unique job identifier (job_<n>).
-        name:
-          type: string
-          title: Name
-          description: Internal job name.
-        display_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Display Name
-          description: Human-friendly job name shown in the UI.
-        agent_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Agent Name
-          description: Name of the agent this job runs.
-        schedule:
-          anyOf:
-          - $ref: '#/components/schemas/JobSchedule'
-          - type: 'null'
-          description: Cron schedule controlling automatic runs.
-      type: object
-      required:
-      - id
-      - name
-      title: JobContext
-      description: Minimal job context embedded in a run detail.
     Job:
       properties:
         id:
@@ -1188,6 +739,212 @@ components:
       - name
       title: Job
       description: 'A configured job: an agent plus its schedule, inputs, and destination.'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ArtifactDownloadUrl:
+      properties:
+        url:
+          type: string
+          title: Url
+          description: Pre-signed URL to download the artifact.
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+          description: When the download URL expires.
+      type: object
+      required:
+      - url
+      - expires_at
+      title: ArtifactDownloadUrl
+      description: A pre-signed URL for downloading an artifact.
+    JobContext:
+      properties:
+        id:
+          type: string
+          pattern: ^job_[1-9][0-9]*$
+          title: Id
+          description: Unique job identifier (job_<n>).
+        name:
+          type: string
+          title: Name
+          description: Internal job name.
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+          description: Human-friendly job name shown in the UI.
+        agent_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Name
+          description: Name of the agent this job runs.
+        schedule:
+          anyOf:
+          - $ref: '#/components/schemas/JobSchedule'
+          - type: 'null'
+          description: Cron schedule controlling automatic runs.
+      type: object
+      required:
+      - id
+      - name
+      title: JobContext
+      description: Minimal job context embedded in a run detail.
+    JobInputs:
+      properties:
+        type:
+          type: string
+          enum:
+          - s3
+          - inline
+          - file
+          title: Type
+          description: 'How inputs are supplied: an ''s3'' bucket, ''inline'' records, or an uploaded ''file''.'
+        file_path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: File Path
+          description: Path to the input file; must start with 's3' or 'file_'. Used for 's3'/'file' types.
+        data:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Data
+          description: Inline list of input records. Used when type is 'inline'.
+      type: object
+      required:
+      - type
+      title: JobInputs
+      description: Configuration for the input data a job processes.
+    JobDestination:
+      properties:
+        type:
+          type: string
+          enum:
+          - file
+          - s3
+          title: Type
+          description: 'Destination kind: a local ''file'' or an ''s3'' bucket.'
+        path:
+          type: string
+          title: Path
+          description: Destination path the output is written to.
+        format:
+          type: string
+          enum:
+          - jsonl
+          - csv
+          - parquet
+          title: Format
+          default: parquet
+          description: Output file format.
+      type: object
+      required:
+      - type
+      - path
+      title: JobDestination
+      description: Where a job writes its results.
+    JobRunSummary:
+      properties:
+        input_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Input Count
+          description: Number of input records processed.
+        result_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Result Count
+          description: Number of result records produced.
+        match_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Match Rate
+          description: Fraction of inputs that produced a result (result_count / input_count), from 0.0 to 1.0.
+      type: object
+      title: JobRunSummary
+      description: Aggregate metrics for a run.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ArtifactList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+          title: Items
+          description: Artifacts produced by the run.
+      type: object
+      required:
+      - items
+      title: ArtifactList
+      description: Artifacts produced by a run.
+    JobRunError:
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+          description: Human-readable error message.
+        step:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Step
+          description: Pipeline step where the error occurred.
+        errors_sample:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Errors Sample
+          description: Sample of individual error records from the run.
+      type: object
+      title: JobRunError
+      description: Error details for a failed run.
     JobRunCancelResponse:
       properties:
         id:
@@ -1213,6 +970,249 @@ components:
       - status
       title: JobRunCancelResponse
       description: Result of cancelling a run.
+    CreateJobRequest:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Job name.
+        agent_name:
+          type: string
+          title: Agent Name
+          description: Name of the agent to run.
+        display_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display Name
+          description: Human-friendly job name shown in the UI.
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Free-text description of the job.
+        schedule:
+          anyOf:
+          - $ref: '#/components/schemas/JobSchedule'
+          - type: 'null'
+          description: Cron schedule controlling automatic runs.
+        inputs:
+          anyOf:
+          - $ref: '#/components/schemas/JobInputs'
+          - type: 'null'
+          description: Input data configuration for the job.
+        destination:
+          anyOf:
+          - $ref: '#/components/schemas/JobDestination'
+          - type: 'null'
+          description: Where the job writes its results.
+      type: object
+      required:
+      - name
+      - agent_name
+      title: CreateJobRequest
+      description: Payload to create a new job.
+    JobRunDetail:
+      properties:
+        id:
+          type: string
+          pattern: ^run_[1-9][0-9]*$
+          title: Id
+          description: Unique run identifier (run_<n>).
+        status:
+          type: string
+          enum:
+          - PENDING
+          - RUNNING
+          - SUCCESS
+          - FAILED
+          - CANCELLED
+          - TIMEOUT
+          - WARNING
+          title: Status
+          description: Current run status.
+        triggered_by:
+          type: string
+          enum:
+          - schedule
+          - manual
+          title: Triggered By
+          description: 'What triggered the run: ''schedule'' or ''manual''.'
+        job:
+          $ref: '#/components/schemas/JobContext'
+          description: Context of the job this run belongs to.
+        summary:
+          anyOf:
+          - $ref: '#/components/schemas/JobRunSummary'
+          - type: 'null'
+          description: Aggregate metrics for the run.
+        inputs_sample:
+          anyOf:
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Inputs Sample
+          description: Sample of the run's input records.
+        error:
+          anyOf:
+          - $ref: '#/components/schemas/JobRunError'
+          - type: 'null'
+          description: Error details when the run failed.
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+          description: When the run started executing.
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+          description: When the run finished.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When the run was created.
+      type: object
+      required:
+      - id
+      - status
+      - triggered_by
+      - job
+      - created_at
+      title: JobRunDetail
+      description: Full detail for a single run.
+    JobRun:
+      properties:
+        id:
+          type: string
+          pattern: ^run_[1-9][0-9]*$
+          title: Id
+          description: Unique run identifier (run_<n>).
+        job_id:
+          type: string
+          pattern: ^job_[1-9][0-9]*$
+          title: Job Id
+          description: Identifier of the job this run belongs to.
+        status:
+          type: string
+          enum:
+          - PENDING
+          - RUNNING
+          - SUCCESS
+          - FAILED
+          - CANCELLED
+          - TIMEOUT
+          - WARNING
+          title: Status
+          description: Current run status.
+        triggered_by:
+          type: string
+          enum:
+          - schedule
+          - manual
+          title: Triggered By
+          description: 'What triggered the run: ''schedule'' or ''manual''.'
+        input_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Input Count
+          description: Number of input records processed.
+        result_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Result Count
+          description: Number of result records produced.
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+          description: When the run started executing.
+        finished_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Finished At
+          description: When the run finished.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When the run was created.
+      type: object
+      required:
+      - id
+      - job_id
+      - status
+      - triggered_by
+      - created_at
+      title: JobRun
+      description: A single execution of a job.
+    JobList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Job'
+          type: array
+          title: Items
+          description: Jobs on this page.
+        total:
+          type: integer
+          title: Total
+          description: Total number of jobs matching the query.
+        page:
+          type: integer
+          title: Page
+          description: Current page number.
+        per_page:
+          type: integer
+          title: Per Page
+          description: Number of items per page.
+      type: object
+      required:
+      - items
+      - total
+      - page
+      - per_page
+      title: JobList
+      description: A page of jobs.
+    Artifact:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: Artifact identifier.
+        type:
+          type: string
+          title: Type
+          description: Artifact type.
+        description:
+          type: string
+          title: Description
+          description: Human-readable artifact description.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When the artifact was created.
+      type: object
+      required:
+      - id
+      - type
+      - description
+      - created_at
+      title: Artifact
+      description: A file produced by a run.
   securitySchemes:
     BearerAuth:
       type: http

@@ -1216,37 +1216,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AgentBatchInputsPayload:
-      type: object
-      title: AgentBatchInputsPayload
-      properties:
-        params:
-          type: object
-          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
-          allOf:
-          - $ref: '#/components/schemas/AgentParams'
-          examples:
-          - params:
-              keyword: iphone 17
-              zip_code: '90210'
-          required: []
-        localization:
-          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
-          type: boolean
-        formats:
-          type: array
-          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
-          items:
-            type: string
-            enum:
-            - html
-            - markdown
-            - headers
-            - links
-      required:
-      - agent
-      - params
-      description: Request body model for the /agent/run endpoint
     AgentAsyncPayload:
       type: object
       title: AgentPayload
@@ -1344,6 +1313,49 @@ components:
       required: []
       title: AgentVersionMetadata
       description: The metadata of the agent version
+    AgentParams:
+      type: object
+      minProperties: 1
+      description: Agent input parameters. At least one agent-specific key-value pair is required (e.g., `keyword`, `product_id`). Refer to the specific agent's documentation.
+      additionalProperties: true
+      properties:
+        country:
+          type: string
+          description: Country used to access the target URL, use ISO Alpha-2 Codes
+          examples:
+          - US
+        locale:
+          type: string
+          description: Language preference for the search results. Use LCID standard
+          examples:
+          - en
+        tag:
+          type: string
+          description: User-defined tag for request identification
+          examples:
+          - campaign-2024-q1
+        parse:
+          type: boolean
+          description: Whether to parse the response content
+          examples:
+          - true
+    AgentBatchBody:
+      type: object
+      properties:
+        inputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentBatchInputsPayload'
+            required: []
+        shared_inputs:
+          allOf:
+          - $ref: '#/components/schemas/AgentAsyncPayload'
+            required:
+            - Agents
+      required:
+      - inputs
+      - shared_inputs
+      description: Request body for executing a batch of agent requests
     AgentResponse:
       type: object
       properties:
@@ -1435,6 +1447,93 @@ components:
       - status_code
       - data
       - metadata
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    Error500:
+      type: object
+      title: Error500
+      properties:
+        success:
+          type: string
+          example: 'false'
+          examples:
+          - 'false'
+        task_id:
+          type: string
+          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+          examples:
+          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message:
+          type: string
+          example: can't download the query response - please try again
+          examples:
+          - can't download the query response - please try again
+      required:
+      - success
+      - task_id
+      - message
+      example:
+        success: 'false'
+        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
+        message: can't download the query response - please try again
+    AgentPayload:
+      type: object
+      title: AgentPayload
+      properties:
+        agent:
+          type: string
+          description: The agent's name to execute
+          examples:
+          - google_search
+        params:
+          type: object
+          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
+          allOf:
+          - $ref: '#/components/schemas/AgentParams'
+          examples:
+          - params:
+              keyword: iphone 17
+              zip_code: '90210'
+          required: []
+        localization:
+          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
+          type: boolean
+        formats:
+          type: array
+          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
+          items:
+            type: string
+            enum:
+            - html
+            - markdown
+            - headers
+            - links
+      required:
+      - agent
+      - params
+      description: Request body model for the /agent/run endpoint
     Error400:
       type: object
       title: Error400
@@ -1482,106 +1581,218 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    AgentParams:
+    AsyncOptions:
       type: object
-      minProperties: 1
-      description: Agent input parameters. At least one agent-specific key-value pair is required (e.g., `keyword`, `product_id`). Refer to the specific agent's documentation.
-      additionalProperties: true
       properties:
-        country:
+        storage_type:
           type: string
-          description: Country used to access the target URL, use ISO Alpha-2 Codes
+          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
+          enum:
+          - s3
+          - gs
           examples:
-          - US
-        locale:
+          - s3
+        storage_url:
           type: string
-          description: Language preference for the search results. Use LCID standard
+          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
           examples:
-          - en
-        tag:
+          - s3://Your.Repository.Path/
+        callback_url:
           type: string
-          description: User-defined tag for request identification
+          format: uri
+          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
           examples:
-          - campaign-2024-q1
-        parse:
+          - https://your.callback.url/path
+        storage_compress:
           type: boolean
-          description: Whether to parse the response content
+          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
           examples:
-          - true
-    Error500:
-      type: object
-      title: Error500
+          - false
+        storage_object_name:
+          type: string
+          description: Custom name for the stored object instead of the default task ID
+          examples:
+          - my task
+    AgentGenerationResponse:
       properties:
-        success:
+        id:
           type: string
-          example: 'false'
-          examples:
-          - 'false'
-        task_id:
+          format: uuid
+          title: Id
+          description: The id of the agent generation
+        status:
           type: string
-          example: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-          examples:
-          - 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message:
+          title: Status
+          description: The status of the agent generation
+        agent_name:
           type: string
-          example: can't download the query response - please try again
-          examples:
-          - can't download the query response - please try again
+          title: Agent Name
+          description: The name of the agent
+        version_id:
+          type: string
+          format: uuid
+          title: Version Id
+          description: The version id of the agent
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+          description: The summary of the agent generation
+        error:
+          anyOf:
+          - type: string
+            title: Error
+            description: The error of the agent generation
+          - type: 'null'
+          title: Error
+          description: The error of the agent generation
+      type: object
       required:
-      - success
-      - task_id
-      - message
+      - id
+      - status
+      title: AgentGenerationResponse
+    AsyncResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          examples:
+          - success
+        task:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Unique task identifier
+              examples:
+              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+            state:
+              type: string
+              description: Current state of the task
+              enum:
+              - pending
+              - processing
+              - completed
+              - failed
+              examples:
+              - pending
+            created_at:
+              type: string
+              format: date-time
+              description: Task creation timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            account_name:
+              type: string
+              description: The user account name
+              examples:
+              - my-account
+            api_type:
+              type: string
+              description: The api endpoint used
+              enum:
+              - agent
+              - extract
+              examples:
+              - extract
+            modified_at:
+              type: string
+              format: date-time
+              description: Task last modification timestamp
+              examples:
+              - '2026-01-24T12:36:24.685Z'
+            input:
+              type: object
+              description: Original request input parameters
+          required:
+          - id
+          - state
+          - created_at
+          - modified_at
+          - input
+      required:
+      - status
+      - task
+      examples:
+      - status: success
+        task:
+          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
+          state: pending
+          account_name: my-account
+          api_type: extract
+          created_at: '2026-01-24T12:36:24.685Z'
+          modified_at: '2026-01-24T12:36:24.685Z'
+          input: {}
+    AgentBatchInputsPayload:
+      type: object
+      title: AgentBatchInputsPayload
+      properties:
+        params:
+          type: object
+          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
+          allOf:
+          - $ref: '#/components/schemas/AgentParams'
+          examples:
+          - params:
+              keyword: iphone 17
+              zip_code: '90210'
+          required: []
+        localization:
+          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
+          type: boolean
+        formats:
+          type: array
+          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
+          items:
+            type: string
+            enum:
+            - html
+            - markdown
+            - headers
+            - links
+      required:
+      - agent
+      - params
+      description: Request body model for the /agent/run endpoint
+    Error429:
+      type: object
+      title: Error429
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          example: Rate limit exceeded
+          examples:
+          - Rate limit exceeded
+      required:
+      - status
+      - msg
       example:
-        success: 'false'
-        task_id: 1ed1dbeb-8f34-4fd1-bb2d-a72bacae2ef3
-        message: can't download the query response - please try again
-    CreateAgentGenerationRequest:
+        status: failed
+        msg: Rate limit exceeded
+    CreateAgentRefinementRequest:
       properties:
         prompt:
           type: string
           title: Prompt
-          description: The prompt to use for the agent generation
-        agent_name:
+          description: The prompt to use for the agent refinement
+        from_agent:
           type: string
-          title: Agent Name
-          description: The name of the agent to generate
-        url:
-          type: string
-          title: Url
-          description: The URL to use for the agent generation
+          title: From Agent
+          description: The name of the agent to refine
           examples:
-          - https://www.amazon.com/s?k=laptop
-        metadata:
-          anyOf:
-          - $ref: '#/components/schemas/AgentVersionMetadata'
-          - type: 'null'
-          title: Metadata
-          description: The metadata of the agent version
-        input_schema:
-          additionalProperties: true
-          type: object
-          title: Input Schema
-          description: The input schema for the agent generation
-          examples:
-            type: object
-            properties:
-              category:
-                type: string
-        output_schema:
-          additionalProperties: true
-          type: object
-          title: Output Schema
-          description: The output schema for the agent generation
-          examples:
-            type: object
-            properties:
-              name:
-                type: string
+          - amazon_pdp
       type: object
       required:
       - prompt
-      - url
-      title: CreateAgentGenerationRequest
+      - from_agent
+      title: CreateAgentRefinementRequest
     BatchResponse:
       type: object
       properties:
@@ -1683,264 +1894,53 @@ components:
           description: List of created tasks.
       additionalProperties: false
       description: Response when a batch of extract tasks is created successfully.
-    CreateAgentRefinementRequest:
+    CreateAgentGenerationRequest:
       properties:
         prompt:
           type: string
           title: Prompt
-          description: The prompt to use for the agent refinement
-        from_agent:
-          type: string
-          title: From Agent
-          description: The name of the agent to refine
-          examples:
-          - amazon_pdp
-      type: object
-      required:
-      - prompt
-      - from_agent
-      title: CreateAgentRefinementRequest
-    AgentBatchBody:
-      type: object
-      properties:
-        inputs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentBatchInputsPayload'
-            required: []
-        shared_inputs:
-          allOf:
-          - $ref: '#/components/schemas/AgentAsyncPayload'
-            required:
-            - Agents
-      required:
-      - inputs
-      - shared_inputs
-      description: Request body for executing a batch of agent requests
-    AsyncOptions:
-      type: object
-      properties:
-        storage_type:
-          type: string
-          description: Storage type for async results. Use s3 for Amazon S3 and gs for Google Cloud Platform.
-          enum:
-          - s3
-          - gs
-          examples:
-          - s3
-        storage_url:
-          type: string
-          description: 'Repository URL where output will be saved. Format: s3://Your.Bucket.Name/your/object/name/prefix/ - Output will be saved as TASK_ID.json'
-          examples:
-          - s3://Your.Repository.Path/
-        callback_url:
-          type: string
-          format: uri
-          description: A URL to callback once the data is delivered. The API will send a POST request with task details (without the requested data) when the task completes.
-          examples:
-          - https://your.callback.url/path
-        storage_compress:
-          type: boolean
-          description: When set to true, the response saved to storage_url will be compressed using GZIP format. If false or not set, response will be saved uncompressed.
-          examples:
-          - false
-        storage_object_name:
-          type: string
-          description: Custom name for the stored object instead of the default task ID
-          examples:
-          - my task
-    AgentPayload:
-      type: object
-      title: AgentPayload
-      properties:
-        agent:
-          type: string
-          description: The agent's name to execute
-          examples:
-          - google_search
-        params:
-          type: object
-          description: The agent's input parameters, for example query, prodcut_id, etc. Depands on the agent used.
-          allOf:
-          - $ref: '#/components/schemas/AgentParams'
-          examples:
-          - params:
-              keyword: iphone 17
-              zip_code: '90210'
-          required: []
-        localization:
-          description: Controls if localization sould be enabled (default false). Some agent support localization based on zip_code or store_id on the site it self. Relevant only when agent is supporting localization
-          type: boolean
-        formats:
-          type: array
-          description: Output formats to include in the response alongside `data.parsing`. By default, only structured parsed data is returned.
-          items:
-            type: string
-            enum:
-            - html
-            - markdown
-            - headers
-            - links
-      required:
-      - agent
-      - params
-      description: Request body model for the /agent/run endpoint
-    AsyncResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          examples:
-          - success
-        task:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Unique task identifier
-              examples:
-              - 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-            state:
-              type: string
-              description: Current state of the task
-              enum:
-              - pending
-              - processing
-              - completed
-              - failed
-              examples:
-              - pending
-            created_at:
-              type: string
-              format: date-time
-              description: Task creation timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            account_name:
-              type: string
-              description: The user account name
-              examples:
-              - my-account
-            api_type:
-              type: string
-              description: The api endpoint used
-              enum:
-              - agent
-              - extract
-              examples:
-              - extract
-            modified_at:
-              type: string
-              format: date-time
-              description: Task last modification timestamp
-              examples:
-              - '2026-01-24T12:36:24.685Z'
-            input:
-              type: object
-              description: Original request input parameters
-          required:
-          - id
-          - state
-          - created_at
-          - modified_at
-          - input
-      required:
-      - status
-      - task
-      examples:
-      - status: success
-        task:
-          id: 8e8cfde8-345b-42b8-b3e2-0c61eb11e00f
-          state: pending
-          account_name: my-account
-          api_type: extract
-          created_at: '2026-01-24T12:36:24.685Z'
-          modified_at: '2026-01-24T12:36:24.685Z'
-          input: {}
-    Error429:
-      type: object
-      title: Error429
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          example: Rate limit exceeded
-          examples:
-          - Rate limit exceeded
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: Rate limit exceeded
-    AgentGenerationResponse:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The id of the agent generation
-        status:
-          type: string
-          title: Status
-          description: The status of the agent generation
+          description: The prompt to use for the agent generation
         agent_name:
           type: string
           title: Agent Name
-          description: The name of the agent
-        version_id:
+          description: The name of the agent to generate
+        url:
           type: string
-          format: uuid
-          title: Version Id
-          description: The version id of the agent
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-          description: The summary of the agent generation
-        error:
-          anyOf:
-          - type: string
-            title: Error
-            description: The error of the agent generation
-          - type: 'null'
-          title: Error
-          description: The error of the agent generation
-      type: object
-      required:
-      - id
-      - status
-      title: AgentGenerationResponse
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
+          title: Url
+          description: The URL to use for the agent generation
           examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
+          - https://www.amazon.com/s?k=laptop
+        metadata:
+          anyOf:
+          - $ref: '#/components/schemas/AgentVersionMetadata'
+          - type: 'null'
+          title: Metadata
+          description: The metadata of the agent version
+        input_schema:
+          additionalProperties: true
+          type: object
+          title: Input Schema
+          description: The input schema for the agent generation
+          examples:
+            type: object
+            properties:
+              category:
+                type: string
+        output_schema:
+          additionalProperties: true
+          type: object
+          title: Output Schema
+          description: The output schema for the agent generation
+          examples:
+            type: object
+            properties:
+              name:
+                type: string
+      type: object
       required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
+      - prompt
+      - url
+      title: CreateAgentGenerationRequest
   securitySchemes:
     BearerAuth:
       type: http

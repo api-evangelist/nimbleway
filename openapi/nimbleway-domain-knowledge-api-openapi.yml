@@ -89,6 +89,63 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error402:
+      type: object
+      title: Error402
+      properties:
+        status:
+          type: string
+          example: failed
+          examples:
+          - failed
+        msg:
+          type: string
+          description: Error message indicating the payment issue
+          example: trial expired
+          enum:
+          - no budget
+          - limit reached
+          - trial expired
+          - trial quota finished
+      required:
+      - status
+      - msg
+      example:
+        status: failed
+        msg: trial expired
+    DriverResolutionResponse:
+      additionalProperties: false
+      properties:
+        agent:
+          description: The input agent name (present when agent query param was used)
+          type: string
+        antibots:
+          description: List of detected antibots for the domain
+          examples:
+          - - cloudflare
+            - datadome
+          items:
+            type: string
+          type: array
+        description:
+          description: Description of the driver
+          type: string
+        driver:
+          description: Resolved driver name
+          examples:
+          - vx10-pro
+          type: string
+        need_to_render:
+          description: Whether the page needs to be rendered to be properly resolved.
+          type: boolean
+        url:
+          description: The input URL (present when url query param was used)
+          type: string
+      required:
+      - driver
+      - antibots
+      - description
+      type: object
     Error400:
       type: object
       title: Error400
@@ -136,39 +193,6 @@ components:
             params:
               missingProperty: search_engine
             message: must have required property 'search_engine'
-    DriverResolutionResponse:
-      additionalProperties: false
-      properties:
-        agent:
-          description: The input agent name (present when agent query param was used)
-          type: string
-        antibots:
-          description: List of detected antibots for the domain
-          examples:
-          - - cloudflare
-            - datadome
-          items:
-            type: string
-          type: array
-        description:
-          description: Description of the driver
-          type: string
-        driver:
-          description: Resolved driver name
-          examples:
-          - vx10-pro
-          type: string
-        need_to_render:
-          description: Whether the page needs to be rendered to be properly resolved.
-          type: boolean
-        url:
-          description: The input URL (present when url query param was used)
-          type: string
-      required:
-      - driver
-      - antibots
-      - description
-      type: object
     Error500:
       type: object
       title: Error500
@@ -216,30 +240,6 @@ components:
       example:
         status: failed
         msg: Rate limit exceeded
-    Error402:
-      type: object
-      title: Error402
-      properties:
-        status:
-          type: string
-          example: failed
-          examples:
-          - failed
-        msg:
-          type: string
-          description: Error message indicating the payment issue
-          example: trial expired
-          enum:
-          - no budget
-          - limit reached
-          - trial expired
-          - trial quota finished
-      required:
-      - status
-      - msg
-      example:
-        status: failed
-        msg: trial expired
   securitySchemes:
     BearerAuth:
       type: http
