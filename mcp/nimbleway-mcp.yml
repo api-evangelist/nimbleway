@@ -48,3 +48,23 @@ deployment:
   probe: gated
   checked: '2026-08-12'
   source: catalog MCP census
+rfc9728:
+  endpoint: https://mcp.nimbleway.com/mcp
+  metadata_url: https://mcp.nimbleway.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.nimbleway.com/mcp
+    authorization_servers:
+    - https://api.nimbleway.com/
+    scopes_supported:
+    - openid
+    - nimble:read
+    - nimble:write
+    - offline_access
+    bearer_methods_supported:
+    - header
+    resource_name: Nimble MCP Server
+    resource_documentation: https://nimbleway.com/
